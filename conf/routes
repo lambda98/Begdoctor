@@ -1,0 +1,12 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Static Assets
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+# WEB Route
+GET     /                           controllers.web.HomeController.index
+
+# API Route
+GET     /api/v1/hospitals/:id       controllers.api.HospitalController.getHospital(id: Long)
