@@ -14,10 +14,10 @@ class HospitalFacadeSpec
 
   "Call findById" should {
     "return Hospital of that id" in {
-      val correct_id = 1L
+      val correct_id = 0L
       val facade = app.injector.instanceOf[HospitalFacade]
 
-      val testObject = facade.findById(1L)
+      val testObject = facade.findById(correct_id)
 
       assert(correct_id == testObject.id)
     }
