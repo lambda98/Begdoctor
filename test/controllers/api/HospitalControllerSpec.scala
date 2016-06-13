@@ -13,7 +13,7 @@ class HospitalControllerSpec
 
   "GET /api/v1/hospitals/1" should {
     "return Hospital JSON" in {
-      contentAsString(route(app, FakeRequest(GET, "/api/v1/hospitals/1")).get) must include
+      contentAsString(route(app, FakeRequest(GET, "/api/v1/hospitals/0")).get) must include
       """
         |"id":1
       """.stripMargin
