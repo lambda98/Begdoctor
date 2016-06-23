@@ -13,5 +13,6 @@ case class PostgresModule()
 
   protected def configure() {
     bind[HospitalPersist].to[HospitalPostgres]
+    bind[UserPersist].to[UserPostgres]
   }
 }
