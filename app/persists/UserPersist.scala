@@ -8,5 +8,5 @@ import models.User
 trait UserPersist {
 
   def findById(id: Long): Option[User]
-
+  def findByEmail(email: String): Option[User]
 }

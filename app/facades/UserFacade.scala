@@ -15,4 +15,8 @@ class UserFacade  @Inject()(persist: UserPersist){
     persist.findById(id).get
   }
 
+  def findByEmail(email: String): User = {
+    persist.findByEmail(email).get
+  }
+
 }

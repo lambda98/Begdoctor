@@ -17,7 +17,17 @@ class UserPersistSpec
       val testObject = persist.findById(correct_id)
 
       assert(correct_id == testObject.get.id)
+    }
+  }
 
+  "Call findByEmail" should {
+    "return User of that email" in {
+      val correct_email = "patient@mail.com"
+      val persist = app.injector.instanceOf[UserPersist]
+
+      val testObject = persist.findByEmail(correct_email)
+
+      assert(correct_email == testObject.get.email)
     }
   }
 

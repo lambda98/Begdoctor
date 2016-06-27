@@ -24,6 +24,18 @@ class UserPostgres @Inject()(db: Database)
     }
   }
 
+  override def findByEmail(email: String): Option[User] = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(FIND_BY_EMAIL)
+    preparedStatement.setString(1, email)
+
+    val resultSet = preparedStatement.executeQuery
+    resultSet.next match {
+      case true => Some(parse(resultSet))
+      case false => None
+    }
+  }
+
+
   private[postgres] def parse(resultSet: ResultSet): User = User(
     id = resultSet.getLong("id")
     , name = resultSet.getString("name")
@@ -32,5 +44,6 @@ class UserPostgres @Inject()(db: Database)
   )
 
   private val FIND_BY_ID = "SELECT * FROM users where id = ?"
+  private val FIND_BY_EMAIL = "SELECT * FROM users where email = ?"
 
 }

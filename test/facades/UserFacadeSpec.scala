@@ -23,4 +23,15 @@ class UserFacadeSpec
     }
   }
 
+  "Call findByEmail" should {
+    "return User of that email" in {
+      val correct_email = "patient@mail.com"
+      val facade = app.injector.instanceOf[UserFacade]
+
+      val testObject = facade.findByEmail(correct_email)
+
+      assert(correct_email == testObject.email)
+    }
+  }
+
 }

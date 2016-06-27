@@ -16,4 +16,8 @@ class UserController @Inject()(userFacade: UserFacade)
     Ok(userFacade.findById(Id).toText)
   }
 
+  def getUserByEmail(email: String) = Action {
+    Ok(userFacade.findByEmail(email).toText)
+  }
+
 }

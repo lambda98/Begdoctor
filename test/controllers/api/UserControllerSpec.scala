@@ -20,4 +20,13 @@ class UserControllerSpec
     }
   }
 
+  "POST /api/v1/user_email/" should {
+    "return User JSON" in {
+      contentAsString(route(app, FakeRequest(POST, "/api/v1/user_email/")).get) must include
+      """
+        |"email": "patient@mail.com"
+      """.stripMargin
+    }
+  }
+
 }

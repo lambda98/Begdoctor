@@ -156,3 +156,27 @@
 2016-06-23 12:06:54,487 [INFO] from application in pool-1-thread-1-ScalaTest-running-ApplicationSpec - Shutting down connection pool.
 2016-06-23 12:06:54,590 [INFO] from application in pool-1-thread-1 - Creating Pool for datasource 'default'
 2016-06-23 12:06:54,674 [INFO] from application in pool-1-thread-1 - Shutting down connection pool.
+2016-06-27 11:32:30,913 [INFO] from application in pool-1-thread-1-ScalaTest-running-HomeControllerSpec - Creating Pool for datasource 'default'
+2016-06-27 11:32:33,394 [INFO] from application in pool-1-thread-1-ScalaTest-running-HomeControllerSpec - Shutting down connection pool.
+2016-06-27 11:32:33,854 [INFO] from application in pool-1-thread-1-ScalaTest-running-UserSpec - Creating Pool for datasource 'default'
+2016-06-27 11:32:33,963 [INFO] from application in pool-1-thread-1-ScalaTest-running-UserSpec - Shutting down connection pool.
+2016-06-27 11:32:34,152 [INFO] from application in pool-1-thread-1 - Creating Pool for datasource 'default'
+2016-06-27 11:32:34,412 [INFO] from application in pool-1-thread-1 - Shutting down connection pool.
+2016-06-27 11:32:34,588 [INFO] from application in pool-1-thread-1 - Creating Pool for datasource 'default'
+2016-06-27 11:32:34,760 [INFO] from application in pool-1-thread-1 - Shutting down connection pool.
+2016-06-27 11:32:34,923 [INFO] from application in pool-1-thread-1-ScalaTest-running-UserControllerSpec - Creating Pool for datasource 'default'
+2016-06-27 11:32:35,115 [INFO] from application in pool-1-thread-1-ScalaTest-running-UserControllerSpec - Shutting down connection pool.
+2016-06-27 11:32:35,312 [INFO] from application in pool-1-thread-1-ScalaTest-running-UserControllerSpec - Creating Pool for datasource 'default'
+2016-06-27 11:32:35,476 [INFO] from application in pool-1-thread-1-ScalaTest-running-UserControllerSpec - Shutting down connection pool.
+2016-06-27 11:32:35,696 [INFO] from application in pool-1-thread-1-ScalaTest-running-HospitalControllerSpec - Creating Pool for datasource 'default'
+2016-06-27 11:32:36,176 [INFO] from application in pool-1-thread-1-ScalaTest-running-HospitalControllerSpec - Shutting down connection pool.
+2016-06-27 11:32:38,096 [INFO] from application in pool-1-thread-1-ScalaTest-running-IntegrationSpec - Creating Pool for datasource 'default'
+2016-06-27 11:32:39,752 [INFO] from application in pool-1-thread-1-ScalaTest-running-IntegrationSpec - Shutting down connection pool.
+2016-06-27 11:32:39,921 [INFO] from application in pool-1-thread-1 - Creating Pool for datasource 'default'
+2016-06-27 11:32:40,141 [INFO] from application in pool-1-thread-1 - Shutting down connection pool.
+2016-06-27 11:32:40,356 [INFO] from application in pool-1-thread-1-ScalaTest-running-HospitalSpec - Creating Pool for datasource 'default'
+2016-06-27 11:32:40,528 [INFO] from application in pool-1-thread-1-ScalaTest-running-HospitalSpec - Shutting down connection pool.
+2016-06-27 11:32:40,679 [INFO] from application in pool-1-thread-1-ScalaTest-running-ApplicationSpec - Creating Pool for datasource 'default'
+2016-06-27 11:32:40,739 [INFO] from application in pool-1-thread-1-ScalaTest-running-ApplicationSpec - Shutting down connection pool.
+2016-06-27 11:32:40,883 [INFO] from application in pool-1-thread-1 - Creating Pool for datasource 'default'
+2016-06-27 11:32:40,964 [INFO] from application in pool-1-thread-1 - Shutting down connection pool.
