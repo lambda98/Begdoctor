@@ -3,6 +3,7 @@ package controllers.api
 import javax.inject._
 
 import facades.UserFacade
+import play.api.libs.json.Json
 import play.api.mvc._
 
 /**
@@ -18,6 +19,10 @@ class UserController @Inject()(userFacade: UserFacade)
 
   def getUserByEmail(email: String) = Action {
     Ok(userFacade.findByEmail(email).toText)
+  }
+
+  def saveUser(name: String, surname: String, email: String) = Action {
+    Ok(Json.toJson(userFacade.insertUser(name, surname, email)))
   }
 
 }

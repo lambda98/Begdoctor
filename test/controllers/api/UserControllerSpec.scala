@@ -20,11 +20,22 @@ class UserControllerSpec
     }
   }
 
-  "POST /api/v1/user_email/" should {
+  "POST /api/v1/useremail/" should {
     "return User JSON" in {
-      contentAsString(route(app, FakeRequest(POST, "/api/v1/user_email/")).get) must include
+      contentAsString(route(app, FakeRequest(POST, "/api/v1/useremail/")).get) must include
       """
         |"email": "patient@mail.com"
+      """.stripMargin
+    }
+  }
+
+  "POST /api/v1/saveuser/" should {
+    "return User JSON" in {
+      contentAsString(route(app, FakeRequest(POST, "/api/v1/saveuser/")).get) must include
+      """
+        |"name":    "patientName"
+        |"surname": "patientSurname"
+        |"email":   "patient@mail.com"
       """.stripMargin
     }
   }

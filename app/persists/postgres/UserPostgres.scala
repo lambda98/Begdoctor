@@ -35,6 +35,16 @@ class UserPostgres @Inject()(db: Database)
     }
   }
 
+  override def insertUser(name: String, surname: String, email: String): Boolean = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(INSERT_USER_DATA)
+    preparedStatement.setString(1, name)
+    preparedStatement.setString(2, surname)
+    preparedStatement.setString(3, email)
+    preparedStatement.executeUpdate() match {
+      case 1 => true
+      case _ => false
+    }
+  }
 
   private[postgres] def parse(resultSet: ResultSet): User = User(
     id = resultSet.getLong("id")
@@ -45,5 +55,6 @@ class UserPostgres @Inject()(db: Database)
 
   private val FIND_BY_ID = "SELECT * FROM users where id = ?"
   private val FIND_BY_EMAIL = "SELECT * FROM users where email = ?"
+  private val INSERT_USER_DATA = "INSERT INTO users (name, surname, email) VALUES (?, ?, ?)"
 
 }

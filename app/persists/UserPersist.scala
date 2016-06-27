@@ -9,4 +9,5 @@ trait UserPersist {
 
   def findById(id: Long): Option[User]
   def findByEmail(email: String): Option[User]
+  def insertUser(name: String, surname: String, email: String): Boolean
 }

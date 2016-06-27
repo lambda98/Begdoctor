@@ -16,7 +16,7 @@ VALUES (0
 
 CREATE TABLE users
 (
-    id              BIGINT NOT NULL UNIQUE,
+    id              SERIAL NOT NULL UNIQUE,
     name            VARCHAR(256) NOT NULL,
     surname         VARCHAR(256) NOT NULL,
     email           VARCHAR(256) NOT NULL UNIQUE,
