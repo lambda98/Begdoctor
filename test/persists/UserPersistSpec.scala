@@ -43,7 +43,7 @@ class UserPersistSpec
 
       val testObject = persist.insertUser(correct_name, correct_surname, correct_email)
 
-      assert(testObject == true)
+      assert(testObject)
     }
   }
 
