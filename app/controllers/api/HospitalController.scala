@@ -14,7 +14,8 @@ class HospitalController @Inject()(hospitalFacade: HospitalFacade)
   extends Controller {
 
   def getHospital(Id: Long) = Action {
-    Ok(new Hospital(0L,"hhhh").toText)
+    //TODO fix hard code
+    Ok(new Hospital(0L,"hhhh","ffsf","www","aaa").toText)
   }
 
 }
