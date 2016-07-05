@@ -3,6 +3,7 @@ package controllers.api
 import javax.inject._
 
 import facades.HospitalFacade
+import models.Hospital
 import play.api.mvc._
 
 /**
@@ -13,7 +14,7 @@ class HospitalController @Inject()(hospitalFacade: HospitalFacade)
   extends Controller {
 
   def getHospital(Id: Long) = Action {
-    Ok(hospitalFacade.findById(Id).toText)
+    Ok(new Hospital(0L,"hhhh").toText)
   }
 
 }
