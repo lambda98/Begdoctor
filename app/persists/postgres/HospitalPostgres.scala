@@ -27,6 +27,9 @@ class HospitalPostgres @Inject()(db: Database)
   private[postgres] def parse(resultSet: ResultSet): Hospital = Hospital(
     id = resultSet.getLong("id")
     , name = resultSet.getString("name")
+    , url = resultSet.getString("url")
+    , location = resultSet.getString("location")
+    , doctorName = resultSet.getString("doctorName")
   )
 
   private val FIND_BY_ID = "SELECT * FROM hospitals where id = ?"

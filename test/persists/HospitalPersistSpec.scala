@@ -12,11 +12,13 @@ class HospitalPersistSpec
   "Call findById" should {
     "return Hospital of that id" in {
       val correct_id = 0L
+      val correct_name = "test hospital name"
       val persist = app.injector.instanceOf[HospitalPersist]
 
       val testObject = persist.findById(correct_id)
 
       assert(correct_id == testObject.get.id)
+      assert(correct_name == testObject.get.name)
 
     }
   }
