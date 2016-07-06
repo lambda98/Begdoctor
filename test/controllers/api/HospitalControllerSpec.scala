@@ -15,7 +15,8 @@ class HospitalControllerSpec
     "return Hospital JSON" in {
       contentAsString(route(app, FakeRequest(GET, "/api/v1/hospitals/0")).get) must include
       """
-        |"id":0
+        |"id":0,
+        |"name":"test hospital name"
       """.stripMargin
     }
   }
