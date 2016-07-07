@@ -53,6 +53,6 @@ ALTER TABLE symptoms OWNER TO begdoctor;
 INSERT INTO symptoms(id
     , name)
 VALUES (0
-   , 'leukemia')
+   , 'Leukemia')
    , (1
-   , 'thalassemia');
+   , 'Thalassemia');
