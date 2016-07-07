@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS hospitals;
 DROP TABLE IF EXISTS users;
-
+DROP TABLE IF EXISTS symptoms;
 CREATE TABLE hospitals
 (
     id              BIGINT NOT NULL UNIQUE,
@@ -41,3 +41,18 @@ VALUES (0
     , 'patientName'
     , 'patientSurname'
     , 'patient@mail.com');
+
+CREATE TABLE symptoms
+(
+    id              SERIAL NOT NULL UNIQUE,
+    name            VARCHAR(256) NOT NULL,
+    CONSTRAINT      symptoms_pk PRIMARY KEY (id)
+);
+ALTER TABLE symptoms OWNER TO begdoctor;
+
+INSERT INTO symptoms(id
+    , name)
+VALUES (0
+   , 'leukemia')
+   , (1
+   , 'thalassemia');
