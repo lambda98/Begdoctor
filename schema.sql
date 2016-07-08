@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS hospitals;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS symptoms;
+
 CREATE TABLE hospitals
 (
     id              BIGINT NOT NULL UNIQUE,
