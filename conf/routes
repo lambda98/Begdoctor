@@ -10,3 +10,4 @@ GET     /                           controllers.web.HomeController.index
 
 # API Route
 GET     /api/v1/hospitals/:id       controllers.api.HospitalController.getHospital(id: Long)
+GET     /api/v1/symptom             controllers.api.SymptomController.getSymptom
