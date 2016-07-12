@@ -19,8 +19,8 @@ class UserFacade  @Inject()(persist: UserPersist){
     persist.findByEmail(email).get
   }
 
-  def insertUser(name: String, surname: String, email: String): Boolean = {
-    persist.insertUser(name, surname, email)
+  def insertUser(id: Long, name: String, surname: String, email: String): Boolean = {
+    persist.insertUser(id, name, surname, email)
   }
 
 }
