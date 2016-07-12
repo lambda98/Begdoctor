@@ -21,8 +21,16 @@ class UserController @Inject()(userFacade: UserFacade)
     Ok(userFacade.findByEmail(email).toText)
   }
 
-  def saveUser(id: Long, name: String, surname: String, email: String) = Action {
-    Ok(Json.toJson(userFacade.insertUser(id, name, surname, email)))
+  def saveUser(name: String, surname: String, email: String) = Action {
+    Ok(
+      Json.toJson(
+        userFacade.insertUser(
+          name
+          , surname
+          , email
+        )
+      )
+    )
   }
 
 }
