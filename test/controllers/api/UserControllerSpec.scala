@@ -33,7 +33,6 @@ class UserControllerSpec
     "return User JSON" in {
       contentAsString(route(app, FakeRequest(POST, "/api/v1/saveuser/")).get) must include
       """
-        |"id":      1
         |"name":    "patientName"
         |"surname": "patientSurname"
         |"email":   "patient@mail.com"
