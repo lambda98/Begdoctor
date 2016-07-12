@@ -3,7 +3,7 @@ package controllers.api
 import javax.inject._
 
 import facades.HospitalFacade
-import models.Hospital
+
 import play.api.mvc._
 
 /**
