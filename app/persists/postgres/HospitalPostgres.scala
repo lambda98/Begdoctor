@@ -30,6 +30,10 @@ class HospitalPostgres @Inject()(db: Database)
     , url = resultSet.getString("url")
     , location = resultSet.getString("location")
     , doctorName = resultSet.getString("doctorName")
+    , types = resultSet.getString("types")
+    , latitude = resultSet.getString("latitude")
+    , longitude = resultSet.getString("longitude")
+    , available_time = resultSet.getString("available_time")
   )
 
   private val FIND_BY_ID = "SELECT * FROM hospitals where id = ?"
