@@ -36,12 +36,14 @@ class UserPersistSpec
   "Call insertUser" should {
     "insert data successfully" in {
       val randomString = Random.alphanumeric.take(5).mkString
+      val randomId = Random.nextLong()
+      val correct_id = randomId
       val correct_name = "patientpersistName"
       val correct_surname = "patientpersistSurname"
       val correct_email = "patientpersist"+randomString+"@mail.com"
       val persist = app.injector.instanceOf[UserPersist]
 
-      val testObject = persist.insertUser(correct_name, correct_surname, correct_email)
+      val testObject = persist.insertUser(correct_id, correct_name, correct_surname, correct_email)
 
       assert(testObject)
     }
