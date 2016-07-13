@@ -14,7 +14,7 @@ class Hospital_TimeFacadeSpec
 
   "Call findById" should {
     "return Hospital_Time of that id" in {
-      val correct_id = 0L
+      val correct_id = 1L
       val facade = app.injector.instanceOf[Hospital_TimeFacade]
 
       val testObject = facade.findById(correct_id)
