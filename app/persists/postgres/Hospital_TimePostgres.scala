@@ -24,7 +24,7 @@ class Hospital_TimePostgres @Inject() (db: Database)
     }
   }
 
-  private[postgres] def parse(resultSet: ResultSet): Hospital_Time = Hospital_time(
+  private[postgres] def parse(resultSet: ResultSet): Hospital_Time = Hospital_Time(
     id = resultSet.getLong("id")
     , hospital_id = resultSet.getLong("hospital_id")
     , start_datetime = resultSet.getString("2016-07-01 10:30")
