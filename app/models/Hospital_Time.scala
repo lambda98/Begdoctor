@@ -1,5 +1,6 @@
 package models
 
+import play.data.format.Formats.DateTime
 import utilities.Json
 
 /**
@@ -7,7 +8,7 @@ import utilities.Json
   */
 class Hospital_Time (id: Long
                      , hospital_id: Long
-                     , start_datetime: String
-                     , finish_datetime: String
+                     , start_datetime: DateTime
+                     , finish_datetime: DateTime
                      , available: String)
   extends Json
