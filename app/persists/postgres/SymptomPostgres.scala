@@ -3,7 +3,7 @@ package persists.postgres
 import java.sql.ResultSet
 
 import com.google.inject.Inject
-import models.Symptom
+import entities.SymptomEntity
 import persists.SymptomPersist
 import play.api.db.Database
 
@@ -13,17 +13,17 @@ import play.api.db.Database
 class SymptomPostgres @Inject() (db: Database)
   extends SymptomPersist {
 
-  override def listAllSymptom(): List[Symptom] = db.withConnection { implicit conn =>
+  override def listAllSymptom(): List[SymptomEntity] = db.withConnection { implicit conn =>
     val preparedStatement = conn.prepareStatement(LIST_ALL_SYMPTOM)
 
 
     val resultSet = preparedStatement.executeQuery
-    new Iterator[Symptom] {
+    new Iterator[SymptomEntity] {
       override def hasNext = resultSet.next()
-      override def next() = parse(resultSet )
+      override def next() = parse(resultSet)
     }.toList
   }
-  private [postgres] def parse(resultSet: ResultSet): Symptom = Symptom(
+  private [postgres] def parse(resultSet: ResultSet): SymptomEntity = SymptomEntity(
     id = resultSet.getLong("id")
     , name = resultSet.getString("name")
   )
