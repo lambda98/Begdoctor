@@ -1,6 +1,6 @@
 package models
 
-import play.data.format.Formats.DateTime
+import org.joda.time.DateTime
 import utilities.Json
 
 /**
