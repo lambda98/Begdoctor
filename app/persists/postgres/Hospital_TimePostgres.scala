@@ -1,11 +1,13 @@
 package persists.postgres
 
+import java.lang.annotation.Annotation
 import java.sql.ResultSet
 import javax.inject.{Inject, Singleton}
 
 import models.Hospital_Time
 import persists.Hospital_TimePersist
 import play.api.db.Database
+import play.data.format.Formats.DateTime
 
 /**
   * Created by Administrator on 13/7/2559.
@@ -27,8 +29,8 @@ class Hospital_TimePostgres @Inject() (db: Database)
   private[postgres] def parse(resultSet: ResultSet): Hospital_Time = Hospital_Time(
     id = resultSet.getLong("id")
     , hospital_id = resultSet.getLong("hospital_id")
-    , start_datetime = resultSet.getString("2016-07-01 10:30")
-    , finish_datetime = resultSet.getString("2016-07-02 11:30")
+    , start_datetime = new DateTime(resultSet.getTimestamp("2016-07-01 10:30").getTime)
+    , finish_datetime = new DateTime(resultSet.getTimestamp("2016-07-02 11:30").getTime)
     , vailable = resultSet.getString("true")
   )
 
