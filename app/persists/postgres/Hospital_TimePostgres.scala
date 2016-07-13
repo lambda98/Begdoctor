@@ -1,12 +1,12 @@
 package persists.postgres
 
 import java.sql.ResultSet
-import javax.inject.{Inject, Singleton}
+import javax.inject.Inject
 
 import models.Hospital_Time
 import persists.Hospital_TimePersist
 import play.api.db.Database
-import play.data.format.Formats.DateTime
+import org.joda.time.DateTime
 
 /**
   * Created by Administrator on 13/7/2559.
