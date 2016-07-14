@@ -11,9 +11,20 @@ class BookingControllerSpec
   extends PlaySpec
     with OneAppPerTest {
 
-  "GET /api/v1/booking/1" should {
+  "GET /api/v1/booking/" should {
     "return Booking JSON" in {
       contentAsString(route(app, FakeRequest(GET, "/api/v1/booking")).get) must include
+      """
+        |"id":"1"
+        |"user_id":"1"
+        |"hospital_time_id":"1"
+      """.stripMargin
+    }
+  }
+
+  "POST /api/v1/bookingbyid/" should {
+    "return Booking JSON" in {
+      contentAsString(route(app, FakeRequest(POST, "/api/v1/bookingbyid/")).get) must include
       """
         |"id":"1"
         |"user_id":"1"

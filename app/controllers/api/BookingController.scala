@@ -14,4 +14,8 @@ class BookingController @Inject() (bookingFacade: BookingFacade)
   def getBooking = Action {
     Ok(bookingFacade.listAllBooking.toText)
   }
+
+  def getBookingById(id: Long) = Action {
+    Ok(bookingFacade.listBookingById(id).toText)
+  }
 }

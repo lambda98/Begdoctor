@@ -7,5 +7,6 @@ import entities.BookingEntity
   */
 trait BookingPersist {
 
-  def listAllBooking() : List[BookingEntity]
+  def listAllBooking()  : List[BookingEntity]
+  def listBookingById(id: Long) : List[BookingEntity]
 }

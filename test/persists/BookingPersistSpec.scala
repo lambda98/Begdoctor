@@ -21,4 +21,15 @@ class BookingPersistSpec
       assert(testObject.isInstanceOf[List[BookingEntity]])
     }
   }
+
+  "When listBookingById" should {
+    "return Booking of that id" in {
+      val correct_id = 0L
+      val persist = app.injector.instanceOf[BookingPostgres]
+
+      val testObject = persist.listBookingById(correct_id)
+
+      assert(testObject.isInstanceOf[List[BookingEntity]])
+    }
+  }
 }

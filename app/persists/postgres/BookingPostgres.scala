@@ -23,6 +23,17 @@ class BookingPostgres @Inject() (db: Database)
     }.toList
   }
 
+  override def listBookingById(id: Long): List[BookingEntity] = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(FIND_BOOKING_BY_ID)
+    preparedStatement.setLong(1, id)
+
+    val resultSet = preparedStatement.executeQuery
+    new Iterator[BookingEntity] {
+      override def hasNext = resultSet.next()
+      override def next() = parse(resultSet)
+    }.toList
+  }
+
   private [postgres] def parse(resultSet: ResultSet): BookingEntity = BookingEntity(
     id = resultSet.getLong("id")
     , user_id = resultSet.getLong("user_id")
@@ -30,4 +41,5 @@ class BookingPostgres @Inject() (db: Database)
   )
 
   private val LIST_ALL_BOOKING = "SELECT * FROM booking"
+  private val FIND_BOOKING_BY_ID = "SELECT * FROM booking where id = ?"
 }
