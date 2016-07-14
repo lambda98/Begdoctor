@@ -15,12 +15,12 @@ class Hospital_TimeControllerSpec
     "return Hospital_Time JSON" in {
       contentAsString(route(app, FakeRequest(GET, "/api/v1/hospital_time/0")).get) must include
       """
-      |"id":0,
-      |"hospital_id":0
-      |"start_datetime":"2016-07-01 10:30"
-      |"finish_datetime":"2016-07-01 11:30"
-      |"available":"true"
-    """.stripMargin
+        |"id":0,
+        |"hospital_id":0
+        |"start_datetime":"2016-07-01 10:30"
+        |"finish_datetime":"2016-07-01 11:30"
+        |"available":"true"
+      """.stripMargin
     }
   }
 }
