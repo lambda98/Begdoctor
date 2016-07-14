@@ -13,14 +13,11 @@ class Hospital_TimePersistSpec
   "Call findByHospital_Id" should {
     "return Hospital of that id" in {
       val correct_id = 1L
-
       val persist = app.injector.instanceOf[Hospital_TimePersist]
 
       val testObject = persist.findById(correct_id)
 
       assert(correct_id == testObject.get.id)
-
     }
   }
-
 }
