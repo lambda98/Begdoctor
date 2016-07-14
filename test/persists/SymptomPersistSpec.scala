@@ -1,5 +1,6 @@
 package persists
 
+import entities.SymptomEntity
 import models.Symptom
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import persists.postgres.SymptomPostgres
@@ -17,8 +18,7 @@ class SymptomPersistSpec
 
       val testObject = persist.listAllSymptom()
 
-      assert(testObject.isInstanceOf[List[Symptom]])
-
+      assert(testObject.isInstanceOf[List[SymptomEntity]])
     }
   }
 }

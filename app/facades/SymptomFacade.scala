@@ -12,6 +12,8 @@ import persists.SymptomPersist
 class SymptomFacade @Inject()(persist: SymptomPersist) {
 
   def listAllSymptom: SymptomList = {
-    SymptomList(persist.listAllSymptom)
+    SymptomList(persist.listAllSymptom.map(
+      symptomEntity => symptomEntity.toModel()
+    ))
   }
 }

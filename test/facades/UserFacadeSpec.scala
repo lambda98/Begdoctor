@@ -41,10 +41,13 @@ class UserFacadeSpec
       val randomString = Random.alphanumeric.take(5).mkString
       val correct_name = "patientfacadeName"
       val correct_surname = "patientfacadeSurname"
-      val correct_email = "patientfacade"+randomString+"@mail.com"
+      val correct_email = "patientfacade" + randomString + "@mail.com"
       val facade = app.injector.instanceOf[UserFacade]
 
-      val testObject = facade.insertUser(correct_name, correct_surname, correct_email)
+      val testObject = facade.insertUser(
+        correct_name
+        , correct_surname
+        , correct_email)
 
       assert(testObject)
     }
