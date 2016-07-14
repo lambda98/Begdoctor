@@ -9,4 +9,5 @@ trait BookingPersist {
 
   def listAllBooking()  : List[BookingEntity]
   def listBookingById(id: Long) : List[BookingEntity]
+  def listBookingByUserId(user_id: Long) : List[BookingEntity]
 }

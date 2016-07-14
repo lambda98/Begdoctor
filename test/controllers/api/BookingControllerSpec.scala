@@ -32,4 +32,15 @@ class BookingControllerSpec
       """.stripMargin
     }
   }
+
+  "POST /api/v1/bookingbyuserid/" should {
+    "return Booking JSON" in {
+      contentAsString(route(app, FakeRequest(POST, "/api/v1/bookingbyuserid/")).get) must include
+      """
+        |"id":"1"
+        |"user_id":"1"
+        |"hospital_time_id":"1"
+      """.stripMargin
+    }
+  }
 }

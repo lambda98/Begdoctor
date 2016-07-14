@@ -22,4 +22,10 @@ class BookingFacade @Inject()(persist: BookingPersist) {
       bookingEntity => bookingEntity.toModel()
     ))
   }
+
+  def listBookingByUserId(user_id: Long): BookingList = {
+    BookingList(persist.listBookingByUserId(user_id).map(
+      bookingEntity => bookingEntity.toModel()
+    ))
+  }
 }

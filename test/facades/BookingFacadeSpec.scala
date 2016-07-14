@@ -23,12 +23,23 @@ class BookingFacadeSpec
     }
   }
 
-  "Call findById" should {
-    "return User of that id" in {
+  "Call listBookingById" should {
+    "return Booking of that id" in {
       val correct_id = 0L
       val facade = app.injector.instanceOf[BookingFacade]
 
       val testObject = facade.listBookingById(correct_id)
+
+      assert(testObject.isInstanceOf[BookingList])
+    }
+  }
+
+  "Call listBookingByUserId" should {
+    "return Booking of that user" in {
+      val correct_user_id = 0L
+      val facade = app.injector.instanceOf[BookingFacade]
+
+      val testObject = facade.listBookingByUserId(correct_user_id)
 
       assert(testObject.isInstanceOf[BookingList])
     }
