@@ -1,5 +1,6 @@
 package models
 
+import org.joda.time.DateTime
 import org.scalatestplus.play.{OneAppPerTest, PlaySpec}
 
 /**
@@ -13,11 +14,9 @@ class Hospital_TimeSpec
     "return Hospital_Time" in {
       val correct_id = 1L
       val correct_hospital_id = 1L
-      val correct_start_datetime = "2016-07-01 10:30"
-      val correct_finish_datetime = "2016-07-01 11:30"
-      val correct_available = "true"
-
-
+      val correct_start_datetime = new DateTime(2016,7,1,10,30,0,0)
+      val correct_finish_datetime = new DateTime(2016,7,1,11,30,0,0)
+      val correct_available = true
 
       val testObject = new Hospital_Time(
         id = correct_id
