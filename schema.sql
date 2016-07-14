@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS hospitals;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS symptoms;
+DROP TABLE IF EXISTS booking;
 
 CREATE TABLE hospitals
 (
@@ -54,6 +55,22 @@ VALUES (0
     , 'patientName'
     , 'patientSurname'
     , 'patient@mail.com');
+
+CREATE TABLE booking
+(
+    id                  BIGINT NOT NULL UNIQUE,
+    user_id             BIGINT NOT NULL,
+    hospital_time_id    BIGINT NOT NULL,
+    CONSTRAINT      booking_pk PRIMARY KEY (id)
+);
+ALTER TABLE booking OWNER TO begdoctor;
+
+INSERT INTO booking(id
+    , user_id
+    , hospital_time_id)
+VALUES (0
+    , 1
+    , 1);
 
 CREATE TABLE symptoms
 (
