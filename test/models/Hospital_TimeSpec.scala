@@ -18,8 +18,6 @@ class Hospital_TimeSpec
       val correct_finish_datetime = new DateTime(2016,7,1,11,30,0,0)
       val correct_available = true
 
-
-
       val testObject = new Hospital_Time(
         id = correct_id
         , hospital_id = correct_hospital_id
