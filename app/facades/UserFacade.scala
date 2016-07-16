@@ -3,6 +3,7 @@ package facades
 import javax.inject.{Inject, Singleton}
 
 import models.User
+import entities.UserEntity
 import persists.UserPersist
 import services.UuidService
 
@@ -21,7 +22,9 @@ class UserFacade @Inject()(uuidSercice: UuidService
     persist.findByEmail(email).get
   }
 
-  def insertUser(name: String, surname: String, email: String): Boolean = {
+  def insertUser(name: String
+                 , surname: String
+                 , email: String): Boolean = {
     persist.insertUser(
       id = uuidSercice.getId
       , name = name
