@@ -1,9 +1,10 @@
 package persists.postgres
 
-import java.sql.ResultSet
+import java.sql.{ResultSet, Timestamp}
 import javax.inject.{Inject, Singleton}
 
 import models.User
+import org.joda.time.DateTime
 import persists.UserPersist
 import play.api.db.Database
 
@@ -41,6 +42,7 @@ class UserPostgres @Inject()(db: Database)
     preparedStatement.setString(2, name)
     preparedStatement.setString(3, surname)
     preparedStatement.setString(4, email)
+    preparedStatement.setTimestamp(5, new Timestamp(new DateTime().getMillis))
     preparedStatement.executeUpdate() match {
       case 1 => true
       case _ => false
@@ -52,10 +54,11 @@ class UserPostgres @Inject()(db: Database)
     , name = resultSet.getString("name")
     , surname = resultSet.getString("surname")
     , email = resultSet.getString("email")
+    , created_at = new DateTime(resultSet.getTimestamp("created_at").getTime)
   )
 
   private val FIND_BY_ID = "SELECT * FROM users where id = ?"
   private val FIND_BY_EMAIL = "SELECT * FROM users where email = ?"
-  private val INSERT_USER_DATA = "INSERT INTO users (id, name, surname, email) VALUES (?, ?, ?, ?)"
+  private val INSERT_USER_DATA = "INSERT INTO users (id, name, surname, email, created_at) VALUES (?, ?, ?, ?, ?)"
 
 }

@@ -44,6 +44,7 @@ CREATE TABLE users
     name            VARCHAR(256) NOT NULL,
     surname         VARCHAR(256) NOT NULL,
     email           VARCHAR(256) NOT NULL UNIQUE,
+    created_at      TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT      users_pk PRIMARY KEY (id)
 );
 ALTER TABLE users OWNER TO begdoctor;
@@ -51,11 +52,13 @@ ALTER TABLE users OWNER TO begdoctor;
 INSERT INTO users(id
     , name
     , surname
-    , email)
+    , email
+    , created_at)
 VALUES (0
     , 'patientName'
     , 'patientSurname'
-    , 'patient@mail.com');
+    , 'patient@mail.com'
+    , '2016-07-01 10:30');
 
 CREATE TABLE booking
 (
