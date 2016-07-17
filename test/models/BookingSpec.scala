@@ -1,5 +1,6 @@
 package models
 
+import org.joda.time.DateTime
 import org.scalatestplus.play.{OneAppPerTest, PlaySpec}
 
 /**
@@ -14,16 +15,19 @@ class BookingSpec
       val correct_id = 0L
       val correct_user_id = 0L
       val correct_hospital_time_id = 0L
+      val correct_created_at = new DateTime()
 
       val testObject = new Booking(
         id = correct_id
         , user_id = correct_user_id
         , hospital_time_id = correct_hospital_time_id
+        , created_at = correct_created_at
       )
 
       assert(correct_id == testObject.id)
       assert(correct_user_id == testObject.user_id)
       assert(correct_hospital_time_id == testObject.hospital_time_id)
+      assert(correct_created_at == testObject.created_at)
     }
   }
 }

@@ -65,16 +65,19 @@ CREATE TABLE booking
     id                  BIGINT NOT NULL UNIQUE,
     user_id             BIGINT NOT NULL,
     hospital_time_id    BIGINT NOT NULL,
-    CONSTRAINT      booking_pk PRIMARY KEY (id)
+    created_at          TIMESTAMP WITH TIME ZONE NOT NULL,
+    CONSTRAINT          booking_pk PRIMARY KEY (id)
 );
 ALTER TABLE booking OWNER TO begdoctor;
 
 INSERT INTO booking(id
     , user_id
-    , hospital_time_id)
+    , hospital_time_id
+    , created_at)
 VALUES (0
     , 1
-    , 1);
+    , 1
+    , '2016-07-01 10:30');
 
 CREATE TABLE symptoms
 (

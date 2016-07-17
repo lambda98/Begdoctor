@@ -1,6 +1,7 @@
 package entities
 
 import models.Booking
+import org.joda.time.DateTime
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 
 /**
@@ -16,6 +17,7 @@ class BookingEntitySpec
         id = 1L
         , user_id = 1L
         , hospital_time_id = 1L
+        , created_at = new DateTime()
       )
 
       val testObject = bookingEntity.toModel()

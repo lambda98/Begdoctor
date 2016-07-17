@@ -1,5 +1,6 @@
 package models
 
+import org.joda.time.DateTime
 import utilities.Json
 
 /**
@@ -7,7 +8,8 @@ import utilities.Json
   */
 case class Booking(id: Long
                    , user_id: Long
-                   , hospital_time_id: Long)
+                   , hospital_time_id: Long
+                   , created_at: DateTime)
   extends Json
 
 case class BookingList(bookings: List[Booking])

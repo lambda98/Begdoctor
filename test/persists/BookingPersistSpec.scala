@@ -5,6 +5,8 @@ import models.Booking
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import persists.postgres.BookingPostgres
 
+import scala.util.Random
+
 /**
   * Created by anawin on 7/14/2016 AD.
   */
@@ -41,6 +43,20 @@ class BookingPersistSpec
       val testObject = persist.listBookingByUserId(correct_user_id)
 
       assert(testObject.isInstanceOf[List[BookingEntity]])
+    }
+  }
+
+  "Call insertBooking" should {
+    "insert Booking data successfully" in {
+      val randomId = Random.nextLong()
+      val correct_id = randomId
+      val correct_user_id = 1L
+      val correct_hospital_time_id = 0L
+      val persist = app.injector.instanceOf[BookingPersist]
+
+      val testObject = persist.insertBooking(correct_id, correct_user_id, correct_hospital_time_id)
+
+      assert(testObject)
     }
   }
 }
