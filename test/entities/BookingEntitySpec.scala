@@ -15,9 +15,9 @@ class BookingEntitySpec
     "return booking of that BookingEntity" in {
       val bookingEntity = BookingEntity(
         id = 1L
-        , user_id = 1L
-        , hospital_time_id = 1L
-        , created_at = new DateTime()
+        , userId = 1L
+        , hospitalTimeId = 1L
+        , created = new DateTime()
       )
 
       val testObject = bookingEntity.toModel()

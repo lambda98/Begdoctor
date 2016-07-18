@@ -10,50 +10,52 @@ import services.UuidService
   * Created by anawin on 7/14/2016 AD.
   */
 @Singleton
-class BookingFacade @Inject()(uuidSercice: UuidService
+class BookingFacade @Inject()(uuidService: UuidService
                               , bookingPersist: BookingPersist
                               , userPersist: UserPersist) {
 
-  def listAllBooking: BookingList = {
-    BookingList(bookingPersist.listAllBooking.map(
+  def listAll: BookingList = {
+    BookingList(bookingPersist.selectAll.map(
       bookingEntity => bookingEntity.toModel()
     ))
   }
 
-  def listBookingById(id: Long): BookingList = {
-    BookingList(bookingPersist.listBookingById(id).map(
+  def listById(id: Long): BookingList = {
+    BookingList(bookingPersist.selectById(id).map(
       bookingEntity => bookingEntity.toModel()
     ))
   }
 
-  def listBookingByUserId(user_id: Long): BookingList = {
-    BookingList(bookingPersist.listBookingByUserId(user_id).map(
+  def listByUserId(userId: Long): BookingList = {
+    BookingList(bookingPersist.selectByUserId(userId).map(
       bookingEntity => bookingEntity.toModel()
     ))
   }
 
-  def insertBooking(name: String
-                    , surname: String
-                    , email: String
-                    , hospital_time_id: Long): Boolean = {
+  def create(name: String
+             , surname: String
+             , email: String
+             , hospitalTimeId: Long): Boolean = {
 
-    val userObject = userPersist.findByEmail(email)
-    val user_id =
-      if (userObject.isEmpty) {
-        val created_user_id = uuidSercice.getId
+    val booker = userPersist.findByEmail(email)
+    val userId = booker match {
+      case None | null => {
+        val createdBookerId = uuidService.getId
         userPersist.insertUser(
-          id = created_user_id
+          id = createdBookerId
           , name = name
           , surname = surname
           , email = email
         )
-        created_user_id
-      } else userObject.get.id
+        createdBookerId
+      }
+      case _ => booker.get.id
+    }
 
-    bookingPersist.insertBooking(
-      id = uuidSercice.getId
-      , user_id = user_id
-      , hospital_time_id = hospital_time_id
+    bookingPersist.insert(
+      id = uuidService.getId
+      , userId = userId
+      , hospitalTimeId = hospitalTimeId
     )
   }
 }

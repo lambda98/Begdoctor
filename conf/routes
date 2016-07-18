@@ -3,13 +3,16 @@
 # ~~~~
 
 # Static Assets
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)
 
 # WEB Route
-GET     /                           controllers.web.HomeController.index
+GET     /                                   controllers.web.HomeController.index
 
 # API Route
-GET     /api/v1/hospitals/:id       controllers.api.HospitalController.getHospital(id: Long)
-GET     /api/v1/symptom             controllers.api.SymptomController.getSymptom
-POST    /api/v1/saveuser            controllers.api.UserController.saveUserData
-POST    /api/v1/savebooking         controllers.api.BookingController.saveBookingData
+GET     /api/v1/hospitals/:id               controllers.api.HospitalController.getHospital(id: Long)
+GET     /api/v1/symptom                     controllers.api.SymptomController.getSymptom
+POST    /api/v1/users                       controllers.api.UserController.saveUserData
+GET     /api/v1/bookings                    controllers.api.BookingController.getList
+GET     /api/v1/bookings/:id                controllers.api.BookingController.getById(id: Long)
+POST    /api/v1/bookings                    controllers.api.BookingController.create
+POST    /api/v1/bookings/userid/:userId     controllers.api.BookingController.getByUserId(userId: Long)

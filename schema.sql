@@ -63,17 +63,17 @@ VALUES (0
 CREATE TABLE booking
 (
     id                  BIGINT NOT NULL UNIQUE,
-    user_id             BIGINT NOT NULL,
-    hospital_time_id    BIGINT NOT NULL,
-    created_at          TIMESTAMP WITH TIME ZONE NOT NULL,
+    userId              BIGINT NOT NULL,
+    hospitalTimeId      BIGINT NOT NULL,
+    created             TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT          booking_pk PRIMARY KEY (id)
 );
 ALTER TABLE booking OWNER TO begdoctor;
 
 INSERT INTO booking(id
-    , user_id
-    , hospital_time_id
-    , created_at)
+    , userId
+    , hospitalTimeId
+    , created)
 VALUES (0
     , 1
     , 1

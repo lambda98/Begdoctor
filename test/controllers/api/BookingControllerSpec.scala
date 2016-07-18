@@ -12,51 +12,51 @@ class BookingControllerSpec
   extends PlaySpec
     with OneAppPerTest {
 
-  "GET /api/v1/booking/" should {
+  "GET /api/v1/bookings" should {
     "return Booking JSON" in {
-      contentAsString(route(app, FakeRequest(GET, "/api/v1/booking")).get) must include
+      contentAsString(route(app, FakeRequest(GET, "/api/v1/bookings")).get) must include
       """
         |"id":"1"
-        |"user_id":"1"
-        |"hospital_time_id":"1"
+        |"userId":"1"
+        |"hospitalTimeId":"1"
       """.stripMargin
     }
   }
 
-  "POST /api/v1/bookingbyid/" should {
+  "GET /api/v1/bookings/:id" should {
     "return Booking JSON" in {
-      contentAsString(route(app, FakeRequest(POST, "/api/v1/bookingbyid/")).get) must include
+      contentAsString(route(app, FakeRequest(POST, "/api/v1/bookings/1")).get) must include
       """
         |"id":"1"
-        |"user_id":"1"
-        |"hospital_time_id":"1"
+        |"userId":"1"
+        |"hospitalTimeId":"1"
       """.stripMargin
     }
   }
 
-  "POST /api/v1/bookingbyuserid/" should {
+  "POST /api/v1/bookings/userid/:userId" should {
     "return Booking JSON" in {
-      contentAsString(route(app, FakeRequest(POST, "/api/v1/bookingbyuserid/")).get) must include
+      contentAsString(route(app, FakeRequest(POST, "/api/v1/bookings/userid/1")).get) must include
       """
         |"id":"1"
-        |"user_id":"1"
-        |"hospital_time_id":"1"
+        |"userId":"1"
+        |"hospitalTimeId":"1"
       """.stripMargin
     }
   }
 
-  "POST /api/v1/savebooking" should {
+  "POST /api/v1/bookings" should {
     "return 200: with Save Successful" in {
       val testObject = route(
         app
-        , FakeRequest(POST, "/api/v1/savebooking")
+        , FakeRequest(POST, "/api/v1/bookings")
           .withJsonBody(Json.parse(
             """
               |{
               |   "name": "Yuri",
               |   "surname": "Yuri",
               |   "email": "yuri@mail.com",
-              |   "hospital_time_id": "1"
+              |   "hospitalTimeId": "1"
               |}
             """.stripMargin
           ))

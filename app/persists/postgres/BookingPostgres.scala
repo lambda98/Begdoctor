@@ -2,7 +2,7 @@ package persists.postgres
 
 import java.sql.{ResultSet, Timestamp}
 
-import com.google.inject.Inject
+import javax.inject.{Inject, Singleton}
 import entities.BookingEntity
 import org.joda.time.DateTime
 import persists.BookingPersist
@@ -14,8 +14,8 @@ import play.api.db.Database
 class BookingPostgres @Inject() (db: Database)
   extends BookingPersist {
 
-  override def listAllBooking(): List[BookingEntity] = db.withConnection { implicit conn =>
-    val preparedStatement = conn.prepareStatement(LIST_ALL_BOOKING)
+  override def selectAll(): List[BookingEntity] = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(SELECT_ALL)
 
     val resultSet = preparedStatement.executeQuery
     new Iterator[BookingEntity] {
@@ -24,8 +24,8 @@ class BookingPostgres @Inject() (db: Database)
     }.toList
   }
 
-  override def listBookingById(id: Long): List[BookingEntity] = db.withConnection { implicit conn =>
-    val preparedStatement = conn.prepareStatement(FIND_BOOKING_BY_ID)
+  override def selectById(id: Long): List[BookingEntity] = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(SELECT_BY_ID)
     preparedStatement.setLong(1, id)
 
     val resultSet = preparedStatement.executeQuery
@@ -35,9 +35,9 @@ class BookingPostgres @Inject() (db: Database)
     }.toList
   }
 
-  override def listBookingByUserId(user_id: Long): List[BookingEntity] = db.withConnection { implicit conn =>
-    val preparedStatement = conn.prepareStatement(FIND_BOOKING_BY_USER_ID)
-    preparedStatement.setLong(1, user_id)
+  override def selectByUserId(userId: Long): List[BookingEntity] = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(SELECT_BY_USER_ID)
+    preparedStatement.setLong(1, userId)
 
     val resultSet = preparedStatement.executeQuery
     new Iterator[BookingEntity] {
@@ -46,13 +46,14 @@ class BookingPostgres @Inject() (db: Database)
     }.toList
   }
 
-  override def insertBooking(id: Long
-                             , user_id: Long
-                             , hospital_time_id: Long): Boolean = db.withConnection { implicit conn =>
-    val preparedStatement = conn.prepareStatement(INSERT_BOOKING_DATA)
+  override def insert(id: Long
+                             , userId: Long
+                             , hospitalTimeId: Long): Boolean = db.withConnection { implicit conn =>
+
+    val preparedStatement = conn.prepareStatement(INSERT)
     preparedStatement.setLong(1, id)
-    preparedStatement.setLong(2, user_id)
-    preparedStatement.setLong(3, hospital_time_id)
+    preparedStatement.setLong(2, userId)
+    preparedStatement.setLong(3, hospitalTimeId)
     preparedStatement.setTimestamp(4, new Timestamp(new DateTime().getMillis))
     preparedStatement.executeUpdate() match {
       case 1 => true
@@ -62,13 +63,13 @@ class BookingPostgres @Inject() (db: Database)
 
   private [postgres] def parse(resultSet: ResultSet): BookingEntity = BookingEntity(
     id = resultSet.getLong("id")
-    , user_id = resultSet.getLong("user_id")
-    , hospital_time_id = resultSet.getLong("hospital_time_id")
-    , created_at =  new DateTime(resultSet.getTimestamp("created_at").getTime)
+    , userId = resultSet.getLong("userId")
+    , hospitalTimeId = resultSet.getLong("hospitalTimeId")
+    , created =  new DateTime(resultSet.getTimestamp("created").getTime)
   )
 
-  private val LIST_ALL_BOOKING = "SELECT * FROM booking"
-  private val FIND_BOOKING_BY_ID = "SELECT * FROM booking where id = ?"
-  private val FIND_BOOKING_BY_USER_ID = "SELECT * FROM booking where user_id = ?"
-  private val INSERT_BOOKING_DATA = "INSERT INTO booking (id, user_id, hospital_time_id, created_at) VALUES (?, ?, ?, ?)"
+  private val SELECT_ALL = "SELECT * FROM booking"
+  private val SELECT_BY_ID = "SELECT * FROM booking where id = ?"
+  private val SELECT_BY_USER_ID = "SELECT * FROM booking where userId = ?"
+  private val INSERT = "INSERT INTO booking (id, userId, hospitalTimeId, created) VALUES (?, ?, ?, ?)"
 }

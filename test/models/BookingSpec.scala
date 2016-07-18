@@ -13,21 +13,21 @@ class BookingSpec
   "Create new Booking" should {
     "return Booking" in {
       val correct_id = 0L
-      val correct_user_id = 0L
-      val correct_hospital_time_id = 0L
-      val correct_created_at = new DateTime()
+      val correct_userId = 0L
+      val correct_hospitalTimeId = 0L
+      val correct_created = new DateTime()
 
       val testObject = new Booking(
         id = correct_id
-        , user_id = correct_user_id
-        , hospital_time_id = correct_hospital_time_id
-        , created_at = correct_created_at
+        , userId = correct_userId
+        , hospitalTimeId = correct_hospitalTimeId
+        , created = correct_created
       )
 
       assert(correct_id == testObject.id)
-      assert(correct_user_id == testObject.user_id)
-      assert(correct_hospital_time_id == testObject.hospital_time_id)
-      assert(correct_created_at == testObject.created_at)
+      assert(correct_userId == testObject.userId)
+      assert(correct_hospitalTimeId == testObject.hospitalTimeId)
+      assert(correct_created == testObject.created)
     }
   }
 }
