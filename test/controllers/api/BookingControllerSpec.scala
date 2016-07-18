@@ -54,8 +54,8 @@ class BookingControllerSpec
             """
               |{
               |   "name": "Yuri",
-              |   "surname": "Yuri",
-              |   "email": "yuri@mail.com",
+              |   "surname": "Kwan",
+              |   "email": "yurikwan@mail.com",
               |   "hospitalTimeId": "1"
               |}
             """.stripMargin
