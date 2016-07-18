@@ -3,7 +3,6 @@ package facades
 import javax.inject.{Inject, Singleton}
 
 import models.User
-import entities.UserEntity
 import persists.UserPersist
 import services.UuidService
 
