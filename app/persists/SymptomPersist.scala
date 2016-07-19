@@ -8,5 +8,4 @@ import entities.SymptomEntity
 trait SymptomPersist {
 
   def listAllSymptom() : List[SymptomEntity]
-
 }

@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS hospitals;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS symptoms;
+DROP TABLE IF EXISTS booking;
 DROP TABLE IF EXISTS hospitals_time;
 
 CREATE TABLE hospitals
@@ -43,6 +44,7 @@ CREATE TABLE users
     name            VARCHAR(256) NOT NULL,
     surname         VARCHAR(256) NOT NULL,
     email           VARCHAR(256) NOT NULL UNIQUE,
+    created_at      TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT      users_pk PRIMARY KEY (id)
 );
 ALTER TABLE users OWNER TO begdoctor;
@@ -50,11 +52,32 @@ ALTER TABLE users OWNER TO begdoctor;
 INSERT INTO users(id
     , name
     , surname
-    , email)
+    , email
+    , created_at)
 VALUES (0
     , 'patientName'
     , 'patientSurname'
-    , 'patient@mail.com');
+    , 'patient@mail.com'
+    , '2016-07-01 10:30');
+
+CREATE TABLE booking
+(
+    id                  BIGINT NOT NULL UNIQUE,
+    userId              BIGINT NOT NULL,
+    hospitalTimeId      BIGINT NOT NULL,
+    created             TIMESTAMP WITH TIME ZONE NOT NULL,
+    CONSTRAINT          booking_pk PRIMARY KEY (id)
+);
+ALTER TABLE booking OWNER TO begdoctor;
+
+INSERT INTO booking(id
+    , userId
+    , hospitalTimeId
+    , created)
+VALUES (0
+    , 1
+    , 1
+    , '2016-07-01 10:30');
 
 CREATE TABLE symptoms
 (
