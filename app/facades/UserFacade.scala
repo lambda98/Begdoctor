@@ -10,22 +10,22 @@ import services.UuidService
   * Created by anawin on 6/23/2016 AD.
   */
 @Singleton
-class UserFacade @Inject()(uuidSercice: UuidService
+class UserFacade @Inject()(uuidService: UuidService
                            , persist: UserPersist) {
 
   def findById(id: Long): User = {
-    persist.findById(id).get
+    persist.selectById(id).get
   }
 
   def findByEmail(email: String): User = {
-    persist.findByEmail(email).get
+    persist.selectByEmail(email).get
   }
 
-  def insertUser(name: String
-                 , surname: String
-                 , email: String): Boolean = {
-    persist.insertUser(
-      id = uuidSercice.getId
+  def create(name: String
+             , surname: String
+             , email: String): Boolean = {
+    persist.insert(
+      id = uuidService.getId
       , name = name
       , surname = surname
       , email = email

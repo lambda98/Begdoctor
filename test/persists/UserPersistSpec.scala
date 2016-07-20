@@ -1,49 +1,49 @@
 package persists
 
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
-
-import scala.util.Random
+import javax.inject.Inject
+import services.UuidService
 
 /**
   * Created by anawin on 6/23/2016 AD.
   */
-class UserPersistSpec
+class UserPersistSpec @Inject()(uuidService: UuidService)
   extends PlaySpec
     with OneAppPerSuite {
 
-  "Call findById" should {
+  "Call selectById" should {
     "return User of that id" in {
       val correct_id = 0L
       val persist = app.injector.instanceOf[UserPersist]
 
-      val testObject = persist.findById(correct_id)
+      val testObject = persist.selectById(correct_id)
 
       assert(correct_id == testObject.get.id)
     }
   }
 
-  "Call findByEmail" should {
+  "Call selectByEmail" should {
     "return User of that email" in {
-      val correct_email = "patient@mail.com"
+      val correct_email = "kimeunji@mail.com"
       val persist = app.injector.instanceOf[UserPersist]
 
-      val testObject = persist.findByEmail(correct_email)
+      val testObject = persist.selectByEmail(correct_email)
 
       assert(correct_email == testObject.get.email)
     }
   }
 
-  "Call insertUser" should {
-    "insert data successfully" in {
-      val randomString = Random.alphanumeric.take(5).mkString
-      val randomId = Random.nextLong()
+  "Call insert" should {
+    "insert user data successfully" in {
+      val randomString = uuidService.getId
+      val randomId = uuidService.getId
       val correct_id = randomId
-      val correct_name = "patientpersistName"
-      val correct_surname = "patientpersistSurname"
-      val correct_email = "patientpersist"+randomString+"@mail.com"
+      val correct_name = "Jang"
+      val correct_surname = "Hee-eun"
+      val correct_email = "jangheeeun"+randomString+"@mail.com"
       val persist = app.injector.instanceOf[UserPersist]
 
-      val testObject = persist.insertUser(correct_id, correct_name, correct_surname, correct_email)
+      val testObject = persist.insert(correct_id, correct_name, correct_surname, correct_email)
 
       assert(testObject)
     }
