@@ -7,7 +7,10 @@ import models.User
   */
 trait UserPersist {
 
-  def findById(id: Long): Option[User]
-  def findByEmail(email: String): Option[User]
-  def insertUser(id: Long, name: String, surname: String, email: String): Boolean
+  def selectById(id: Long): Option[User]
+  def selectByEmail(email: String): Option[User]
+  def insert(id: Long
+             , name: String
+             , surname: String
+             , email: String): Boolean
 }

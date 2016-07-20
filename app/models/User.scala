@@ -10,5 +10,5 @@ case class User(id: Long
                 , name: String
                 , surname: String
                 , email: String
-                , created_at: DateTime)
+                , created: DateTime)
   extends Json

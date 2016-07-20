@@ -14,8 +14,8 @@ import play.api.db.Database
 class UserPostgres @Inject()(db: Database)
   extends UserPersist{
 
-  override def findById(id: Long): Option[User] = db.withConnection { implicit conn =>
-    val preparedStatement = conn.prepareStatement(FIND_BY_ID)
+  override def selectById(id: Long): Option[User] = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(SELECT_BY_ID)
     preparedStatement.setLong(1, id)
 
     val resultSet = preparedStatement.executeQuery
@@ -25,8 +25,8 @@ class UserPostgres @Inject()(db: Database)
     }
   }
 
-  override def findByEmail(email: String): Option[User] = db.withConnection { implicit conn =>
-    val preparedStatement = conn.prepareStatement(FIND_BY_EMAIL)
+  override def selectByEmail(email: String): Option[User] = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(SELECT_BY_EMAIL)
     preparedStatement.setString(1, email)
 
     val resultSet = preparedStatement.executeQuery
@@ -36,8 +36,11 @@ class UserPostgres @Inject()(db: Database)
     }
   }
 
-  override def insertUser(id: Long, name: String, surname: String, email: String): Boolean = db.withConnection { implicit conn =>
-    val preparedStatement = conn.prepareStatement(INSERT_USER_DATA)
+  override def insert(id: Long
+                      , name: String
+                      , surname: String
+                      , email: String): Boolean = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(INSERT)
     preparedStatement.setLong(1, id)
     preparedStatement.setString(2, name)
     preparedStatement.setString(3, surname)
@@ -54,11 +57,11 @@ class UserPostgres @Inject()(db: Database)
     , name = resultSet.getString("name")
     , surname = resultSet.getString("surname")
     , email = resultSet.getString("email")
-    , created_at = new DateTime(resultSet.getTimestamp("created_at").getTime)
+    , created = new DateTime(resultSet.getTimestamp("created").getTime)
   )
 
-  private val FIND_BY_ID = "SELECT * FROM users where id = ?"
-  private val FIND_BY_EMAIL = "SELECT * FROM users where email = ?"
-  private val INSERT_USER_DATA = "INSERT INTO users (id, name, surname, email, created_at) VALUES (?, ?, ?, ?, ?)"
+  private val SELECT_BY_ID = "SELECT * FROM users where id = ?"
+  private val SELECT_BY_EMAIL = "SELECT * FROM users where email = ?"
+  private val INSERT = "INSERT INTO users (id, name, surname, email, created) VALUES (?, ?, ?, ?, ?)"
 
 }
