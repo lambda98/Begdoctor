@@ -13,11 +13,11 @@ class SymptomFacadeSpec
 
   implicit override lazy val app = new GuiceApplicationBuilder().build
 
-  "Call listAllSymptom" should {
+  "Call listAll" should {
     "return Symptom " in {
       val facade = app.injector.instanceOf[SymptomFacade]
 
-      val testObject = facade.listAllSymptom
+      val testObject = facade.listAll
 
       assert(testObject.isInstanceOf[SymptomList])
     }
