@@ -16,6 +16,6 @@ case class PostgresModule()
     bind[UserPersist].to[UserPostgres]
     bind[BookingPersist].to[BookingPostgres]
     bind[SymptomPersist].to[SymptomPostgres]
-    bind[Hospital_TimePersist].to[Hospital_TimePostgres]
+    bind[HospitalTimePersist].to[HospitalTimePostgres]
   }
 }
