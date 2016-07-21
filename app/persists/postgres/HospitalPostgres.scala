@@ -13,8 +13,8 @@ import play.api.db.Database
 class HospitalPostgres @Inject()(db: Database)
   extends HospitalPersist {
 
-  override def findById(id: Long): Option[Hospital] = db.withConnection { implicit conn =>
-    val preparedStatement = conn.prepareStatement(FIND_BY_ID)
+  override def selectById(id: Long): Option[Hospital] = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(SELECT_BY_ID)
     preparedStatement.setLong(1, id)
 
     val resultSet = preparedStatement.executeQuery
@@ -29,13 +29,13 @@ class HospitalPostgres @Inject()(db: Database)
     , name = resultSet.getString("name")
     , url = resultSet.getString("url")
     , location = resultSet.getString("location")
-    , doctorName = resultSet.getString("doctorName")
+    , doctorName = resultSet.getString("doctor_name")
     , types = resultSet.getString("types")
     , latitude = resultSet.getString("latitude")
     , longitude = resultSet.getString("longitude")
-    , available_time = resultSet.getString("available_time")
+    , availableTime = resultSet.getString("available_time")
   )
 
-  private val FIND_BY_ID = "SELECT * FROM hospitals where id = ?"
+  private val SELECT_BY_ID = "SELECT * FROM hospitals where id = ?"
 
 }
