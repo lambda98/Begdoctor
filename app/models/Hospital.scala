@@ -13,5 +13,5 @@ case class Hospital(id: Long
                     , types: String
                     , latitude: String
                     , longitude: String
-                    , available_time: String)
+                    , availableTime: String)
   extends Json
