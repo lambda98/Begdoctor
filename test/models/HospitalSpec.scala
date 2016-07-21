@@ -32,7 +32,7 @@ class HospitalSpec
         , types = correct_types
         , latitude = correct_latitude
         , longitude = correct_longitude
-        , available_time = correct_available_time
+        , availableTime = correct_available_time
       )
 
       assert(correct_id == testObject.id)
@@ -43,7 +43,7 @@ class HospitalSpec
       assert(correct_types == testObject.types)
       assert(correct_latitude == testObject.latitude)
       assert(correct_longitude == testObject.longitude)
-      assert(correct_available_time == testObject.available_time)
+      assert(correct_available_time == testObject.availableTime)
     }
   }
 
