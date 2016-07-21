@@ -13,9 +13,9 @@ class Hospital_TimeFacadeSpec
   implicit override lazy val app = new GuiceApplicationBuilder().build
 
   "Call findById" should {
-    "return Hospital_Time of that id" in {
+    "return HospitalTime of that id" in {
       val correct_id = 1L
-      val facade = app.injector.instanceOf[Hospital_TimeFacade]
+      val facade = app.injector.instanceOf[HospitalTimeFacade]
 
       val testObject = facade.findById(correct_id)
 
