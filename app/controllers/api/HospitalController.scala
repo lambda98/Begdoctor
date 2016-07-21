@@ -13,7 +13,7 @@ import play.api.mvc._
 class HospitalController @Inject()(hospitalFacade: HospitalFacade)
   extends Controller {
 
-  def getHospital(Id: Long) = Action {
+  def getById(Id: Long) = Action {
     Ok(hospitalFacade.findById(Id).toText)
   }
 
