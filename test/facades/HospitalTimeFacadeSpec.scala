@@ -6,7 +6,7 @@ import play.api.inject.guice.GuiceApplicationBuilder
 /**
   * Created by Siam yimyam on 13/7/2559.
   */
-class Hospital_TimeFacadeSpec
+class HospitalTimeFacadeSpec
   extends PlaySpec
     with OneAppPerSuite {
 
