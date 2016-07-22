@@ -15,11 +15,11 @@ class HospitalPersistSpec
       val correct_name = "Hae Song"
       val coreect_url = "https://www.benin2009.com/wp-content/uploads/2015/11/hospital.png"
       val correct_location = "Seoul Korea"
-      val correct_doctor_name = "Kang Moyeon"
+      val correct_doctorName = "Kang Moyeon"
       val correct_types = "Hospital"
       val correct_latitude = "13.7854529"
       val correct_longitude = "100.5736408"
-      val correct_available_time = "10:00 - 17:00"
+      val correct_availableTime = "10:00 - 17:00"
 
       val persist = app.injector.instanceOf[HospitalPersist]
 
