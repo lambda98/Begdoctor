@@ -1,6 +1,6 @@
 package controllers.api
 
-import com.google.inject.{Inject, Singleton}
+import javax.inject.{Inject, Singleton}
 import facades.HospitalTimeFacade
 import play.api.mvc.{Action, Controller}
 
