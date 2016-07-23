@@ -11,8 +11,8 @@ import play.api.mvc._
 class SymptomController @Inject() (symptomFacade: SymptomFacade)
   extends Controller {
 
-  def getSymptom = Action {
-    Ok(symptomFacade.listAllSymptom.toText)
+  def getList = Action {
+    Ok(symptomFacade.listAll.toText)
   }
 
 }

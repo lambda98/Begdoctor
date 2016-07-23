@@ -10,7 +10,7 @@ CREATE TABLE hospitals
     name            VARCHAR(256) NOT NULL UNIQUE,
     url             VARCHAR(256) NOT NULL UNIQUE,
     location        VARCHAR(256) NOT NULL UNIQUE,
-    doctorName      VARCHAR(256) NOT NULL UNIQUE,
+    doctor_name      VARCHAR(256) NOT NULL UNIQUE,
     types           VARCHAR(256) NOT NULL UNIQUE,
     latitude        FLOAT(20)  NOT NULL UNIQUE,
     longitude       FLOAT(20)  NOT NULL UNIQUE,
@@ -23,7 +23,7 @@ INSERT INTO hospitals(id
     , name
     , url
     , location
-    , doctorName
+    , doctor_name
     , types
     , latitude
     , longitude

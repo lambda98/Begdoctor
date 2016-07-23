@@ -12,11 +12,11 @@ class SymptomPersistSpec
   extends PlaySpec
     with OneAppPerSuite {
 
-  "When findById" should {
+  "When selectAll" should {
     "return Symptom" in {
       val persist = app.injector.instanceOf[SymptomPostgres]
 
-      val testObject = persist.listAllSymptom()
+      val testObject = persist.selectAll()
 
       assert(testObject.isInstanceOf[List[SymptomEntity]])
     }

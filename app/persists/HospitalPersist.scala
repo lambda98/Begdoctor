@@ -7,6 +7,6 @@ import models.Hospital
   */
 trait HospitalPersist {
 
-  def findById(id: Long): Option[Hospital]
+  def selectById(id: Long): Option[Hospital]
 
 }

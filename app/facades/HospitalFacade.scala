@@ -12,7 +12,7 @@ import persists.HospitalPersist
 class HospitalFacade @Inject()(persist: HospitalPersist) {
 
   def findById(id: Long): Hospital = {
-    persist.findById(id).get
+    persist.selectById(id).get
   }
 
 }

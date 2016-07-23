@@ -11,8 +11,8 @@ import persists.SymptomPersist
 @Singleton
 class SymptomFacade @Inject()(persist: SymptomPersist) {
 
-  def listAllSymptom: SymptomList = {
-    SymptomList(persist.listAllSymptom.map(
+  def listAll: SymptomList = {
+    SymptomList(persist.selectAll.map(
       symptomEntity => symptomEntity.toModel()
     ))
   }

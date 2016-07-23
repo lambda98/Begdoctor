@@ -7,5 +7,5 @@ import entities.SymptomEntity
   */
 trait SymptomPersist {
 
-  def listAllSymptom() : List[SymptomEntity]
+  def selectAll() : List[SymptomEntity]
 }
