@@ -19,8 +19,6 @@ class HospitalControllerSpec
         |"name":"Hae song"
         |"url":"https://www.benin2009.com/wp-content/uploads/2015/11/hospital.png"
         |"name":Kang Moyeon
-        |"location":"Seoul Korea"
-        |"types":"Hospital"
         |"latitude":"13.7854529"
         |"longitude":"100.5736408"
         |"available_time":"10:00 - 17:00"
