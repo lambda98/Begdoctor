@@ -13,9 +13,8 @@ import play.api.db.Database
 class SymptomPostgres @Inject() (db: Database)
   extends SymptomPersist {
 
-  override def listAllSymptom(): List[SymptomEntity] = db.withConnection { implicit conn =>
-    val preparedStatement = conn.prepareStatement(LIST_ALL_SYMPTOM)
-
+  override def selectAll(): List[SymptomEntity] = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(SELECT_ALL)
 
     val resultSet = preparedStatement.executeQuery
     new Iterator[SymptomEntity] {
@@ -28,5 +27,5 @@ class SymptomPostgres @Inject() (db: Database)
     , name = resultSet.getString("name")
   )
 
-  private val LIST_ALL_SYMPTOM = "SELECT * FROM symptoms"
+  private val SELECT_ALL = "SELECT * FROM symptoms"
 }

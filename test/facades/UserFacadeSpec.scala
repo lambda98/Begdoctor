@@ -2,13 +2,13 @@ package facades
 
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import play.api.inject.guice.GuiceApplicationBuilder
-
-import scala.util.Random
+import javax.inject.Inject
+import services.UuidService
 
 /**
   * Created by anawin on 6/23/2016 AD.
   */
-class UserFacadeSpec
+class UserFacadeSpec @Inject()(uuidService: UuidService)
   extends PlaySpec
     with OneAppPerSuite {
 
@@ -27,7 +27,7 @@ class UserFacadeSpec
 
   "Call findByEmail" should {
     "return User of that email" in {
-      val correct_email = "patient@mail.com"
+      val correct_email = "kimeunji@mail.com"
       val facade = app.injector.instanceOf[UserFacade]
 
       val testObject = facade.findByEmail(correct_email)
@@ -36,15 +36,15 @@ class UserFacadeSpec
     }
   }
 
-  "Call insertUser" should {
+  "Call create" should {
     "insert data successfully" in {
-      val randomString = Random.alphanumeric.take(5).mkString
-      val correct_name = "patientfacadeName"
-      val correct_surname = "patientfacadeSurname"
-      val correct_email = "patientfacade" + randomString + "@mail.com"
+      val randomString = uuidService.getId
+      val correct_name = "Han"
+      val correct_surname = "Suk-won"
+      val correct_email = "Han" + randomString + "@mail.com"
       val facade = app.injector.instanceOf[UserFacade]
 
-      val testObject = facade.insertUser(
+      val testObject = facade.create(
         correct_name
         , correct_surname
         , correct_email)

@@ -7,18 +7,18 @@ import play.api.test.Helpers._
 /**
   * Created by Administrator on 13/7/2559.
   */
-class Hospital_TimeControllerSpec
+class HospitalTimeControllerSpec
   extends PlaySpec
     with OneAppPerTest{
 
-  "GET /api/v1/hospital_time/1" should {
-    "return Hospital_Time JSON" in {
-      contentAsString(route(app, FakeRequest(GET, "/api/v1/hospital_time/0")).get) must include
+  "GET /api/v1/hospitals/0/time" should {
+    "return HospitalTime JSON" in {
+      contentAsString(route(app, FakeRequest(GET, "/api/v1/hospitals/0/time")).get) must include
       """
         |"id":0,
-        |"hospital_id":0
-        |"start_datetime":"2016-07-01 10:30"
-        |"finish_datetime":"2016-07-01 11:30"
+        |"hospitalId":0
+        |"startDatetime":"2016-07-01 10:30"
+        |"finishDatetime":"2016-07-01 11:30"
         |"available":"true"
       """.stripMargin
     }

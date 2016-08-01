@@ -12,20 +12,24 @@ class UserControllerSpec
   extends PlaySpec
     with OneAppPerTest {
 
-  "GET /api/v1/users/1" should {
+  "GET /api/v1/users/:id" should {
     "return User JSON" in {
-      contentAsString(route(app, FakeRequest(GET, "/api/v1/users/0")).get) must include
+      contentAsString(route(
+        app
+        , FakeRequest(GET, "/api/v1/users/0")).get) must include
       """
         |"id":1
       """.stripMargin
     }
   }
 
-  "POST /api/v1/useremail/" should {
+  "GET /api/v1/users/email/:email" should {
     "return User JSON" in {
-      contentAsString(route(app, FakeRequest(POST, "/api/v1/useremail/")).get) must include
+      contentAsString(route(
+        app
+        , FakeRequest(GET, "/api/v1/users/email/kimeunji@mail.com")).get) must include
       """
-        |"email": "yoona@mail.com"
+        |"email": "kimeunji@mail.com"
       """.stripMargin
     }
   }
@@ -39,8 +43,8 @@ class UserControllerSpec
             """
               |{
               |   "name": "Yuri",
-              |   "surname": "Yuri",
-              |   "email": "yuri@mail.com"
+              |   "surname": "kwan",
+              |   "email": "yurikwan@mail.com"
               |}
             """.stripMargin
           ))

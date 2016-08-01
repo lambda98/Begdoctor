@@ -8,10 +8,8 @@ import utilities.Json
 case class Hospital(id: Long
                     , name: String
                     , url: String
-                    , location: String
                     , doctorName: String
-                    , types: String
                     , latitude: String
                     , longitude: String
-                    , available_time: String)
+                    , availableTime: String)
   extends Json

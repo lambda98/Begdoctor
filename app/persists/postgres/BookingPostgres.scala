@@ -47,8 +47,8 @@ class BookingPostgres @Inject() (db: Database)
   }
 
   override def insert(id: Long
-                             , userId: Long
-                             , hospitalTimeId: Long): Boolean = db.withConnection { implicit conn =>
+                      , userId: Long
+                      , hospitalTimeId: Long): Boolean = db.withConnection { implicit conn =>
 
     val preparedStatement = conn.prepareStatement(INSERT)
     preparedStatement.setLong(1, id)

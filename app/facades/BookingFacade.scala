@@ -37,11 +37,11 @@ class BookingFacade @Inject()(uuidService: UuidService
              , email: String
              , hospitalTimeId: Long): Boolean = {
 
-    val booker = userPersist.findByEmail(email)
+    val booker = userPersist.selectByEmail(email)
     val userId = booker match {
       case None | null => {
         val createdBookerId = uuidService.getId
-        userPersist.insertUser(
+        userPersist.insert(
           id = createdBookerId
           , name = name
           , surname = surname

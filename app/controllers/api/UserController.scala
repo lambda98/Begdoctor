@@ -16,19 +16,19 @@ import play.api.mvc._
 class UserController @Inject()(userFacade: UserFacade)
   extends Controller {
 
-  def getUser(Id: Long) = Action {
-    Ok(userFacade.findById(Id).toText)
+  def getById(id: Long) = Action {
+    Ok(userFacade.findById(id).toText)
   }
 
-  def getUserByEmail(email: String) = Action {
+  def getByEmail(email: String) = Action {
     Ok(userFacade.findByEmail(email).toText)
   }
 
-  def saveUserData() = Action { implicit request =>
+  def create() = Action { implicit request =>
     CreateUserForm.form.bindFromRequest.fold(
       formWithErrors => Ok("400")
       , form => try {
-        userFacade.insertUser(
+        userFacade.create(
           name = form.name
           , surname = form.surname
           , email = form.email
