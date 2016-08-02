@@ -63,13 +63,13 @@ class BookingPostgres @Inject() (db: Database)
 
   private [postgres] def parse(resultSet: ResultSet): BookingEntity = BookingEntity(
     id = resultSet.getLong("id")
-    , userId = resultSet.getLong("userId")
-    , hospitalTimeId = resultSet.getLong("hospitalTimeId")
+    , userId = resultSet.getLong("user_id")
+    , hospitalTimeId = resultSet.getLong("hospital_time_id")
     , created =  new DateTime(resultSet.getTimestamp("created").getTime)
   )
 
   private val SELECT_ALL = "SELECT * FROM booking"
   private val SELECT_BY_ID = "SELECT * FROM booking where id = ?"
-  private val SELECT_BY_USER_ID = "SELECT * FROM booking where userId = ?"
-  private val INSERT = "INSERT INTO booking (id, userId, hospitalTimeId, created) VALUES (?, ?, ?, ?)"
+  private val SELECT_BY_USER_ID = "SELECT * FROM booking where user_id = ?"
+  private val INSERT = "INSERT INTO booking (id, user_id, hospital_time_id, created) VALUES (?, ?, ?, ?)"
 }

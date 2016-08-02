@@ -17,8 +17,8 @@ class BookingControllerSpec
       contentAsString(route(app, FakeRequest(GET, "/api/v1/bookings")).get) must include
       """
         |"id":"1"
-        |"userId":"1"
-        |"hospitalTimeId":"1"
+        |"user_id":"1"
+        |"hospital_time_id":"1"
       """.stripMargin
     }
   }
@@ -28,8 +28,8 @@ class BookingControllerSpec
       contentAsString(route(app, FakeRequest(POST, "/api/v1/bookings/1")).get) must include
       """
         |"id":"1"
-        |"userId":"1"
-        |"hospitalTimeId":"1"
+        |"user_id":"1"
+        |"hospital_time_id":"1"
       """.stripMargin
     }
   }
@@ -39,8 +39,8 @@ class BookingControllerSpec
       contentAsString(route(app, FakeRequest(POST, "/api/v1/bookings/userid/1")).get) must include
       """
         |"id":"1"
-        |"userId":"1"
-        |"hospitalTimeId":"1"
+        |"user_id":"1"
+        |"hospital_time_id":"1"
       """.stripMargin
     }
   }
