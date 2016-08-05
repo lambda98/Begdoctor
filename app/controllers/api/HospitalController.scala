@@ -7,7 +7,7 @@ import facades.HospitalFacade
 import play.api.mvc._
 
 /**
-  * Created by champillon on 6/12/16.
+  * Created by champillon on 6/12/16
   */
 @Singleton
 class HospitalController @Inject()(hospitalFacade: HospitalFacade)
