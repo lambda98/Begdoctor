@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS hospitals;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS admins;
 DROP TABLE IF EXISTS symptoms;
 DROP TABLE IF EXISTS booking;
 DROP TABLE IF EXISTS hospitals_time;
@@ -52,6 +53,37 @@ VALUES (0
     , 'Kim'
     , 'Eun-ji'
     , 'kimeunji@mail.com'
+    , '2016-07-01 10:30');
+
+CREATE TABLE admins
+(
+    id              BIGINT NOT NULL UNIQUE,
+    name            VARCHAR(256) NOT NULL,
+    surname         VARCHAR(256) NOT NULL,
+    email           VARCHAR(256),
+    username        VARCHAR(256) NOT NULL UNIQUE,
+    password        VARCHAR(256) NOT NULL,
+    hospital_id     BIGINT NOT NULL,
+    created         TIMESTAMP WITH TIME ZONE NOT NULL,
+    CONSTRAINT      admins_pk PRIMARY KEY (id)
+);
+ALTER TABLE admins OWNER TO begdoctor;
+
+INSERT INTO admins(id
+    , name
+    , surname
+    , email
+    , username
+    , password
+    , hospital_id
+    , created)
+VALUES (0
+    , 'Choi'
+    , 'Woo-geun'
+    , 'choiwoogeun@mail.com'
+    , 'choiwoogeun'
+    , '$2a$10$iXIfki6AefgcUsPqR.niQ.FvIK8vdcfup09YmUxmzS/sQeuI3QOFG'
+    , '1'
     , '2016-07-01 10:30');
 
 CREATE TABLE booking
