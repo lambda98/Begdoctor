@@ -3,25 +3,25 @@ package persists.postgres
 import java.sql.{ResultSet, Timestamp}
 import javax.inject.{Inject, Singleton}
 
-import models.Admin
+import models.Staff
 import org.joda.time.DateTime
-import persists.AdminPersist
+import persists.StaffPersist
 import play.api.db.Database
 import com.github.t3hnar.bcrypt._
-import entities.AdminEntity
+import entities.StaffEntity
 
 /**
   * Created by anawin on 8/6/2016 AD.
   */
-class AdminPostgres @Inject()(db: Database)
-  extends AdminPersist{
+class StaffPostgres @Inject()(db: Database)
+  extends StaffPersist{
 
-  override def selectByUserName(username: String):  List[AdminEntity] = db.withConnection { implicit conn =>
+  override def selectByUserName(username: String):  List[StaffEntity] = db.withConnection { implicit conn =>
     val preparedStatement = conn.prepareStatement(SELECT_BY_USERNAME)
     preparedStatement.setString(1, username)
 
     val resultSet = preparedStatement.executeQuery
-    new Iterator[AdminEntity] {
+    new Iterator[StaffEntity] {
       override def hasNext = resultSet.next()
       override def next() = parse(resultSet)
     }.toList
@@ -63,7 +63,7 @@ class AdminPostgres @Inject()(db: Database)
     }
   }
 
-  private[postgres] def parse(resultSet: ResultSet): AdminEntity = AdminEntity(
+  private[postgres] def parse(resultSet: ResultSet): StaffEntity = StaffEntity(
     id = resultSet.getLong("id")
     , name = resultSet.getString("name")
     , surname = resultSet.getString("surname")
@@ -74,9 +74,9 @@ class AdminPostgres @Inject()(db: Database)
     , created = new DateTime(resultSet.getTimestamp("created").getTime)
   )
 
-  private val SELECT_BY_USERNAME = "SELECT * FROM admins where username = ?"
-  private val LOGIN = "SELECT * FROM admins where username = ? AND password = ?"
-  private val INSERT = "INSERT INTO admins (id" +
+  private val SELECT_BY_USERNAME = "SELECT * FROM staffs where username = ?"
+  private val LOGIN = "SELECT * FROM staffs where username = ? AND password = ?"
+  private val INSERT = "INSERT INTO staffs (id" +
                                             ", name" +
                                             ", surname" +
                                             ", email" +

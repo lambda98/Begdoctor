@@ -5,32 +5,32 @@ import javax.inject.Inject
 
 import services.UuidService
 import com.github.t3hnar.bcrypt._
-import entities.AdminEntity
-import persists.postgres.AdminPostgres
+import entities.StaffEntity
+import persists.postgres.StaffPostgres
 
 /**
   * Created by anawin on 8/6/2016 AD.
   */
-class AdminPersistSpec @Inject()(uuidService: UuidService)
+class StaffPersistSpec @Inject()(uuidService: UuidService)
   extends PlaySpec
     with OneAppPerSuite {
 
   "When selectByUserName" should {
     "return data of that username" in {
       val correct_username = "choiwoogeun"
-      val persist = app.injector.instanceOf[AdminPostgres]
+      val persist = app.injector.instanceOf[StaffPostgres]
 
       val testObject = persist.selectByUserName(correct_username)
 
-      assert(testObject.isInstanceOf[List[AdminEntity]])
+      assert(testObject.isInstanceOf[List[StaffEntity]])
     }
   }
 
-  "Call admin check" should {
-    "return admin data" in {
+  "Call staff check" should {
+    "return staff data" in {
       val correct_username = "choiwoogeun"
       val correct_password = "password"
-      val persist = app.injector.instanceOf[AdminPersist]
+      val persist = app.injector.instanceOf[StaffPersist]
 
       val testObject = persist.check(correct_username, correct_password)
 
@@ -38,8 +38,8 @@ class AdminPersistSpec @Inject()(uuidService: UuidService)
     }
   }
 
-  "Call insert admin" should {
-    "insert admin data successfully" in {
+  "Call insert staff" should {
+    "insert staff data successfully" in {
       val randomId = uuidService.getId
       val correct_id = randomId
       val correct_name = "Im"
@@ -48,7 +48,7 @@ class AdminPersistSpec @Inject()(uuidService: UuidService)
       val correct_username = "imgwangnam"
       val correct_password = "picolo"
       val correct_hospitalId = uuidService.getId
-      val persist = app.injector.instanceOf[AdminPersist]
+      val persist = app.injector.instanceOf[StaffPersist]
 
       val testObject = persist.insert(correct_id
                                       , correct_name

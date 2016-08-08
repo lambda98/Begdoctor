@@ -18,6 +18,6 @@ GET     /api/v1/bookings                    controllers.api.BookingController.ge
 GET     /api/v1/bookings/:id                controllers.api.BookingController.getById(id: Long)
 POST    /api/v1/bookings                    controllers.api.BookingController.create
 POST    /api/v1/bookings/userid/:userId     controllers.api.BookingController.getByUserId(userId: Long)
-POST    /api/v1/admins                      controllers.api.AdminController.create
-POST    /api/v1/admins/check                controllers.api.AdminController.check
-POST    /api/v1/admins/username/:username   controllers.api.AdminController.getByUserName(username: String)
+POST    /api/v1/staffs                      controllers.api.StaffController.create
+POST    /api/v1/staffs/check                controllers.api.StaffController.check
+POST    /api/v1/staffs/username/:username   controllers.api.StaffController.getByUserName(username: String)

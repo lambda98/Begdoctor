@@ -2,19 +2,19 @@ package facades
 
 import javax.inject.{Inject, Singleton}
 
-import models.{Admin, AdminList}
-import persists.AdminPersist
+import models.{Staff, StaffList}
+import persists.StaffPersist
 import services.UuidService
 
 /**
   * Created by anawin on 8/6/2016 AD.
   */
 @Singleton
-class AdminFacade @Inject()(uuidService: UuidService
-                            , persist: AdminPersist) {
+class StaffFacade @Inject()(uuidService: UuidService
+                            , persist: StaffPersist) {
 
-  def listByUserName(username: String): AdminList = {
-    AdminList(persist.selectByUserName(username).map(
+  def listByUserName(username: String): StaffList = {
+    StaffList(persist.selectByUserName(username).map(
       adminEntity => adminEntity.toModel()
     ))
   }

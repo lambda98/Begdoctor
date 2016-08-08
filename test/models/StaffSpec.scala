@@ -7,12 +7,12 @@ import org.scalatestplus.play.{OneAppPerTest, PlaySpec}
 /**
   * Created by anawin on 8/6/2016 AD.
   */
-class AdminSpec
+class StaffSpec
   extends  PlaySpec
     with  OneAppPerTest {
 
-  "Create new Admin" should {
-    "return Admin" in {
+  "Create new Staff" should {
+    "return staff" in {
       val correct_id = 1L
       val correct_name = "Lee"
       val correct_surname = "Chi-hoon"
@@ -22,7 +22,7 @@ class AdminSpec
       val correct_hospitalId = 1L
       val correct_created = new DateTime()
 
-      val testObject = new Admin(
+      val testObject = new Staff(
         id = correct_id
         , name = correct_name
         , surname = correct_surname

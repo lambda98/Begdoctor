@@ -6,7 +6,7 @@ import utilities.Json
 /**
   * Created by anawin on 8/6/2016 AD.
   */
-case class Admin (id: Long
+case class Staff (id: Long
                   , name: String
                   , surname: String
                   , email: String
@@ -16,5 +16,5 @@ case class Admin (id: Long
                   , created: DateTime)
   extends Json
 
-case class AdminList(admins: List[Admin])
+case class StaffList(staffs: List[Staff])
   extends Json

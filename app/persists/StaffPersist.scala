@@ -1,14 +1,14 @@
 package persists
 
-import models.Admin
-import entities.AdminEntity
+import models.Staff
+import entities.StaffEntity
 
 /**
   * Created by anawin on 8/6/2016 AD.
   */
-trait AdminPersist {
+trait StaffPersist {
 
-  def selectByUserName(username: String) : List[AdminEntity]
+  def selectByUserName(username: String) : List[StaffEntity]
   def check(username: String, password: String) : Boolean
   def insert(id: Long
              , name: String

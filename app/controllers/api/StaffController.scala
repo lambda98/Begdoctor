@@ -2,7 +2,7 @@ package controllers.api
 
 import javax.inject._
 
-import facades.AdminFacade
+import facades.StaffFacade
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
@@ -13,18 +13,18 @@ import play.api.mvc._
   * Created by anawin on 8/6/2016 AD.
   */
 @Singleton
-class AdminController @Inject()(adminFacade: AdminFacade)
+class StaffController @Inject()(staffFacade: StaffFacade)
   extends Controller {
 
   def getByUserName(username: String) = Action {
-    Ok(adminFacade.listByUserName(username).toText)
+    Ok(staffFacade.listByUserName(username).toText)
   }
 
   def check() = Action { implicit request =>
-    LoginAdminForm.form.bindFromRequest.fold(
+    LoginStaffForm.form.bindFromRequest.fold(
       formWithErrors => Ok("400")
       , form => try {
-        adminFacade.check(
+        staffFacade.check(
           username = form.username
           , password = form.password
         )
@@ -36,10 +36,10 @@ class AdminController @Inject()(adminFacade: AdminFacade)
   }
 
   def create() = Action { implicit request =>
-    CreateAdminForm.form.bindFromRequest.fold(
+    CreateStaffForm.form.bindFromRequest.fold(
       formWithErrors => Ok("400")
       , form => try {
-        adminFacade.create(
+        staffFacade.create(
           name = form.name
           , surname = form.surname
           , email = form.email
@@ -56,13 +56,13 @@ class AdminController @Inject()(adminFacade: AdminFacade)
 
 }
 
-case class CreateAdminForm(name: String
+case class CreateStaffForm(name: String
                            , surname: String
                            , email: String
                            , username: String
                            , password: String
                            , hospitalId: Long)
-object CreateAdminForm {
+object CreateStaffForm {
   val form = Form(
     mapping(
       "name" -> of[String],
@@ -71,17 +71,17 @@ object CreateAdminForm {
       "username" -> of[String],
       "password" -> of[String],
       "hospitalId" -> of[Long]
-    )(CreateAdminForm.apply)(CreateAdminForm.unapply)
+    )(CreateStaffForm.apply)(CreateStaffForm.unapply)
   )
 }
 
-case class LoginAdminForm(username: String
+case class LoginStaffForm(username: String
                            , password: String)
-object LoginAdminForm {
+object LoginStaffForm {
   val form = Form(
     mapping(
       "username" -> of[String],
       "password" -> of[String]
-    )(LoginAdminForm.apply)(LoginAdminForm.unapply)
+    )(LoginStaffForm.apply)(LoginStaffForm.unapply)
   )
 }

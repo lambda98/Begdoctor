@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS hospitals;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS admins;
+DROP TABLE IF EXISTS staffs;
 DROP TABLE IF EXISTS symptoms;
 DROP TABLE IF EXISTS booking;
 DROP TABLE IF EXISTS hospitals_time;
@@ -55,7 +55,7 @@ VALUES (0
     , 'kimeunji@mail.com'
     , '2016-07-01 10:30');
 
-CREATE TABLE admins
+CREATE TABLE staffs
 (
     id              BIGINT NOT NULL UNIQUE,
     name            VARCHAR(256) NOT NULL,
@@ -65,11 +65,11 @@ CREATE TABLE admins
     password        VARCHAR(256) NOT NULL,
     hospital_id     BIGINT NOT NULL,
     created         TIMESTAMP WITH TIME ZONE NOT NULL,
-    CONSTRAINT      admins_pk PRIMARY KEY (id)
+    CONSTRAINT      staffs_pk PRIMARY KEY (id)
 );
-ALTER TABLE admins OWNER TO begdoctor;
+ALTER TABLE staffs OWNER TO begdoctor;
 
-INSERT INTO admins(id
+INSERT INTO staffs(id
     , name
     , surname
     , email

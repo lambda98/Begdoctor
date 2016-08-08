@@ -1,19 +1,19 @@
 package entities
 
-import models.Admin
+import models.Staff
 import org.joda.time.DateTime
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 
 /**
   * Created by anawin on 8/7/2016 AD.
   */
-class AdminEntitySpec
+class StaffEntitySpec
   extends PlaySpec
     with OneAppPerSuite {
 
   "Call toModel" should {
-    "return Admin of that AdminEntity" in {
-      val adminEntity = AdminEntity(
+    "return Staff of that StaffEntity" in {
+      val staffEntity = StaffEntity(
         id = 1L
         , name = "Kim"
         , surname = "Yoona"
@@ -24,9 +24,9 @@ class AdminEntitySpec
         , created = new DateTime()
       )
 
-      val testObject = adminEntity.toModel()
+      val testObject = staffEntity.toModel()
 
-      assert(testObject.isInstanceOf[Admin])
+      assert(testObject.isInstanceOf[Staff])
     }
   }
 

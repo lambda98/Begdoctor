@@ -1,11 +1,11 @@
 package entities
 
-import models.Admin
+import models.Staff
 import org.joda.time.DateTime
 /**
   * Created by anawin on 8/7/2016 AD.
   */
-case class AdminEntity (id: Long
+case class StaffEntity (id: Long
                         , name: String
                         , surname: String
                         , email: String
@@ -13,7 +13,7 @@ case class AdminEntity (id: Long
                         , password: String
                         , hospitalId: Long
                         , created: DateTime){
-  def toModel(): Admin = Admin(
+  def toModel(): Staff = Staff(
     id = id
     , name = name
     , surname = surname

@@ -5,12 +5,12 @@ import play.api.inject.guice.GuiceApplicationBuilder
 import javax.inject.Inject
 import services.UuidService
 import com.github.t3hnar.bcrypt._
-import models.AdminList
+import models.StaffList
 
 /**
   * Created by anawin on 8/6/2016 AD.
   */
-class AdminFacadeSpec  @Inject()(uuidService: UuidService)
+class StaffFacadeSpec  @Inject()(uuidService: UuidService)
   extends PlaySpec
     with OneAppPerSuite {
 
@@ -19,19 +19,19 @@ class AdminFacadeSpec  @Inject()(uuidService: UuidService)
   "Call listByUserName" should {
     "return data of that username" in {
       val correct_username = "choiwoogeun"
-      val facade = app.injector.instanceOf[AdminFacade]
+      val facade = app.injector.instanceOf[StaffFacade]
 
       val testObject = facade.listByUserName(correct_username)
 
-      assert(testObject.isInstanceOf[AdminList])
+      assert(testObject.isInstanceOf[StaffList])
     }
   }
 
-  "Call check admin" should {
-    "return admin info" in {
+  "Call check staff" should {
+    "return staff info" in {
       val correct_username = "choiwoogeun"
       val correct_password = "password"
-      val facade = app.injector.instanceOf[AdminFacade]
+      val facade = app.injector.instanceOf[StaffFacade]
 
       val testObject = facade.check(correct_username, correct_password)
 
@@ -39,8 +39,8 @@ class AdminFacadeSpec  @Inject()(uuidService: UuidService)
     }
   }
 
-  "Call create admin" should {
-    "insert admin data successfully" in {
+  "Call create staff" should {
+    "insert staff data successfully" in {
       val randomString = uuidService.getId
       val correct_name = "Song"
       val correct_surname = "Sang-hyun"
@@ -48,7 +48,7 @@ class AdminFacadeSpec  @Inject()(uuidService: UuidService)
       val correct_username = "songsanghyn"
       val correct_password = "songsang".bcrypt
       val correct_hospitalId = 1L
-      val facade = app.injector.instanceOf[AdminFacade]
+      val facade = app.injector.instanceOf[StaffFacade]
 
       val testObject = facade.create(
         correct_name
