@@ -26,13 +26,13 @@ class StaffPersistSpec @Inject()(uuidService: UuidService)
     }
   }
 
-  "Call staff check" should {
+  "Call staff authenticate" should {
     "return staff data" in {
       val correct_username = "choiwoogeun"
       val correct_password = "password"
       val persist = app.injector.instanceOf[StaffPersist]
 
-      val testObject = persist.check(correct_username, correct_password)
+      val testObject = persist.authenticate(correct_username, correct_password)
 
       assert(testObject)
     }

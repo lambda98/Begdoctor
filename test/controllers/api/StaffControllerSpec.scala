@@ -23,11 +23,11 @@ class StaffControllerSpec
     }
   }
 
-  "POST /api/v1/staffs/check" should {
+  "POST /api/v1/staffs/authenticate" should {
     "return Staff: with Login Successful" in {
       val testObject = route(
         app
-        , FakeRequest(POST, "/api/v1/staffs/check")
+        , FakeRequest(POST, "/api/v1/staffs/authenticate")
           .withJsonBody(Json.parse(
             """
               |{

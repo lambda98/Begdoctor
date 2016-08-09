@@ -27,13 +27,13 @@ class StaffFacadeSpec  @Inject()(uuidService: UuidService)
     }
   }
 
-  "Call check staff" should {
+  "Call authenticate staff" should {
     "return staff info" in {
       val correct_username = "choiwoogeun"
       val correct_password = "password"
       val facade = app.injector.instanceOf[StaffFacade]
 
-      val testObject = facade.check(correct_username, correct_password)
+      val testObject = facade.authenticate(correct_username, correct_password)
 
       assert(testObject)
     }

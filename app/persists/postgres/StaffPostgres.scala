@@ -7,7 +7,6 @@ import models.Staff
 import org.joda.time.DateTime
 import persists.StaffPersist
 import play.api.db.Database
-import com.github.t3hnar.bcrypt._
 import entities.StaffEntity
 
 /**
@@ -27,11 +26,10 @@ class StaffPostgres @Inject()(db: Database)
     }.toList
   }
 
-  override def check(username: String, password: String): Boolean = db.withConnection { implicit conn =>
+  override def authenticate(username: String, password: String): Boolean = db.withConnection { implicit conn =>
     val preparedStatement = conn.prepareStatement(LOGIN)
-    val bcryptPassword = password.bcrypt
     preparedStatement.setString(1, username)
-    preparedStatement.setString(2, bcryptPassword)
+    preparedStatement.setString(2, password)
 
     val resultSet = preparedStatement.executeQuery
     resultSet.next match {
@@ -48,13 +46,12 @@ class StaffPostgres @Inject()(db: Database)
                       , password: String
                       , hospitalId: Long): Boolean = db.withConnection { implicit conn =>
     val preparedStatement = conn.prepareStatement(INSERT)
-    val bcryptPassword = password.bcrypt
     preparedStatement.setLong(1, id)
     preparedStatement.setString(2, name)
     preparedStatement.setString(3, surname)
     preparedStatement.setString(4, email)
     preparedStatement.setString(5, username)
-    preparedStatement.setString(6, bcryptPassword)
+    preparedStatement.setString(6, password)
     preparedStatement.setLong(7, hospitalId)
     preparedStatement.setTimestamp(8, new Timestamp(new DateTime().getMillis))
     preparedStatement.executeUpdate() match {

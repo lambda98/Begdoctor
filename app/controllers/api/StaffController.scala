@@ -20,11 +20,11 @@ class StaffController @Inject()(staffFacade: StaffFacade)
     Ok(staffFacade.listByUserName(username).toText)
   }
 
-  def check() = Action { implicit request =>
+  def authenticate() = Action { implicit request =>
     LoginStaffForm.form.bindFromRequest.fold(
       formWithErrors => Ok("400")
       , form => try {
-        staffFacade.check(
+        staffFacade.authenticate(
           username = form.username
           , password = form.password
         )

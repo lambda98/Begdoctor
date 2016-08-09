@@ -5,6 +5,7 @@ import javax.inject.{Inject, Singleton}
 import models.{Staff, StaffList}
 import persists.StaffPersist
 import services.UuidService
+import com.github.t3hnar.bcrypt._
 
 /**
   * Created by anawin on 8/6/2016 AD.
@@ -19,10 +20,10 @@ class StaffFacade @Inject()(uuidService: UuidService
     ))
   }
 
-  def check(username: String, password: String): Boolean = {
-    persist.check(
+  def authenticate(username: String, password: String): Boolean = {
+    persist.authenticate(
       username = username
-      , password = password
+      , password = password.bcrypt
     )
   }
 
@@ -38,7 +39,7 @@ class StaffFacade @Inject()(uuidService: UuidService
       , surname = surname
       , email = email
       , username = username
-      , password = password
+      , password = password.bcrypt
       , hospitalId = hospitalId
     )
   }
