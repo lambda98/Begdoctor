@@ -16,7 +16,7 @@ class StaffFacadeSpec  @Inject()(uuidService: UuidService)
 
   implicit override lazy val app = new GuiceApplicationBuilder().build
 
-  "Call authenticate staff" should {
+  "Call authenticate" should {
     "return staff info" in {
       val correct_username = "choiwoogeun"
       val correct_password = "password"

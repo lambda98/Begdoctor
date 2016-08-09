@@ -15,7 +15,7 @@ class StaffPersistSpec @Inject()(uuidService: UuidService)
   extends PlaySpec
     with OneAppPerSuite {
 
-  "Call staff authenticate" should {
+  "Call selectByUsername" should {
     "return staff data" in {
       val correct_username = "choiwoogeun"
       val correct_password = "password"

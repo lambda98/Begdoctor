@@ -20,6 +20,7 @@ class StaffPostgres @Inject()(db: Database)
     preparedStatement.setString(1, username)
 
     val resultSet = preparedStatement.executeQuery
+
     resultSet.next match {
       case true => Some(parse(resultSet))
       case false => None
@@ -42,6 +43,7 @@ class StaffPostgres @Inject()(db: Database)
     preparedStatement.setString(6, password)
     preparedStatement.setLong(7, hospitalId)
     preparedStatement.setTimestamp(8, new Timestamp(new DateTime().getMillis))
+
     preparedStatement.executeUpdate() match {
       case 1 => true
       case _ => false
@@ -60,7 +62,6 @@ class StaffPostgres @Inject()(db: Database)
   )
 
   private val SELECT_BY_USERNAME = "SELECT * FROM staffs where username = ?"
-  //private val LOGIN = "SELECT * FROM staffs where username = ? AND password = ?"
   private val INSERT = "INSERT INTO staffs (id" +
                                             ", name" +
                                             ", surname" +
