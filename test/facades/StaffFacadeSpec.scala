@@ -16,17 +16,6 @@ class StaffFacadeSpec  @Inject()(uuidService: UuidService)
 
   implicit override lazy val app = new GuiceApplicationBuilder().build
 
-  "Call listByUserName" should {
-    "return data of that username" in {
-      val correct_username = "choiwoogeun"
-      val facade = app.injector.instanceOf[StaffFacade]
-
-      val testObject = facade.listByUserName(correct_username)
-
-      assert(testObject.isInstanceOf[StaffList])
-    }
-  }
-
   "Call authenticate staff" should {
     "return staff info" in {
       val correct_username = "choiwoogeun"

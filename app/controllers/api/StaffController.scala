@@ -16,10 +16,6 @@ import play.api.mvc._
 class StaffController @Inject()(staffFacade: StaffFacade)
   extends Controller {
 
-  def getByUserName(username: String) = Action {
-    Ok(staffFacade.listByUserName(username).toText)
-  }
-
   def authenticate() = Action { implicit request =>
     LoginStaffForm.form.bindFromRequest.fold(
       formWithErrors => Ok("400")
@@ -28,7 +24,7 @@ class StaffController @Inject()(staffFacade: StaffFacade)
           username = form.username
           , password = form.password
         )
-        Ok(form.username) as "application/json"
+        Ok("200") as "application/json"
       } catch {
         case t: Throwable => Ok("500")
       }

@@ -12,17 +12,6 @@ class StaffControllerSpec
   extends PlaySpec
     with OneAppPerTest {
 
-  "POST /api/v1/staffs/username/:username" should {
-    "return Staff JSON" in {
-      contentAsString(route(app, FakeRequest(POST, "/api/v1/staffs/username/choiwoogeun")).get) must include
-      """
-        |"name":"Choi"
-        |"surname":"Woo-geun"
-        |"hospital_id":"1"
-      """.stripMargin
-    }
-  }
-
   "POST /api/v1/staffs/authenticate" should {
     "return Staff: with Login Successful" in {
       val testObject = route(
@@ -40,7 +29,7 @@ class StaffControllerSpec
       status(testObject) mustBe OK
       contentType(testObject) mustBe Some("application/json")
       val contentString = contentAsString(testObject)
-      contentString must include("choiwoogeun")
+      contentString must include("200")
     }
   }
 

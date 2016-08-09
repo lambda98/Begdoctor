@@ -8,8 +8,7 @@ import entities.StaffEntity
   */
 trait StaffPersist {
 
-  def selectByUserName(username: String) : List[StaffEntity]
-  def authenticate(username: String, password: String) : Boolean
+  def selectByUserName(username: String) : Option[StaffEntity]
   def insert(id: Long
              , name: String
              , surname: String

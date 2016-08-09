@@ -15,26 +15,15 @@ class StaffPersistSpec @Inject()(uuidService: UuidService)
   extends PlaySpec
     with OneAppPerSuite {
 
-  "When selectByUserName" should {
-    "return data of that username" in {
-      val correct_username = "choiwoogeun"
-      val persist = app.injector.instanceOf[StaffPostgres]
-
-      val testObject = persist.selectByUserName(correct_username)
-
-      assert(testObject.isInstanceOf[List[StaffEntity]])
-    }
-  }
-
   "Call staff authenticate" should {
     "return staff data" in {
       val correct_username = "choiwoogeun"
       val correct_password = "password"
       val persist = app.injector.instanceOf[StaffPersist]
 
-      val testObject = persist.authenticate(correct_username, correct_password)
+      val testObject = persist.selectByUserName(correct_username)
 
-      assert(testObject)
+      assert(correct_username == testObject.get.username)
     }
   }
 

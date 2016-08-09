@@ -14,17 +14,10 @@ import com.github.t3hnar.bcrypt._
 class StaffFacade @Inject()(uuidService: UuidService
                             , persist: StaffPersist) {
 
-  def listByUserName(username: String): StaffList = {
-    StaffList(persist.selectByUserName(username).map(
-      adminEntity => adminEntity.toModel()
-    ))
-  }
 
   def authenticate(username: String, password: String): Boolean = {
-    persist.authenticate(
-      username = username
-      , password = password.bcrypt
-    )
+    val staffEntity = persist.selectByUserName(username = username).get
+    password.isBcrypted(staffEntity.password)
   }
 
   def create(name: String

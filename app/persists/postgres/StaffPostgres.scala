@@ -15,26 +15,14 @@ import entities.StaffEntity
 class StaffPostgres @Inject()(db: Database)
   extends StaffPersist{
 
-  override def selectByUserName(username: String):  List[StaffEntity] = db.withConnection { implicit conn =>
+  override def selectByUserName(username: String):  Option[StaffEntity] = db.withConnection { implicit conn =>
     val preparedStatement = conn.prepareStatement(SELECT_BY_USERNAME)
     preparedStatement.setString(1, username)
 
     val resultSet = preparedStatement.executeQuery
-    new Iterator[StaffEntity] {
-      override def hasNext = resultSet.next()
-      override def next() = parse(resultSet)
-    }.toList
-  }
-
-  override def authenticate(username: String, password: String): Boolean = db.withConnection { implicit conn =>
-    val preparedStatement = conn.prepareStatement(LOGIN)
-    preparedStatement.setString(1, username)
-    preparedStatement.setString(2, password)
-
-    val resultSet = preparedStatement.executeQuery
     resultSet.next match {
-      case true => true
-      case false => false
+      case true => Some(parse(resultSet))
+      case false => None
     }
   }
 
@@ -72,7 +60,7 @@ class StaffPostgres @Inject()(db: Database)
   )
 
   private val SELECT_BY_USERNAME = "SELECT * FROM staffs where username = ?"
-  private val LOGIN = "SELECT * FROM staffs where username = ? AND password = ?"
+  //private val LOGIN = "SELECT * FROM staffs where username = ? AND password = ?"
   private val INSERT = "INSERT INTO staffs (id" +
                                             ", name" +
                                             ", surname" +
