@@ -26,8 +26,8 @@ class HospitalSpec
         , name = correct_name
         , url = correct_url
         , doctorName = correct_doctorName
-        , latitude = correct_latitude
-        , longitude = correct_longitude
+        , lat = correct_latitude
+        , lng = correct_longitude
         , availableTime = correct_available_time
       )
 
@@ -35,8 +35,8 @@ class HospitalSpec
       assert(correct_name == testObject.name)
       assert(correct_url == testObject.url)
       assert(correct_doctorName == testObject.doctorName)
-      assert(correct_latitude == testObject.latitude)
-      assert(correct_longitude == testObject.longitude)
+      assert(correct_latitude == testObject.lat)
+      assert(correct_longitude == testObject.lng)
       assert(correct_available_time == testObject.availableTime)
     }
   }
