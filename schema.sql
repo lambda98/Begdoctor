@@ -8,11 +8,11 @@ CREATE TABLE hospitals
 (
     id              BIGINT NOT NULL UNIQUE,
     name            VARCHAR(256) NOT NULL UNIQUE,
-    url             VARCHAR(256) NOT NULL UNIQUE,
-    doctor_name      VARCHAR(256) NOT NULL UNIQUE,
-    latitude        FLOAT(20)  NOT NULL UNIQUE,
-    longitude       FLOAT(20)  NOT NULL UNIQUE,
-    available_time  VARCHAR(256) NOT NULL UNIQUE,
+    url             VARCHAR(256) NOT NULL,
+    doctor_name     VARCHAR(256) NOT NULL,
+    lat             FLOAT(20)  NOT NULL UNIQUE,
+    lng             FLOAT(20)  NOT NULL UNIQUE,
+    available_time  VARCHAR(256) NOT NULL ,
     CONSTRAINT      accounts_pk PRIMARY KEY (id)
 );
 ALTER TABLE hospitals OWNER TO begdoctor;
@@ -21,16 +21,16 @@ INSERT INTO hospitals(id
     , name
     , url
     , doctor_name
-    , latitude
-    , longitude
+    , lat
+    , lng
     , available_time)
 VALUES (0
     , 'Hae Song'
-    , 'https://www.benin2009.com/wp-content/uploads/2015/11/hospital.png'
-    , 'Kang Moyeon'
+    , '-'
+    , '-'
     , '13.7854529'
     , '100.5736408'
-    , '10:00 - 17:00');
+    , '-');
 
 CREATE TABLE users
 (
