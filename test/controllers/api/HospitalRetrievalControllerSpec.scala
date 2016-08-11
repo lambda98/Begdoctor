@@ -12,6 +12,17 @@ class HospitalRetrievalControllerSpec
   extends PlaySpec
     with OneAppPerTest {
 
+  "GET /api/v1/hospitalretrievals/:id" should {
+    "return HospitalRetrieval JSON" in {
+      contentAsString(route(
+        app
+        , FakeRequest(GET, "/api/v1/hospitalretrievals/0")).get) must include
+      """
+        |"id":1
+      """.stripMargin
+    }
+  }
+
   "POST /api/v1/hospitalretrievals" should {
     "return 200: with Save Successful" in {
       val testObject = route(
@@ -31,7 +42,7 @@ class HospitalRetrievalControllerSpec
       status(testObject) mustBe OK
 
       val contentString = contentAsString(testObject)
-      println(contentString)
+      println("test"+contentString)
       contentType(testObject) mustBe Some("application/json")
       contentString must include("200")
 
