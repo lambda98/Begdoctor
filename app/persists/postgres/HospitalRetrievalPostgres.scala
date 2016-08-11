@@ -13,13 +13,26 @@ import play.api.db.Database
 class HospitalRetrievalPostgres @Inject() (db: Database)
   extends HospitalRetrievalPersist{
 
-  override def insert(lat: String
-                     , lng: String
-                     , name: String): Boolean = db.withConnection { implicit conn =>
+  override def selectById(id: Long): Option[HospitalRetrieval] = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(SELECT_BY_ID)
+    preparedStatement.setLong(1, id)
+
+    val resultSet = preparedStatement.executeQuery
+    resultSet.next match {
+      case true => Some(parse(resultSet))
+      case false => None
+    }
+  }
+
+  override def insert(id: Long
+                      ,lat: Float
+                      , lng: Float
+                      , name: String): Boolean = db.withConnection { implicit conn =>
     val preparedStatement = conn.prepareStatement(INSERT)
-    preparedStatement.setString(1,lat)
-    preparedStatement.setString(2,lng)
-    preparedStatement.setString(3,name)
+    preparedStatement.setLong(1, id)
+    preparedStatement.setFloat(2, lat)
+    preparedStatement.setFloat(3, lng)
+    preparedStatement.setString(4, name)
     preparedStatement.executeUpdate() match {
       case 1 => true
       case _ => false
@@ -27,10 +40,12 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
   }
 
   private [postgres] def parse(resultSet: ResultSet): HospitalRetrieval = HospitalRetrieval(
-    lat = resultSet.getString("lat")
-    , lng = resultSet.getString("lng")
+    id = resultSet.getLong("id")
+    ,lat = resultSet.getFloat("lat")
+    , lng = resultSet.getFloat("lng")
     , name = resultSet.getString("name")
   )
 
-  private val INSERT = "INSERT INTO hospitals (lat, lng, name) VALUES (?, ?, ?)"
+  private val SELECT_BY_ID = "SELECT * FROM hospitals where id = ?"
+  private val INSERT = "INSERT INTO hospitals (id, lat, lng, name) VALUES (?, ?, ?, ?)"
 }
