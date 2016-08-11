@@ -8,11 +8,11 @@ CREATE TABLE hospitals
 (
     id              BIGINT NOT NULL UNIQUE,
     name            VARCHAR(256) NOT NULL UNIQUE,
-    url             VARCHAR(256) NOT NULL,
-    doctor_name     VARCHAR(256) NOT NULL,
+    url             VARCHAR(256) NULL,
+    doctor_name     VARCHAR(256) NULL,
     lat             FLOAT(20)  NOT NULL UNIQUE,
     lng             FLOAT(20)  NOT NULL UNIQUE,
-    available_time  VARCHAR(256) NOT NULL ,
+    available_time  VARCHAR(256) NULL ,
     CONSTRAINT      accounts_pk PRIMARY KEY (id)
 );
 ALTER TABLE hospitals OWNER TO begdoctor;
@@ -28,8 +28,8 @@ VALUES (0
     , 'Hae Song'
     , '-'
     , '-'
-    , '13.7854529'
-    , '100.5736408'
+    , 13.7854529
+    , 100.5736408
     , '-');
 
 CREATE TABLE users
