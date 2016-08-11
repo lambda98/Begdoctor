@@ -19,3 +19,4 @@ GET     /api/v1/bookings/:id                controllers.api.BookingController.ge
 POST    /api/v1/bookings                    controllers.api.BookingController.create
 POST    /api/v1/bookings/userid/:userId     controllers.api.BookingController.getByUserId(userId: Long)
 POST    /api/v1/hospitalretrievals          controllers.api.HospitalRetrievalController.create
+GET     /api/v1/hospitalretrievals/:id      controllers.api.HospitalRetrievalController.getById(id: Long)
