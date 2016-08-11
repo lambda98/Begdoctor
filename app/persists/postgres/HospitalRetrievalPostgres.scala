@@ -32,5 +32,5 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
     , name = resultSet.getString("name")
   )
 
-  private val INSERT = "INSERT INTO hospitals (lat, lng, name) VALUE (?, ?, ?)"
+  private val INSERT = "INSERT INTO hospitals (lat, lng, name) VALUES (?, ?, ?)"
 }
