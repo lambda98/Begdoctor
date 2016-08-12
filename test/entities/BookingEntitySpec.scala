@@ -17,6 +17,7 @@ class BookingEntitySpec
         id = 1L
         , userId = 1L
         , hospitalTimeId = 1L
+        , status = "confirmed"
         , created = new DateTime()
       )
 

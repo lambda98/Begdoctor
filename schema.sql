@@ -88,21 +88,24 @@ VALUES (0
 
 CREATE TABLE booking
 (
-    id                  BIGINT NOT NULL UNIQUE,
+    id                   BIGINT NOT NULL UNIQUE,
     user_id              BIGINT NOT NULL,
-    hospital_time_id      BIGINT NOT NULL,
-    created             TIMESTAMP WITH TIME ZONE NOT NULL,
-    CONSTRAINT          booking_pk PRIMARY KEY (id)
+    hospital_time_id     BIGINT NOT NULL,
+    status               VARCHAR(256) NOT NULL,
+    created              TIMESTAMP WITH TIME ZONE NOT NULL,
+    CONSTRAINT           booking_pk PRIMARY KEY (id)
 );
 ALTER TABLE booking OWNER TO begdoctor;
 
 INSERT INTO booking(id
     , user_id
     , hospital_time_id
+    , status
     , created)
 VALUES (0
     , 1
     , 1
+    , 'confirmed'
     , '2016-07-01 10:30');
 
 CREATE TABLE symptoms

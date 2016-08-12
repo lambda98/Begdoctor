@@ -12,5 +12,6 @@ trait BookingPersist {
   def selectByUserId(userId: Long) : List[BookingEntity]
   def insert(id: Long
              , userId: Long
-             , hospitalTimeId: Long): Boolean
+             , hospitalTimeId: Long
+             , status: String): Boolean
 }
