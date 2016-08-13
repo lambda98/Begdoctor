@@ -9,6 +9,7 @@ import utilities.Json
 case class Booking(id: Long
                    , userId: Long
                    , hospitalTimeId: Long
+                   , status: String
                    , created: DateTime)
   extends Json
 
