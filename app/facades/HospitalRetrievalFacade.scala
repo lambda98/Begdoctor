@@ -16,13 +16,13 @@ class HospitalRetrievalFacade @Inject()(uuidService: UuidService
     persist.selectById(id).get
   }
 
-  def create(lat: Float
-             , lng: Float
+  def create(latitude: Float
+             , longitude: Float
              , name: String): Boolean = {
     persist.insert(
       id = uuidService.getId
-      , lat = lat
-      , lng = lng
+      , latitude = latitude
+      , longitude = longitude
       , name = name
     )
   }
