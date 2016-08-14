@@ -25,13 +25,13 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
   }
 
   override def insert(id: Long
-                      ,lat: Float
-                      , lng: Float
+                      , latitude: Float
+                      , longitude: Float
                       , name: String): Boolean = db.withConnection { implicit conn =>
     val preparedStatement = conn.prepareStatement(INSERT)
     preparedStatement.setLong(1, id)
-    preparedStatement.setFloat(2, lat)
-    preparedStatement.setFloat(3, lng)
+    preparedStatement.setFloat(2, latitude)
+    preparedStatement.setFloat(3, longitude)
     preparedStatement.setString(4, name)
     preparedStatement.executeUpdate() match {
       case 1 => true
@@ -41,11 +41,11 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
 
   private [postgres] def parse(resultSet: ResultSet): HospitalRetrieval = HospitalRetrieval(
     id = resultSet.getLong("id")
-    ,lat = resultSet.getFloat("lat")
-    , lng = resultSet.getFloat("lng")
+    ,latitude = resultSet.getFloat("latitude")
+    , longitude = resultSet.getFloat("longitude")
     , name = resultSet.getString("name")
   )
 
   private val SELECT_BY_ID = "SELECT * FROM hospitals where id = ?"
-  private val INSERT = "INSERT INTO hospitals (id, lat, lng, name) VALUES (?, ?, ?, ?)"
+  private val INSERT = "INSERT INTO hospitals (id, latitude, longitude, name) VALUES (?, ?, ?, ?)"
 }
