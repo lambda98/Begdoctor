@@ -31,8 +31,8 @@ class HospitalRetrievalControllerSpec
           .withJsonBody(Json.parse(
             """
               |{
-              |   "lat": "13.7479752",
-              |   "lng": "100.5836296",
+              |   "latitude": "13.7479752",
+              |   "longitude": "100.5836296",
               |   "name": "โรงพยาบาลกรุงเทพ"
               |}
             """.stripMargin
@@ -42,7 +42,6 @@ class HospitalRetrievalControllerSpec
       status(testObject) mustBe OK
 
       val contentString = contentAsString(testObject)
-      println("test"+contentString)
       contentType(testObject) mustBe Some("application/json")
       contentString must include("200")
 
