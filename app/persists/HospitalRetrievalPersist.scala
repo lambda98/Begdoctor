@@ -9,8 +9,8 @@ trait HospitalRetrievalPersist {
 
   def selectById(id: Long): Option[HospitalRetrieval]
   def insert(id: Long
-             ,lat: Float
-             , lng: Float
+             , latitude: Float
+             , longitude: Float
              , name: String): Boolean
 
 }
