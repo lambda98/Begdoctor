@@ -10,8 +10,8 @@ CREATE TABLE hospitals
     name            VARCHAR(256) NOT NULL UNIQUE,
     url             VARCHAR(256) NULL,
     doctor_name     VARCHAR(256) NULL,
-    lat             FLOAT(20)  NOT NULL UNIQUE,
-    lng             FLOAT(20)  NOT NULL UNIQUE,
+    latitude        FLOAT(20)  NOT NULL UNIQUE,
+    longitude       FLOAT(20)  NOT NULL UNIQUE,
     available_time  VARCHAR(256) NULL ,
     CONSTRAINT      accounts_pk PRIMARY KEY (id)
 );
@@ -21,8 +21,8 @@ INSERT INTO hospitals(id
     , name
     , url
     , doctor_name
-    , lat
-    , lng
+    , latitude
+    , longitude
     , available_time)
 VALUES (0
     , 'Hae Song'
