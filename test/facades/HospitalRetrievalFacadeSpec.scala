@@ -29,14 +29,14 @@ class HospitalRetrievalFacadeSpec @Inject()(uuidService: UuidService)
   "Call create" should {
     "insert data successfully" in {
       val randomString = uuidService.getId
-      val correct_lat = 13.7479752f
-      val correct_lng = 100.5836296f
+      val correct_latitude = 13.7479752f
+      val correct_longitude = 100.5836296f
       val correct_name = "โรงพยาบาลกรุงเทพ"
       val facade = app.injector.instanceOf[HospitalRetrievalFacade]
 
       val testObject = facade.create(
-        correct_lat
-        , correct_lng
+        correct_latitude
+        , correct_longitude
         , correct_name)
 
       assert(testObject)
