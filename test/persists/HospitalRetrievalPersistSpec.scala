@@ -13,15 +13,14 @@ class HospitalRetrievalPersistSpec @Inject()(uuidService: UuidService)
 
   "Call insert" should {
      "insert hospitalretrieval data successfully" in {
-       val randomString = uuidService.getId
        val randomId = uuidService.getId
        val correct_id = randomId
-       val correct_lat = 13.7479752f
-       val correct_lng = 100.5836296f
+       val correct_latitude = 13.7479752f
+       val correct_longitude = 100.5836296f
        val correct_name = "โรงพยาบาลกรุงเทพ"
        val persist = app.injector.instanceOf[HospitalRetrievalPersist]
 
-       val testObject = persist.insert(correct_id, correct_lat, correct_lng, correct_name)
+       val testObject = persist.insert(correct_id, correct_latitude, correct_longitude, correct_name)
 
        assert(testObject)
      }
