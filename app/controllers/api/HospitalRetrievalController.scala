@@ -4,7 +4,6 @@ import javax.inject.{Inject, Singleton}
 
 import facades.HospitalRetrievalFacade
 import play.api.mvc.{Action, Controller}
-import google.HttpJsonPostTestClass
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
@@ -13,41 +12,39 @@ import play.api.data.format.Formats._
   * Created by Siam yimyam on 8/8/2559.
   */
 @Singleton
-class HospitalRetrievalController @Inject() (hospitalRetrievalFacade: HospitalRetrievalFacade, googleJson: HttpJsonPostTestClass)
+class HospitalRetrievalController @Inject() (hospitalRetrievalFacade: HospitalRetrievalFacade)
   extends Controller {
 
   def getById(id: Long) = Action {
     Ok(hospitalRetrievalFacade.findById(id).toText)
   }
 
-  val stringJsonData = googleJson.jsonData
   def create() = Action { implicit request =>
     CreateHospitalRetrievalForm.form.bindFromRequest.fold(
       formWithErrors => Ok("400")
       , form => try {
         hospitalRetrievalFacade.create(
-          lat =  13.7479752f
-          , lng = 100.5836296f
+          latitude =  13.7479752f
+          , longitude = 100.5836296f
           , name =  "โรงพยาบาลกรุงเทพ"
         )
         Ok("200") as "application/json"
       } catch {
         case t: Throwable =>
-          println("test1"+t.printStackTrace())
           Ok("500") as "application/json"
       }
     )
   }
 }
 
-case class CreateHospitalRetrievalForm(lat: Float
-                                        , lng: Float
-                                        , name: String)
+case class CreateHospitalRetrievalForm(latitude: Float
+                                       , longitude: Float
+                                       , name: String)
 object CreateHospitalRetrievalForm {
   val form = Form(
     mapping(
-      "lat" -> of[Float],
-      "lng" -> of[Float],
+      "latitude" -> of[Float],
+      "longitude" -> of[Float],
       "name" -> of[String]
     ) (CreateHospitalRetrievalForm.apply)(CreateHospitalRetrievalForm.unapply)
   )
