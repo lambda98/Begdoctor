@@ -48,4 +48,16 @@ class HospitalRetrievalControllerSpec
     }
   }
 
+  "GET /api/v1/hospitalretrievals" should {
+    "return HospitalRetrieval JSON" in {
+      contentAsString(route(
+        app
+        , FakeRequest(GET, "/api/v1/hospitalretrievals/0")).get) must include
+      """
+        |"name": "โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)"
+      """.stripMargin
+
+    }
+  }
+
 }
