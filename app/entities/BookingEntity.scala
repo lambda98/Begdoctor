@@ -9,12 +9,14 @@ import org.joda.time.DateTime
 case class BookingEntity (id: Long
                           , userId: Long
                           , hospitalTimeId: Long
+                          , status: String
                           , created: DateTime) {
 
   def toModel(): Booking = Booking(
     id = id
     , userId = userId
     , hospitalTimeId = hospitalTimeId
+    , status = status
     , created = created
   )
 }

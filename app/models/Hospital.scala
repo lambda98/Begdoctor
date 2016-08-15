@@ -9,7 +9,7 @@ case class Hospital(id: Long
                     , name: String
                     , url: String
                     , doctorName: String
-                    , latitude: String
-                    , longitude: String
+                    , latitude: Float
+                    , longitude: Float
                     , availableTime: String)
   extends Json

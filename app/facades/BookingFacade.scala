@@ -56,6 +56,7 @@ class BookingFacade @Inject()(uuidService: UuidService
       id = uuidService.getId
       , userId = userId
       , hospitalTimeId = hospitalTimeId
+      , status = "confirmed"
     )
   }
 }

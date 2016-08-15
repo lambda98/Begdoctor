@@ -48,13 +48,15 @@ class BookingPostgres @Inject() (db: Database)
 
   override def insert(id: Long
                       , userId: Long
-                      , hospitalTimeId: Long): Boolean = db.withConnection { implicit conn =>
+                      , hospitalTimeId: Long
+                      , status: String): Boolean = db.withConnection { implicit conn =>
 
     val preparedStatement = conn.prepareStatement(INSERT)
     preparedStatement.setLong(1, id)
     preparedStatement.setLong(2, userId)
     preparedStatement.setLong(3, hospitalTimeId)
-    preparedStatement.setTimestamp(4, new Timestamp(new DateTime().getMillis))
+    preparedStatement.setString(4, status)
+    preparedStatement.setTimestamp(5, new Timestamp(new DateTime().getMillis))
     preparedStatement.executeUpdate() match {
       case 1 => true
       case _ => false
@@ -65,11 +67,12 @@ class BookingPostgres @Inject() (db: Database)
     id = resultSet.getLong("id")
     , userId = resultSet.getLong("user_id")
     , hospitalTimeId = resultSet.getLong("hospital_time_id")
+    , status = resultSet.getString("status")
     , created =  new DateTime(resultSet.getTimestamp("created").getTime)
   )
 
   private val SELECT_ALL = "SELECT * FROM booking"
   private val SELECT_BY_ID = "SELECT * FROM booking where id = ?"
   private val SELECT_BY_USER_ID = "SELECT * FROM booking where user_id = ?"
-  private val INSERT = "INSERT INTO booking (id, user_id, hospital_time_id, created) VALUES (?, ?, ?, ?)"
+  private val INSERT = "INSERT INTO booking (id, user_id, hospital_time_id, status, created) VALUES (?, ?, ?, ?, ?)"
 }

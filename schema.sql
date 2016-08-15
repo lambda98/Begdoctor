@@ -9,11 +9,11 @@ CREATE TABLE hospitals
 (
     id              BIGINT NOT NULL UNIQUE,
     name            VARCHAR(256) NOT NULL UNIQUE,
-    url             VARCHAR(256) NOT NULL UNIQUE,
-    doctor_name      VARCHAR(256) NOT NULL UNIQUE,
+    url             VARCHAR(256) NULL,
+    doctor_name     VARCHAR(256) NULL,
     latitude        FLOAT(20)  NOT NULL UNIQUE,
     longitude       FLOAT(20)  NOT NULL UNIQUE,
-    available_time  VARCHAR(256) NOT NULL UNIQUE,
+    available_time  VARCHAR(256) NULL ,
     CONSTRAINT      accounts_pk PRIMARY KEY (id)
 );
 ALTER TABLE hospitals OWNER TO begdoctor;
@@ -27,11 +27,11 @@ INSERT INTO hospitals(id
     , available_time)
 VALUES (0
     , 'Hae Song'
-    , 'https://www.benin2009.com/wp-content/uploads/2015/11/hospital.png'
-    , 'Kang Moyeon'
-    , '13.7854529'
-    , '100.5736408'
-    , '10:00 - 17:00');
+    , '-'
+    , '-'
+    , 13.7854529
+    , 100.5736408
+    , '-');
 
 CREATE TABLE users
 (
@@ -88,21 +88,24 @@ VALUES (0
 
 CREATE TABLE booking
 (
-    id                  BIGINT NOT NULL UNIQUE,
+    id                   BIGINT NOT NULL UNIQUE,
     user_id              BIGINT NOT NULL,
-    hospital_time_id      BIGINT NOT NULL,
-    created             TIMESTAMP WITH TIME ZONE NOT NULL,
-    CONSTRAINT          booking_pk PRIMARY KEY (id)
+    hospital_time_id     BIGINT NOT NULL,
+    status               VARCHAR(256) NOT NULL,
+    created              TIMESTAMP WITH TIME ZONE NOT NULL,
+    CONSTRAINT           booking_pk PRIMARY KEY (id)
 );
 ALTER TABLE booking OWNER TO begdoctor;
 
 INSERT INTO booking(id
     , user_id
     , hospital_time_id
+    , status
     , created)
 VALUES (0
     , 1
     , 1
+    , 'confirmed'
     , '2016-07-01 10:30');
 
 CREATE TABLE symptoms
