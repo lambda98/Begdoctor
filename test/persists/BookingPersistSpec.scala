@@ -52,9 +52,10 @@ class BookingPersistSpec @Inject()(uuidService: UuidService)
       val correct_id = randomId
       val correct_userId = 1L
       val correct_hospitalTimeId = 0L
+      val correct_status = "confirmed"
       val persist = app.injector.instanceOf[BookingPersist]
 
-      val testObject = persist.insert(correct_id, correct_userId, correct_hospitalTimeId)
+      val testObject = persist.insert(correct_id, correct_userId, correct_hospitalTimeId, correct_status)
 
       assert(testObject)
     }

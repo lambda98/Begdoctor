@@ -22,6 +22,7 @@ libraryDependencies ++= Seq(
   , "net.codingwell" %% "scala-guice" % "4.0.0"
   , "org.postgresql" % "postgresql" % "9.4.1208"
   , "com.google.code.gson" % "gson" % "2.3.1"
+  , "com.github.t3hnar" %% "scala-bcrypt" % "2.6"
 )
 
 libraryDependencies ++= Seq(
