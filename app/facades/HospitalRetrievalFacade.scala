@@ -27,4 +27,8 @@ class HospitalRetrievalFacade @Inject()(uuidService: UuidService
     )
   }
 
+  def findByName(name: String): HospitalRetrieval = {
+    persist.selectByName(name).get
+  }
+
 }
