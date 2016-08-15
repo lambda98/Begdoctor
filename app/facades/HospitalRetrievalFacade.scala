@@ -27,4 +27,15 @@ class HospitalRetrievalFacade @Inject()(uuidService: UuidService
     )
   }
 
+  def update(latitude: Float
+             , longitude: Float
+             , name: String): Boolean = {
+    persist.update(
+      id = uuidService.getId
+      , latitude = latitude
+      , longitude = longitude
+      , name = name
+    )
+  }
+
 }
