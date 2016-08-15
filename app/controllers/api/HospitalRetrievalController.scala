@@ -35,6 +35,10 @@ class HospitalRetrievalController @Inject() (hospitalRetrievalFacade: HospitalRe
       }
     )
   }
+
+  def getByName(name: String) = Action {
+    Ok(hospitalRetrievalFacade.findByName(name).toText)
+  }
 }
 
 case class CreateHospitalRetrievalForm(latitude: Float
