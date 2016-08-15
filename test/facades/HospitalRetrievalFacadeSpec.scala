@@ -43,4 +43,21 @@ class HospitalRetrievalFacadeSpec @Inject()(uuidService: UuidService)
     }
   }
 
+  "Call update" should {
+    "update data successfully" in {
+      val randomString = uuidService.getId
+      val correct_latitude = 13.735052f
+      val correct_longitude = 100.576692f
+      val correct_name = "โรงพยาบาลสมิติเวช สุขุมวิท"
+      val facade = app.injector.instanceOf[HospitalRetrievalFacade]
+
+      val testObject = facade.update(
+        correct_latitude
+        , correct_longitude
+        , correct_name)
+
+      assert(testObject)
+    }
+  }
+
 }
