@@ -43,4 +43,15 @@ class HospitalRetrievalFacadeSpec @Inject()(uuidService: UuidService)
     }
   }
 
+  "Call findByName" should {
+    "return HospitalRetrieval of that name" in {
+      val correct_name = "โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)"
+      val facade = app.injector.instanceOf[HospitalRetrievalFacade]
+
+      val testObject = facade.findByName(correct_name)
+
+      assert(correct_name == testObject.name)
+    }
+  }
+
 }
