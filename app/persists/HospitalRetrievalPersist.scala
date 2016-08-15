@@ -12,5 +12,9 @@ trait HospitalRetrievalPersist {
              , latitude: Float
              , longitude: Float
              , name: String): Boolean
+  def update(id: Long
+             , latitude: Float
+             , longitude: Float
+             , name: String): Boolean
 
 }
