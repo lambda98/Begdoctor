@@ -63,5 +63,5 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
 
   private val SELECT_BY_ID = "SELECT * FROM hospitals where id = ?"
   private val INSERT = "INSERT INTO hospitals (id, latitude, longitude, name) VALUES (?, ?, ?, ?)"
-  private val UPDATE = "UPDATE INTO hospitals (id, latitude, longitude, name) VALUES (?, ?, ?, ?)"
+  private val UPDATE = "UPDATE hospitals SET id = ?, latitude = ?, longitude = ?, name = ? where id = ?"
 }
