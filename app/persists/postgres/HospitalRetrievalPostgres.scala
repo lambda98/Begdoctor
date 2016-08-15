@@ -39,6 +39,21 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
     }
   }
 
+  override def update(id: Long
+                      , latitude: Float
+                      , longitude: Float
+                      , name: String): Boolean = db.withConnection { implicit conn =>
+    val preparedStatement = conn.prepareStatement(UPDATE)
+    preparedStatement.setLong(1, id)
+    preparedStatement.setFloat(2, latitude)
+    preparedStatement.setFloat(3, longitude)
+    preparedStatement.setString(4, name)
+    preparedStatement.executeUpdate() match {
+      case 1 => true
+      case _ => false
+    }
+  }
+
   private [postgres] def parse(resultSet: ResultSet): HospitalRetrieval = HospitalRetrieval(
     id = resultSet.getLong("id")
     ,latitude = resultSet.getFloat("latitude")
@@ -48,4 +63,5 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
 
   private val SELECT_BY_ID = "SELECT * FROM hospitals where id = ?"
   private val INSERT = "INSERT INTO hospitals (id, latitude, longitude, name) VALUES (?, ?, ?, ?)"
+  private val UPDATE = "UPDATE INTO hospitals (id, latitude, longitude, name) VALUES (?, ?, ?, ?)"
 }
