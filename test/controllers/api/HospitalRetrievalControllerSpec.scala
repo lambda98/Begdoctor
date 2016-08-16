@@ -23,17 +23,67 @@ class HospitalRetrievalControllerSpec
     }
   }
 
-  "POST /api/v1/hospitalretrievals" should {
+  "POST /api/v1/hospitalRetrievals" should {
     "return 200: with Save Successful" in {
       val testObject = route(
         app
-        , FakeRequest(POST, "/api/v1/hospitalretrievals")
+        , FakeRequest(POST, "/api/v1/hospitalRetrievals")
           .withJsonBody(Json.parse(
             """
               |{
               |   "latitude": "13.7479752",
               |   "longitude": "100.5836296",
               |   "name": "โรงพยาบาลกรุงเทพ"
+              |}
+            """.stripMargin
+          ))
+      ).get
+
+      status(testObject) mustBe OK
+
+      val contentString = contentAsString(testObject)
+      contentType(testObject) mustBe Some("application/json")
+      contentString must include("200")
+
+    }
+  }
+
+  "POST /api/v1/hospitalRetrievals" should {
+    "return 200: with Update Successful" in {
+      val testObject = route(
+        app
+        , FakeRequest(POST, "/api/v1/hospitalRetrievals")
+          .withJsonBody(Json.parse(
+            """
+              |{
+              |   "latitude": "13.735052",
+              |   "longitude": "100.576692",
+              |   "name": "โรงพยาบาลสมิติเวช สุขุมวิท"
+              |}
+            """.stripMargin
+          ))
+      ).get
+
+      status(testObject) mustBe OK
+
+      val contentString = contentAsString(testObject)
+      contentType(testObject) mustBe Some("application/json")
+      contentString must include("200")
+
+    }
+  }
+
+  "POST /api/v1/hospitalRetrievals" should {
+    "return 200: with Select Successful" in {
+      val testObject = route(
+        app
+        , FakeRequest(POST, "/api/v1/hospitalRetrievals")
+          .withJsonBody(Json.parse(
+            """
+              |{
+              |   "latitude": "13.714171",
+              |   "longitude": "100.489026",
+              |   "name": "โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)"
               |}
             """.stripMargin
           ))
