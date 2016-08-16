@@ -36,6 +36,10 @@ class HospitalRetrievalController @Inject() (hospitalRetrievalFacade: HospitalRe
     )
   }
 
+  def getByName(name: String) = Action {
+    Ok(hospitalRetrievalFacade.findByName(name).toText)
+  }
+
   def update() = Action { implicit request =>
     UpdateHospitalRetrievalForm.form.bindFromRequest.fold(
       formWithErrors => Ok("400")

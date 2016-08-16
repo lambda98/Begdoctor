@@ -12,6 +12,7 @@ trait HospitalRetrievalPersist {
              , latitude: Float
              , longitude: Float
              , name: String): Boolean
+  def selectByName(name: String): Option[HospitalRetrieval]
   def update(id: Long
              , latitude: Float
              , longitude: Float
