@@ -9,7 +9,7 @@ import services.UuidService
 /**
   * Created by Siam yimyam on 11/8/2559.
   */
-class HospitalRetrievalFacadeSpec @Inject()(uuidService: UuidService)
+class HospitalRetrievalFacadeSpec
   extends PlaySpec
     with OneAppPerSuite {
 
@@ -28,6 +28,7 @@ class HospitalRetrievalFacadeSpec @Inject()(uuidService: UuidService)
 
   "Call create" should {
     "insert data successfully" in {
+      val uuidService = app.injector.instanceOf[UuidService]
       val randomString = uuidService.getId
       val correct_latitude = 13.7479752f
       val correct_longitude = 100.5836296f
@@ -45,27 +46,22 @@ class HospitalRetrievalFacadeSpec @Inject()(uuidService: UuidService)
 
   "Call findByName" should {
     "return HospitalRetrieval of that name" in {
-      val randomString = uuidService.getId
-      val correct_latitude = 13.714171f
-      val correct_longitude = 100.489026f
-      val correct_name = "โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)"
+      val correct_name = "Asan Medical Center"
       val facade = app.injector.instanceOf[HospitalRetrievalFacade]
 
-      val testObject = facade.update(
-        correct_latitude
-        , correct_longitude
-        , correct_name)
+      val testObject = facade.findByName(correct_name)
 
-      assert(testObject)
+      assert(correct_name == testObject.name)
     }
   }
 
   "Call update" should {
     "update data successfully" in {
+      val uuidService = app.injector.instanceOf[UuidService]
       val randomString = uuidService.getId
-      val correct_latitude = 13.735052f
-      val correct_longitude = 100.576692f
-      val correct_name = "โรงพยาบาลสมิติเวช สุขุมวิท"
+      val correct_latitude = 37.487996f
+      val correct_longitude = 127.084419f
+      val correct_name = "Samsung Medical Center"
       val facade = app.injector.instanceOf[HospitalRetrievalFacade]
 
       val testObject = facade.update(
@@ -76,5 +72,33 @@ class HospitalRetrievalFacadeSpec @Inject()(uuidService: UuidService)
       assert(testObject)
     }
   }
+
+  "Call createOrUpdate" should {
+    "createOrUpdate data for create successfully" in {
+      val correct_latitude = 17.7777f
+      val correct_longitude = 100.1111f
+      val correct_name = "โรงพยาบาลลาดกระบัง"
+      val facade = app.injector.instanceOf[HospitalRetrievalFacade]
+
+      val testObject = facade.createOrUpdate(correct_latitude
+                                             , correct_longitude
+                                             , correct_name)
+
+      assert(testObject)
+    }
+    "createOrUpdate data for update successfully" in {
+      val correct_latitude = 17.7777f
+      val correct_longitude = 100.1111f
+      val correct_name = "Samsung Medical Center"
+      val facade = app.injector.instanceOf[HospitalRetrievalFacade]
+
+      val testObject = facade.createOrUpdate(correct_latitude
+        , correct_longitude
+        , correct_name)
+
+      assert(testObject)
+    }
+  }
+
 
 }
