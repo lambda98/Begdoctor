@@ -19,8 +19,6 @@ GET     /api/v1/bookings/:id                controllers.api.BookingController.ge
 POST    /api/v1/bookings                    controllers.api.BookingController.create
 POST    /api/v1/bookings/userid/:userId     controllers.api.BookingController.getByUserId(userId: Long)
 POST    /api/v1/hospitalRetrievals          controllers.api.HospitalRetrievalController.create
-POST    /api/v1/hospitalRetrievals          controllers.api.HospitalRetrievalController.update
-POST    /api/v1/hospitalRetrievals          controllers.api.HospitalRetrievalController.findByName
 GET     /api/v1/hospitalRetrievals/:id      controllers.api.HospitalRetrievalController.getById(id: Long)
 POST    /api/v1/staffs                      controllers.api.StaffController.create
 POST    /api/v1/staffs/authenticate         controllers.api.StaffController.authenticate
