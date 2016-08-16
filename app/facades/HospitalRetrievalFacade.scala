@@ -27,15 +27,8 @@ class HospitalRetrievalFacade @Inject()(uuidService: UuidService
     )
   }
 
-  def findByName(latitude: Float
-                 , longitude: Float
-                 , name: String): Boolean = {
-    persist.selectByName(
-      id = uuidService.getId
-      , latitude = latitude
-      , longitude = longitude
-      , name = name
-    )
+  def findByName(name: String): HospitalRetrieval = {
+    persist.selectByName(name).getOrElse(null)
   }
 
   def update(latitude: Float
@@ -49,4 +42,20 @@ class HospitalRetrievalFacade @Inject()(uuidService: UuidService
     )
   }
 
+  def createOrUpdate( latitude: Float
+                     , longitude: Float
+                     , name: String): Boolean = {
+   val result = findByName(
+       name = name)
+    if(result == null){
+      create(latitude
+        , longitude
+        , name)
+    }
+    else{
+      update(latitude
+        , longitude
+        , name)
+    }
+  }
 }
