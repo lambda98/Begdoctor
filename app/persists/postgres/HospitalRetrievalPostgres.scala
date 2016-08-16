@@ -39,14 +39,18 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
     }
   }
 
-  override def selectByName(name: String): Option[HospitalRetrieval] = db.withConnection { implicit conn =>
+  override def selectByName(id: Long
+                            , latitude: Float
+                            , longitude: Float
+                            , name: String): Boolean = db.withConnection { implicit conn =>
     val preparedStatement = conn.prepareStatement(SELECT_BY_NAME)
+    preparedStatement.setLong(1, id)
+    preparedStatement.setFloat(2, latitude)
+    preparedStatement.setFloat(3, longitude)
     preparedStatement.setString(4, name)
-
-    val resultSet = preparedStatement.executeQuery
-    resultSet.next() match {
-      case true => Some(parse(resultSet))
-      case false => None
+    preparedStatement.executeUpdate() match {
+      case 1 => true
+      case _ => false
     }
   }
 
@@ -75,5 +79,5 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
   private val SELECT_BY_ID = "SELECT * FROM hospitals where id = ?"
   private val INSERT = "INSERT INTO hospitals (id, latitude, longitude, name) VALUES (?, ?, ?, ?)"
   private val UPDATE = "UPDATE hospitals SET id = ?, latitude = ?, longitude = ?, name = ? where id = ?"
-  private val SELECT_BY_NAME = "SELECT * FROM hospitals where name = ?"
+  private val SELECT_BY_NAME = "SELECT * FROM hospitals (id, latitude, longitude, name) VALUES(?, ?, ?, ?)"
 }
