@@ -15,9 +15,9 @@ class HospitalRetrievalPersistSpec @Inject()(uuidService: UuidService)
      "insert hospitalretrieval data successfully" in {
        val randomId = uuidService.getId
        val correct_id = randomId
-       val correct_latitude = 13.7479752f
-       val correct_longitude = 100.5836296f
-       val correct_name = "โรงพยาบาลกรุงเทพ"
+       val correct_latitude = 37.487996f
+       val correct_longitude = 127.084419f
+       val correct_name = "Samsung Medical Center"
        val persist = app.injector.instanceOf[HospitalRetrievalPersist]
 
        val testObject = persist.insert(correct_id, correct_latitude, correct_longitude, correct_name)
@@ -27,17 +27,13 @@ class HospitalRetrievalPersistSpec @Inject()(uuidService: UuidService)
    }
 
   "Call selectByName" should {
-    "selectByName hospitalretrieval data successfully" in {
-      val randomId = uuidService.getId
-      val correct_id = randomId
-      val correct_latitude = 13.714171f
-      val correct_longitude = 100.489026f
-      val correct_name = "โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)"
+    "return HospitalRetrieval of that name" in {
+      val correct_name = "Asan Medical Center"
       val persist = app.injector.instanceOf[HospitalRetrievalPersist]
 
-      val testObject = persist.insert(correct_id, correct_latitude, correct_longitude, correct_name)
+      val testObject = persist.selectByName(correct_name)
 
-      assert(testObject)
+      assert(correct_name == testObject.get.name)
     }
   }
 
@@ -45,9 +41,9 @@ class HospitalRetrievalPersistSpec @Inject()(uuidService: UuidService)
      "update hospitalretrieval data successfully" in {
        val randomId = uuidService.getId
        val correct_id = randomId
-       val correct_latitude = 13.735052f
-       val correct_longitude = 100.576692f
-       val correct_name = "โรงพยาบาลสมิติเวช สุขุมวิท"
+       val correct_latitude = 36.99331f
+       val correct_longitude = 127.089189f
+       val correct_name = "Bagae Hospital"
        val persist = app.injector.instanceOf[HospitalRetrievalPersist]
 
        val testObject = persist.insert(correct_id, correct_latitude, correct_longitude, correct_name)
