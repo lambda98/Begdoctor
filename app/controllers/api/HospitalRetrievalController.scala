@@ -35,9 +35,23 @@ class HospitalRetrievalController @Inject() (hospitalRetrievalFacade: HospitalRe
     )
   }
 
-  def getByName(name: String) = Action {
-    Ok(hospitalRetrievalFacade.findByName(name).toText)
+  def getByName(name: String) = Action { implicit  request =>
+    CreateHospitalRetrievalForm.form.bindFromRequest.fold(
+      formWithErrors => Ok("400")
+      , form => try {
+        hospitalRetrievalFacade.create(
+          latitude =  13.714171f
+          , longitude = 100.489026f
+          , name =  "โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)"
+        )
+        Ok("200") as "application/json"
+      } catch {
+        case t: Throwable =>
+          Ok("500") as "application/json"
+      }
+    )
   }
+
 
   def update() = Action { implicit request =>
     UpdateHospitalRetrievalForm.form.bindFromRequest.fold(

@@ -45,12 +45,18 @@ class HospitalRetrievalFacadeSpec @Inject()(uuidService: UuidService)
 
   "Call findByName" should {
     "return HospitalRetrieval of that name" in {
+      val randomString = uuidService.getId
+      val correct_latitude = 13.714171f
+      val correct_longitude = 100.489026f
       val correct_name = "โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)"
       val facade = app.injector.instanceOf[HospitalRetrievalFacade]
 
-      val testObject = facade.findByName(correct_name)
+      val testObject = facade.update(
+        correct_latitude
+        , correct_longitude
+        , correct_name)
 
-      assert(correct_name == testObject.name)
+      assert(testObject)
     }
   }
 

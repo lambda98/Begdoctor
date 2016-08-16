@@ -26,6 +26,21 @@ class HospitalRetrievalPersistSpec @Inject()(uuidService: UuidService)
      }
    }
 
+  "Call selectByName" should {
+    "selectByName hospitalretrieval data successfully" in {
+      val randomId = uuidService.getId
+      val correct_id = randomId
+      val correct_latitude = 13.714171f
+      val correct_longitude = 100.489026f
+      val correct_name = "โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)"
+      val persist = app.injector.instanceOf[HospitalRetrievalPersist]
+
+      val testObject = persist.insert(correct_id, correct_latitude, correct_longitude, correct_name)
+
+      assert(testObject)
+    }
+  }
+
   "Call update" should {
      "update hospitalretrieval data successfully" in {
        val randomId = uuidService.getId
