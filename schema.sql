@@ -11,8 +11,8 @@ CREATE TABLE hospitals
     name            VARCHAR(256) NOT NULL UNIQUE,
     url             VARCHAR(256) NULL,
     doctor_name     VARCHAR(256) NULL,
-    latitude        FLOAT(20)  NOT NULL UNIQUE,
-    longitude       FLOAT(20)  NOT NULL UNIQUE,
+    latitude        FLOAT(20)  NOT NULL,
+    longitude       FLOAT(20)  NOT NULL,
     available_time  VARCHAR(256) NULL ,
     CONSTRAINT      accounts_pk PRIMARY KEY (id)
 );
@@ -33,25 +33,25 @@ VALUES (0
     , 100.5736408
     , '-')
     ,(1
-    , 'โรงพยาบาลกรุงเทพ'
+    , 'Samsung Medical Center'
     , '-'
     , '-'
-    , 13.7479752
-    , 100.5836296
+    , 37.487996
+    , 127.084419
     , '-')
     ,(2
-    , 'โรงพยาบาลสมิติเวช สุขุมวิท'
+    , 'Asan Medical Center'
     , '-'
     , '-'
-    , 13.735052
-    , 100.576692
+    , 37.530753
+    , 127.107250
     , '-')
     ,(3
-    , 'โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)'
+    , 'Bagae Hospital'
     , '-'
     , '-'
-    , 13.714171
-    , 100.489026
+    , 36.99331
+    , 127.089189
     , '-');
 
 CREATE TABLE users
