@@ -17,4 +17,8 @@ class HospitalController @Inject()(hospitalFacade: HospitalFacade)
     Ok(hospitalFacade.findById(Id).toText)
   }
 
+  def getList = Action {
+    Ok(hospitalFacade.listAll.toText)
+  }
+
 }

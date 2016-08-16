@@ -3,6 +3,7 @@ package persists.postgres
 import java.sql.ResultSet
 import javax.inject.{Inject, Singleton}
 
+import entities.HospitalEntity
 import models.Hospital
 import persists.HospitalPersist
 import play.api.db.Database
@@ -13,18 +14,29 @@ import play.api.db.Database
 class HospitalPostgres @Inject()(db: Database)
   extends HospitalPersist {
 
-  override def selectById(id: Long): Option[Hospital] = db.withConnection { implicit conn =>
+  override def selectById(id: Long): List[HospitalEntity] = db.withConnection { implicit conn =>
     val preparedStatement = conn.prepareStatement(SELECT_BY_ID)
     preparedStatement.setLong(1, id)
 
     val resultSet = preparedStatement.executeQuery
-    resultSet.next match {
-      case true => Some(parse(resultSet))
-      case false => None
-    }
+    new Iterator[HospitalEntity] {
+      override def hasNext = resultSet.next()
+      override def next() = parse(resultSet)
+    }.toList
   }
 
-  private[postgres] def parse(resultSet: ResultSet): Hospital = Hospital(
+  override def selectAll():  List[HospitalEntity] = db.withConnection { implicit conn =>
+
+    val preparedStatement = conn.prepareStatement(SELECT_ALL)
+
+    val resultSet = preparedStatement.executeQuery
+    new Iterator[HospitalEntity] {
+      override def hasNext = resultSet.next()
+      override def next() = parse(resultSet)
+    }.toList
+  }
+
+  private[postgres] def parse(resultSet: ResultSet): HospitalEntity = HospitalEntity(
     id = resultSet.getLong("id")
     , name = resultSet.getString("name")
     , url = resultSet.getString("url")
@@ -35,5 +47,6 @@ class HospitalPostgres @Inject()(db: Database)
   )
 
   private val SELECT_BY_ID = "SELECT * FROM hospitals where id = ?"
+  private val SELECT_ALL = "SELECT * FROM hospitals"
 
 }

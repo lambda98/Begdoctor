@@ -1,7 +1,9 @@
 package facades
 
+import models.{Hospital, HospitalList}
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import play.api.inject.guice.GuiceApplicationBuilder
+
 
 /**
   * Created by champillon on 6/12/16.
@@ -19,7 +21,17 @@ class HospitalFacadeSpec
 
       val testObject = facade.findById(correct_id)
 
-      assert(correct_id == testObject.id)
+      assert(testObject.isInstanceOf[HospitalList])
+    }
+  }
+
+  "Call listAll" should {
+    "return Hospital " in {
+      val facade = app.injector.instanceOf[HospitalFacade]
+
+      val testObject = facade.listAll
+
+      assert(testObject.isInstanceOf[HospitalList])
     }
   }
 

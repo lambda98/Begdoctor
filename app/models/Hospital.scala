@@ -13,3 +13,6 @@ case class Hospital(id: Long
                     , longitude: Float
                     , availableTime: String)
   extends Json
+
+case class HospitalList(hospitals: List[Hospital])
+  extends Json

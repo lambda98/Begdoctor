@@ -1,5 +1,7 @@
 package persists
 
+import entities.HospitalEntity
+import persists.postgres.HospitalPostgres
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 
 /**
@@ -23,9 +25,18 @@ class HospitalPersistSpec
 
       val testObject = persist.selectById(correct_id)
 
-      assert(correct_id == testObject.get.id)
-      assert(correct_name == testObject.get.name)
+      assert(testObject.isInstanceOf[List[HospitalEntity]])
 
+    }
+  }
+
+  "When selectAll" should {
+    "return Booking" in {
+      val persist = app.injector.instanceOf[HospitalPostgres]
+
+      val testObject = persist.selectAll()
+
+      assert(testObject.isInstanceOf[List[HospitalEntity]])
     }
   }
 
