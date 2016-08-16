@@ -24,14 +24,13 @@ class HospitalRetrievalController @Inject() (hospitalRetrievalFacade: HospitalRe
       formWithErrors => Ok("400")
       , form => try {
         hospitalRetrievalFacade.create(
-          latitude =  13.7479752f
-          , longitude = 100.5836296f
-          , name =  "โรงพยาบาลกรุงเทพ"
+          latitude = form.latitude
+          , longitude = form.longitude
+          , name = form.name
         )
         Ok("200") as "application/json"
       } catch {
-        case t: Throwable =>
-          Ok("500") as "application/json"
+        case t: Throwable => Ok("500")
       }
     )
   }
@@ -45,14 +44,13 @@ class HospitalRetrievalController @Inject() (hospitalRetrievalFacade: HospitalRe
       formWithErrors => Ok("400")
       , form => try {
         hospitalRetrievalFacade.update(
-          latitude = 13.735052f
-          , longitude = 100.576692f
-          , name = "โรงพยาบาลสมิติเวช สุขุมวิท"
+          latitude = form.latitude
+          , longitude = form.longitude
+          , name = form.name
         )
         Ok("200") as "application/json"
       } catch {
-        case t: Throwable =>
-          Ok("500") as "application/json"
+        case t: Throwable => Ok("500")
       }
     )
   }
