@@ -67,6 +67,7 @@ class HospitalRetrievalControllerSpec
       status(testObject) mustBe OK
 
       val contentString = contentAsString(testObject)
+      println("test"+contentString)
       contentType(testObject) mustBe Some("application/json")
       contentString must include("200")
 
