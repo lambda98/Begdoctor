@@ -30,7 +30,9 @@ class HospitalRetrievalController @Inject() (hospitalRetrievalFacade: HospitalRe
         )
         Ok("200") as "application/json"
       } catch {
-        case t: Throwable => Ok("500")
+        case t: Throwable =>
+          println("Pokemon"+t.printStackTrace())
+          Ok("500")
       }
     )
   }
