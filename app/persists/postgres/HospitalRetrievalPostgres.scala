@@ -48,7 +48,6 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
       case true => Some(parse(resultSet))
       case false => None
     }
-
   }
 
   override def update(id: Long
@@ -73,7 +72,11 @@ class HospitalRetrievalPostgres @Inject() (db: Database)
   )
 
   private val SELECT_BY_ID = "SELECT * FROM hospitals where id = ?"
+
   private val INSERT = "INSERT INTO hospitals (id, latitude, longitude, name) VALUES (?, ?, ?, ?)"
+
   private val UPDATE = "UPDATE hospitals SET latitude = ?, longitude = ? where name = ?"
+
   private val SELECT_BY_NAME = "SELECT * FROM hospitals where name = ?"
+
 }
