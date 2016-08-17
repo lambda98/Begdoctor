@@ -36,6 +36,21 @@ class HospitalPostgres @Inject()(db: Database)
     }.toList
   }
 
+  override def selectByLocation(latitude: Float
+                                , longitude: Float): List[HospitalEntity] = db.withConnection { implicit conn =>
+
+    val preparedStatement = conn.prepareStatement(SELECT_BY_LOCATION)
+    preparedStatement.setFloat(1, latitude)
+    preparedStatement.setFloat(2, longitude)
+
+    val resultSet = preparedStatement.executeQuery
+    new Iterator[HospitalEntity] {
+      override def hasNext = resultSet.next()
+      override def next() = parse(resultSet)
+    }.toList
+
+  }
+
   private[postgres] def parse(resultSet: ResultSet): HospitalEntity = HospitalEntity(
     id = resultSet.getLong("id")
     , name = resultSet.getString("name")
@@ -48,5 +63,10 @@ class HospitalPostgres @Inject()(db: Database)
 
   private val SELECT_BY_ID = "SELECT * FROM hospitals where id = ?"
   private val SELECT_ALL = "SELECT * FROM hospitals"
+  private val SELECT_BY_LOCATION = "SELECT * " +
+    "                                      , round((point(latitude, longitude) <@> point(? , ?))::numeric, 2) as miles" +
+    "                               FROM hospitals " +
+    "                               ORDER by miles ASC" +
+    "                               limit 3;"
 
 }

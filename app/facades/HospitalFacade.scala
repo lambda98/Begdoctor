@@ -23,4 +23,11 @@ class HospitalFacade @Inject()(persist: HospitalPersist) {
     ))
   }
 
+  def findByLocation(latitude: Float
+                     , longitude: Float): HospitalList = {
+    HospitalList(persist.selectByLocation(latitude, longitude).map(
+      hospitalEntity => hospitalEntity.toModel()
+    ))
+  }
+
 }

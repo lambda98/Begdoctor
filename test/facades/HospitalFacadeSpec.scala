@@ -35,4 +35,16 @@ class HospitalFacadeSpec
     }
   }
 
+  "Call findByLocation" should {
+    "return Hospital " in {
+      val latitude = 13.7854529F
+      val longitude = 100.5736408F
+      val facade = app.injector.instanceOf[HospitalFacade]
+
+      val testObject = facade.findByLocation(latitude, longitude)
+
+      assert(testObject.isInstanceOf[HospitalList])
+    }
+  }
+
 }

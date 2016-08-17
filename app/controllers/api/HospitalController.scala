@@ -21,4 +21,12 @@ class HospitalController @Inject()(hospitalFacade: HospitalFacade)
     Ok(hospitalFacade.listAll.toText)
   }
 
+  def getByLocation(location: String) = Action {
+    val lat_long  = location.split(",")
+    val latitude  = lat_long(0).toFloat
+    val longitude = lat_long(1).toFloat
+    //val symtomp   = lat_long(2).toString
+    Ok(hospitalFacade.findByLocation(latitude, longitude).toText)
+  }
+
 }
