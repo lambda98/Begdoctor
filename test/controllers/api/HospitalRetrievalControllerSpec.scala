@@ -38,13 +38,10 @@ class HospitalRetrievalControllerSpec
             """.stripMargin
           ))
       ).get
-
       status(testObject) mustBe OK
-
       val contentString = contentAsString(testObject)
       contentType(testObject) mustBe Some("application/json")
       contentString must include("200")
-
     }
   }
 
@@ -63,14 +60,10 @@ class HospitalRetrievalControllerSpec
             """.stripMargin
           ))
       ).get
-
       status(testObject) mustBe OK
-
       val contentString = contentAsString(testObject)
-      println("test"+contentString)
       contentType(testObject) mustBe Some("application/json")
       contentString must include("200")
-
     }
   }
 
@@ -78,12 +71,11 @@ class HospitalRetrievalControllerSpec
     "return HospitalRetrieval JSON" in {
       contentAsString(route(
         app
-        , FakeRequest(GET, "/api/v1/hospitalRetrievals/name/:name")).get) must include
+        , FakeRequest(GET, "/api/v1/hospitalRetrievals/name/โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)")).get) must include
       """
-        |   "name": "โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)"
-      """.
-        stripMargin
-      }
+        |"name": "โรงพยาบาลสมิติเวช ธนบุรี (Samitivej Thonburi)"
+      """.stripMargin
     }
+  }
 
 }
