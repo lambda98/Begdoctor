@@ -25,8 +25,7 @@ class HospitalPersistSpec
 
       val testObject = persist.selectById(correct_id)
 
-      assert(testObject.isInstanceOf[List[HospitalEntity]])
-
+      assert(correct_id == testObject.get.id)
     }
   }
 

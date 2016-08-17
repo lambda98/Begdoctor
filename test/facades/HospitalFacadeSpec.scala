@@ -21,7 +21,7 @@ class HospitalFacadeSpec
 
       val testObject = facade.findById(correct_id)
 
-      assert(testObject.isInstanceOf[HospitalList])
+      assert(correct_id == testObject.id)
     }
   }
 
@@ -41,7 +41,7 @@ class HospitalFacadeSpec
       val longitude = 100.5736408F
       val facade = app.injector.instanceOf[HospitalFacade]
 
-      val testObject = facade.findByLocation(latitude, longitude)
+      val testObject = facade.listByLocation(latitude, longitude)
 
       assert(testObject.isInstanceOf[HospitalList])
     }

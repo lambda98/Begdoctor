@@ -11,10 +11,8 @@ import persists.HospitalPersist
 @Singleton
 class HospitalFacade @Inject()(persist: HospitalPersist) {
 
-  def findById(id: Long): HospitalList = {
-    HospitalList(persist.selectById(id).map(
-      hospitalEntity => hospitalEntity.toModel()
-    ))
+  def findById(id: Long): Hospital = {
+     persist.selectById(id).get
   }
 
   def listAll: HospitalList = {
@@ -23,7 +21,7 @@ class HospitalFacade @Inject()(persist: HospitalPersist) {
     ))
   }
 
-  def findByLocation(latitude: Float
+  def listByLocation(latitude: Float
                      , longitude: Float): HospitalList = {
     HospitalList(persist.selectByLocation(latitude, longitude).map(
       hospitalEntity => hospitalEntity.toModel()

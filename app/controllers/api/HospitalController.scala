@@ -25,8 +25,7 @@ class HospitalController @Inject()(hospitalFacade: HospitalFacade)
     val lat_long  = location.split(",")
     val latitude  = lat_long(0).toFloat
     val longitude = lat_long(1).toFloat
-    //val symtomp   = lat_long(2).toString
-    Ok(hospitalFacade.findByLocation(latitude, longitude).toText)
+    Ok(hospitalFacade.listByLocation(latitude, longitude).toText)
   }
 
 }
