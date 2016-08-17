@@ -1,10 +1,7 @@
 package facades
 
-import javax.inject.Inject
-
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import play.api.inject.guice.GuiceApplicationBuilder
-import services.UuidService
 
 /**
   * Created by Siam yimyam on 11/8/2559.
@@ -28,8 +25,6 @@ class HospitalRetrievalFacadeSpec
 
   "Call create" should {
     "insert data successfully" in {
-      val uuidService = app.injector.instanceOf[UuidService]
-      val randomString = uuidService.getId
       val correct_latitude = 13.7479752f
       val correct_longitude = 100.5836296f
       val correct_name = "โรงพยาบาลกรุงเทพ"
@@ -57,8 +52,6 @@ class HospitalRetrievalFacadeSpec
 
   "Call update" should {
     "update data successfully" in {
-      val uuidService = app.injector.instanceOf[UuidService]
-      val randomString = uuidService.getId
       val correct_latitude = 37.487996f
       val correct_longitude = 127.084419f
       val correct_name = "Samsung Medical Center"
