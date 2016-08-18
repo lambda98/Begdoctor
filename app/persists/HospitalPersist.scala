@@ -1,5 +1,6 @@
 package persists
 
+import entities.HospitalEntity
 import models.Hospital
 
 /**
@@ -8,5 +9,8 @@ import models.Hospital
 trait HospitalPersist {
 
   def selectById(id: Long): Option[Hospital]
+  def selectAll():  List[HospitalEntity]
+  def selectByLocation(latitude: Float
+                       , longitude: Float):  List[HospitalEntity]
 
 }

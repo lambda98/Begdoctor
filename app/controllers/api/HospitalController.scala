@@ -17,4 +17,15 @@ class HospitalController @Inject()(hospitalFacade: HospitalFacade)
     Ok(hospitalFacade.findById(Id).toText)
   }
 
+  def getList = Action {
+    Ok(hospitalFacade.listAll.toText)
+  }
+
+  def getByLocation(location: String) = Action {
+    val lat_long  = location.split(",")
+    val latitude  = lat_long(0).toFloat
+    val longitude = lat_long(1).toFloat
+    Ok(hospitalFacade.listByLocation(latitude, longitude).toText)
+  }
+
 }

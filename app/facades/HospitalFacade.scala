@@ -1,8 +1,8 @@
 package facades
 
-import javax.inject.{Singleton, Inject}
+import javax.inject.{Inject, Singleton}
 
-import models.Hospital
+import models.{Hospital, HospitalList}
 import persists.HospitalPersist
 
 /**
@@ -12,7 +12,20 @@ import persists.HospitalPersist
 class HospitalFacade @Inject()(persist: HospitalPersist) {
 
   def findById(id: Long): Hospital = {
-    persist.selectById(id).get
+     persist.selectById(id).get
+  }
+
+  def listAll: HospitalList = {
+    HospitalList(persist.selectAll.map(
+      hospitalEntity => hospitalEntity.toModel()
+    ))
+  }
+
+  def listByLocation(latitude: Float
+                     , longitude: Float): HospitalList = {
+    HospitalList(persist.selectByLocation(latitude, longitude).map(
+      hospitalEntity => hospitalEntity.toModel()
+    ))
   }
 
 }

@@ -5,6 +5,9 @@ DROP TABLE IF EXISTS symptoms;
 DROP TABLE IF EXISTS booking;
 DROP TABLE IF EXISTS hospitals_time;
 
+CREATE extension cube;
+CREATE extension earthdistance;
+
 CREATE TABLE hospitals
 (
     id              BIGINT NOT NULL UNIQUE,
