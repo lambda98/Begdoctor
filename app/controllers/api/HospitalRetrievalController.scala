@@ -24,14 +24,33 @@ class HospitalRetrievalController @Inject() (hospitalRetrievalFacade: HospitalRe
       formWithErrors => Ok("400")
       , form => try {
         hospitalRetrievalFacade.create(
-          latitude =  13.7479752f
-          , longitude = 100.5836296f
-          , name =  "โรงพยาบาลกรุงเทพ"
+          latitude = form.latitude
+          , longitude = form.longitude
+          , name = form.name
         )
         Ok("200") as "application/json"
       } catch {
-        case t: Throwable =>
-          Ok("500") as "application/json"
+        case t: Throwable => Ok("500")
+      }
+    )
+  }
+
+  def getByName(name: String) = Action {
+    Ok(hospitalRetrievalFacade.findByName(name).toText)
+  }
+
+  def update() = Action { implicit request =>
+    UpdateHospitalRetrievalForm.form.bindFromRequest.fold(
+      formWithErrors => Ok("400")
+      , form => try {
+        hospitalRetrievalFacade.update(
+          latitude = form.latitude
+          , longitude = form.longitude
+          , name = form.name
+        )
+        Ok("200") as "application/json"
+      } catch {
+        case t: Throwable => Ok("500")
       }
     )
   }
@@ -47,5 +66,18 @@ object CreateHospitalRetrievalForm {
       "longitude" -> of[Float],
       "name" -> of[String]
     ) (CreateHospitalRetrievalForm.apply)(CreateHospitalRetrievalForm.unapply)
+  )
+}
+
+case class UpdateHospitalRetrievalForm (latitude: Float
+                                        , longitude: Float
+                                        , name: String)
+object UpdateHospitalRetrievalForm {
+  val form = Form(
+    mapping(
+      "latitude" -> of[Float],
+      "longitude" -> of[Float],
+      "name" -> of[String]
+    ) (UpdateHospitalRetrievalForm.apply) (UpdateHospitalRetrievalForm.unapply)
   )
 }
