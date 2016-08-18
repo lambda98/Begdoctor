@@ -27,4 +27,35 @@ class HospitalRetrievalFacade @Inject()(uuidService: UuidService
     )
   }
 
+  def findByName(name: String): HospitalRetrieval = {
+    persist.selectByName(name).getOrElse(null)
+  }
+
+  def update(latitude: Float
+             , longitude: Float
+             , name: String): Boolean = {
+    persist.update(
+      id = uuidService.getId
+      , latitude = latitude
+      , longitude = longitude
+      , name = name
+    )
+  }
+
+  def createOrUpdate( latitude: Float
+                     , longitude: Float
+                     , name: String): Boolean = {
+   val result = findByName(
+       name = name)
+    if(result == null){
+      create(latitude
+        , longitude
+        , name)
+    }
+    else{
+      update(latitude
+        , longitude
+        , name)
+    }
+  }
 }
