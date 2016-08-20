@@ -1,5 +1,6 @@
 package facades
 
+import models.{HospitalTime, HospitalTimeList}
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import play.api.inject.guice.GuiceApplicationBuilder
 
@@ -19,7 +20,7 @@ class HospitalTimeFacadeSpec
 
       val testObject = facade.findById(correct_id)
 
-      assert(correct_id == testObject.id)
+      assert(testObject.isInstanceOf[HospitalTimeList])
     }
   }
 

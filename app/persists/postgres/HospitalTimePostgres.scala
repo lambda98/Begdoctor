@@ -3,6 +3,7 @@ package persists.postgres
 import java.sql.ResultSet
 import javax.inject.Inject
 
+import entities.HospitalTimeEntity
 import models.HospitalTime
 import persists.HospitalTimePersist
 import play.api.db.Database
@@ -14,18 +15,18 @@ import org.joda.time.DateTime
 class HospitalTimePostgres @Inject()(db: Database)
   extends HospitalTimePersist {
 
-  override def selectById(id: Long): Option[HospitalTime] = db.withConnection { implicit conn =>
+  override def selectById(id: Long): List[HospitalTimeEntity] = db.withConnection { implicit conn =>
     val preparedStatement = conn.prepareStatement(SELECT_BY_ID)
     preparedStatement.setLong(1, id)
 
     val resultSet = preparedStatement.executeQuery
-    resultSet.next match {
-      case true => Some(parse(resultSet))
-      case false => None
-    }
+    new Iterator[HospitalTimeEntity] {
+      override def hasNext = resultSet.next()
+      override def next() = parseList(resultSet)
+    }.toList
   }
 
-  private[postgres] def parse(resultSet: ResultSet): HospitalTime = HospitalTime(
+  private[postgres] def parseList(resultSet: ResultSet): HospitalTimeEntity = HospitalTimeEntity(
     id = resultSet.getLong("id")
     , hospitalId = resultSet.getLong("hospital_id")
     , startDateTime = new DateTime(resultSet.getTimestamp("start_datetime").getTime)
