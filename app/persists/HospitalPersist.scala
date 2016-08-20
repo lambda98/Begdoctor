@@ -13,4 +13,16 @@ trait HospitalPersist {
   def selectByLocation(latitude: Float
                        , longitude: Float):  List[HospitalEntity]
 
+  def insert(id: Long
+             , latitude: Float
+             , longitude: Float
+             , name: String): Boolean
+
+  def selectByName( name: String): Option[Hospital]
+
+  def update(id: Long
+             , latitude: Float
+             , longitude: Float
+             , name: String): Boolean
+
 }
