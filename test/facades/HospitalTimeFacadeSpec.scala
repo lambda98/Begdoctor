@@ -20,7 +20,7 @@ class HospitalTimeFacadeSpec
 
       val testObject = facade.findById(correct_id)
 
-      assert(testObject.isInstanceOf[HospitalTimeList])
+      assert(testObject.isInstanceOf[HospitalTime])
     }
   }
 
