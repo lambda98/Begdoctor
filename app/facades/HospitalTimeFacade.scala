@@ -11,10 +11,8 @@ import persists.HospitalTimePersist
 @Singleton
 class HospitalTimeFacade @Inject()(persist: HospitalTimePersist) {
 
-  def findById(id: Long): HospitalTimeList = {
-    HospitalTimeList(persist.selectById(id).map(
-      hospitalTimeEntity => hospitalTimeEntity.toModel()
-    ))
+  def findById(id: Long): HospitalTime = {
+    persist.selectById(id).get.toModel()
   }
 
 }
