@@ -8,6 +8,6 @@ import entities.HospitalTimeEntity
   */
 trait HospitalTimePersist {
 
-  def selectById(id: Long): List[HospitalTimeEntity]
+  def selectById(id: Long): Option[HospitalTimeEntity]
 
 }
