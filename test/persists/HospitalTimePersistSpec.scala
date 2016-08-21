@@ -18,7 +18,7 @@ class HospitalTimePersistSpec
 
       val testObject = persist.selectById(correct_id)
 
-      assert(testObject.isInstanceOf[List[HospitalTimeEntity]])
+      assert(testObject.isInstanceOf[Option[HospitalTimeEntity]])
     }
   }
 }
