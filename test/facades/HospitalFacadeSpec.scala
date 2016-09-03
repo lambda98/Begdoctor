@@ -97,7 +97,7 @@ class HospitalFacadeSpec
       val correct_name = "โรงพยาบาลลาดกระบัง"
       val facade = app.injector.instanceOf[HospitalFacade]
 
-      val testObject = facade.createOrUpdate(correct_latitude
+      val testObject = facade.save(correct_latitude
         , correct_longitude
         , correct_name)
 
@@ -109,7 +109,7 @@ class HospitalFacadeSpec
       val correct_name = "Samsung Medical Center"
       val facade = app.injector.instanceOf[HospitalFacade]
 
-      val testObject = facade.createOrUpdate(correct_latitude
+      val testObject = facade.save(correct_latitude
         , correct_longitude
         , correct_name)
 

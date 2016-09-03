@@ -1,5 +1,6 @@
 package persists
 
+import entities.HospitalTimeEntity
 import org.joda.time.DateTime
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 
@@ -17,7 +18,7 @@ class HospitalTimePersistSpec
 
       val testObject = persist.selectById(correct_id)
 
-      assert(correct_id == testObject.get.id)
+      assert(testObject.isInstanceOf[Option[HospitalTimeEntity]])
     }
   }
 }

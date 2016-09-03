@@ -12,3 +12,6 @@ case class HospitalTime(id: Long
                         , finishDateTime: DateTime
                         , available: Boolean)
   extends Json
+
+case class HospitalTimeList(hospitalTimes: List[HospitalTime])
+  extends Json

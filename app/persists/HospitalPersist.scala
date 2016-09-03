@@ -8,17 +8,19 @@ import models.Hospital
   */
 trait HospitalPersist {
 
-  def selectById(id: Long): Option[Hospital]
-  def selectAll():  List[HospitalEntity]
+  def selectById(id: Long): Option[HospitalEntity]
+
+  def selectByName(name: String): Option[HospitalEntity]
+
   def selectByLocation(latitude: Float
-                       , longitude: Float):  List[HospitalEntity]
+                       , longitude: Float): List[HospitalEntity]
+
+  def selectAll(): List[HospitalEntity]
 
   def insert(id: Long
              , latitude: Float
              , longitude: Float
              , name: String): Boolean
-
-  def selectByName( name: String): Option[Hospital]
 
   def update(id: Long
              , latitude: Float

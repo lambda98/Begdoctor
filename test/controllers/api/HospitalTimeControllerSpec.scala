@@ -11,11 +11,11 @@ class HospitalTimeControllerSpec
   extends PlaySpec
     with OneAppPerTest{
 
-  "GET /api/v1/hospitals/0/time" should {
+  "GET /api/v1/hospitals/1/time" should {
     "return HospitalTime JSON" in {
-      contentAsString(route(app, FakeRequest(GET, "/api/v1/hospitals/0/time")).get) must include
+      contentAsString(route(app, FakeRequest(GET, "/api/v1/hospitals/1/time")).get) must include
       """
-        |"id":0,
+        |"id":1,
         |"hospitalId":0
         |"startDatetime":"2016-07-01 10:30"
         |"finishDatetime":"2016-07-01 11:30"

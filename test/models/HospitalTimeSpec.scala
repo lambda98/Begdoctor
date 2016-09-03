@@ -6,7 +6,7 @@ import org.scalatestplus.play.{OneAppPerTest, PlaySpec}
 /**
   * Created by Siam yimyam on 13/7/2559.
   */
-class Hospital_TimeSpec
+class HospitalTimeSpec
   extends PlaySpec
     with OneAppPerTest {
 

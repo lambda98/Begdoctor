@@ -2,7 +2,7 @@ package facades
 
 import javax.inject.{Inject, Singleton}
 
-import models.HospitalTime
+import models.{HospitalTime,HospitalTimeList}
 import persists.HospitalTimePersist
 
 /**
@@ -12,6 +12,7 @@ import persists.HospitalTimePersist
 class HospitalTimeFacade @Inject()(persist: HospitalTimePersist) {
 
   def findById(id: Long): HospitalTime = {
-    persist.selectById(id).get
+    persist.selectById(id).get.toModel()
   }
+
 }

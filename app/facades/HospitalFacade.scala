@@ -2,6 +2,7 @@ package facades
 
 import javax.inject.{Inject, Singleton}
 
+import entities.HospitalEntity
 import models.{Hospital, HospitalList}
 import persists.HospitalPersist
 import services.UuidService
@@ -14,20 +15,42 @@ class HospitalFacade @Inject()(uuidService: UuidService
                                , persist: HospitalPersist) {
 
   def findById(id: Long): Hospital = {
-     persist.selectById(id).get
+    persist.selectById(id).get.toModel()
   }
 
-  def listAll: HospitalList = {
-    HospitalList(persist.selectAll.map(
-      hospitalEntity => hospitalEntity.toModel()
-    ))
+  def findByName(name: String): Hospital = {
+    persist.selectByName(name).get.toModel()
   }
 
   def listByLocation(latitude: Float
                      , longitude: Float): HospitalList = {
-    HospitalList(persist.selectByLocation(latitude, longitude).map(
-      hospitalEntity => hospitalEntity.toModel()
-    ))
+    toHospitalList(
+      persist.selectByLocation(latitude, longitude)
+    )
+  }
+
+  def listAll: HospitalList = {
+    toHospitalList(
+      persist.selectAll
+    )
+  }
+
+  def save(latitude: Float
+           , longitude: Float
+           , name: String): Boolean = {
+
+    isCreated(name) match {
+      case false => create(
+        latitude
+        , longitude
+        , name
+      )
+      case true => update(
+        latitude
+        , longitude
+        , name
+      )
+    }
   }
 
   def create(latitude: Float
@@ -41,10 +64,6 @@ class HospitalFacade @Inject()(uuidService: UuidService
     )
   }
 
-  def findByName(name: String): Hospital = {
-    persist.selectByName(name).getOrElse(null)
-  }
-
   def update(latitude: Float
              , longitude: Float
              , name: String): Boolean = {
@@ -56,20 +75,16 @@ class HospitalFacade @Inject()(uuidService: UuidService
     )
   }
 
-  def createOrUpdate( latitude: Float
-                      , longitude: Float
-                      , name: String): Boolean = {
-    val result = findByName(
-      name = name)
-    if(result == null){
-      create(latitude
-        , longitude
-        , name)
-    }
-    else{
-      update(latitude
-        , longitude
-        , name)
+  private def toHospitalList(hospitalEntities: List[HospitalEntity]): HospitalList = {
+    HospitalList(hospitalEntities.map(
+      hospitalEntity => hospitalEntity.toModel()
+    ))
+  }
+
+  private def isCreated(name: String): Boolean = {
+    persist.selectByName(name) match {
+      case None => false
+      case _ => true
     }
   }
 
