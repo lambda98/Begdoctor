@@ -2,16 +2,13 @@ package controllers.api
 
 import javax.inject.{Inject, Singleton}
 import facades.BookingFacade
-import play.api.data.Form
-import play.api.data.Forms._
-import play.api.data.format.Formats._
 import play.api.mvc._
 
 /**
   * Created by anawin on 7/14/2016 AD.
   */
 @Singleton
-class BookingController @Inject() (bookingFacade: BookingFacade)
+class BookingController @Inject()(bookingFacade: BookingFacade)
   extends Controller {
 
   def getList = Action {
@@ -42,20 +39,8 @@ class BookingController @Inject() (bookingFacade: BookingFacade)
       }
     )
   }
+
 }
 
-case class CreateBookingForm(name: String
-                             , surname: String
-                             , email: String
-                             , hospitalTimeId: Long)
-object CreateBookingForm {
-  val form = Form(
-    mapping(
-      "name" -> of[String],
-      "surname" -> of[String],
-      "email" -> of[String],
-      "hospitalTimeId" -> of[Long]
-    )(CreateBookingForm.apply)(CreateBookingForm.unapply)
-  )
-}
+
 
