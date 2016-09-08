@@ -11,6 +11,7 @@ case class CreateBookingForm(name: String
                              , surname: String
                              , email: String
                              , hospitalTimeId: Long)
+
 object CreateBookingForm {
   val form = Form(
     mapping(
@@ -25,25 +26,27 @@ object CreateBookingForm {
 case class CreateHospitalForm(latitude: Float
                               , longitude: Float
                               , name: String)
+
 object CreateHospitalForm {
   val form = Form(
     mapping(
       "latitude" -> of[Float],
       "longitude" -> of[Float],
       "name" -> of[String]
-    ) (CreateHospitalForm.apply)(CreateHospitalForm.unapply)
+    )(CreateHospitalForm.apply)(CreateHospitalForm.unapply)
   )
 }
 
-case class UpdateHospitalForm (latitude: Float
-                               , longitude: Float
-                               , name: String)
+case class UpdateHospitalForm(latitude: Float
+                              , longitude: Float
+                              , name: String)
+
 object UpdateHospitalForm {
   val form = Form(
     mapping(
       "latitude" -> of[Float],
       "longitude" -> of[Float],
       "name" -> of[String]
-    ) (UpdateHospitalForm.apply) (UpdateHospitalForm.unapply)
+    )(UpdateHospitalForm.apply)(UpdateHospitalForm.unapply)
   )
 }
