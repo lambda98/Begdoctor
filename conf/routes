@@ -9,7 +9,6 @@ GET     /assets/*file                        controllers.Assets.versioned(path="
 GET     /                                    controllers.web.HomeController.index
 
 # API Route
-POST    /api/v1/hospitals                    controllers.api.HospitalController.create
 GET     /api/v1/hospitals                    controllers.api.HospitalController.getList
 GET     /api/v1/hospitals/location/:location controllers.api.HospitalController.getByLocation(location: String)
 GET     /api/v1/hospitals/:id                controllers.api.HospitalController.getById(id: Long)
