@@ -22,8 +22,7 @@ class HospitalFacade @Inject()(uuidService: UuidService
     persist.selectByName(name).get.toModel()
   }
 
-  def listByLocation(latitude: Float
-                     , longitude: Float): HospitalList = {
+  def listByLocation(latitude: Float, longitude: Float): HospitalList = {
     toHospitalList(
       persist.selectByLocation(latitude, longitude)
     )
@@ -35,10 +34,7 @@ class HospitalFacade @Inject()(uuidService: UuidService
     )
   }
 
-  def save(latitude: Float
-           , longitude: Float
-           , name: String): Boolean = {
-
+  def save(latitude: Float, longitude: Float, name: String): Boolean = {
     isCreated(name) match {
       case false => create(
         latitude
@@ -53,9 +49,9 @@ class HospitalFacade @Inject()(uuidService: UuidService
     }
   }
 
-  def create(latitude: Float
-             , longitude: Float
-             , name: String): Boolean = {
+  private def create(latitude: Float
+                     , longitude: Float
+                     , name: String): Boolean = {
     persist.insert(
       id = uuidService.getId
       , latitude = latitude
@@ -64,9 +60,9 @@ class HospitalFacade @Inject()(uuidService: UuidService
     )
   }
 
-  def update(latitude: Float
-             , longitude: Float
-             , name: String): Boolean = {
+  private def update(latitude: Float
+                     , longitude: Float
+                     , name: String): Boolean = {
     persist.update(
       id = uuidService.getId
       , latitude = latitude
