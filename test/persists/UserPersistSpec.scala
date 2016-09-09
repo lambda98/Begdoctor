@@ -35,15 +35,17 @@ class UserPersistSpec @Inject()(uuidService: UuidService)
 
   "Call insert" should {
     "insert user data successfully" in {
+      val persist = app.injector.instanceOf[UserPersist]
       val randomString = uuidService.getId
       val randomId = uuidService.getId
       val correct_id = randomId
       val correct_name = "Jang"
       val correct_surname = "Hee-eun"
-      val correct_email = "jangheeeun"+randomString+"@mail.com"
-      val persist = app.injector.instanceOf[UserPersist]
+      val correct_email = "jangheeeun" + randomString + "@mail.com"
+      val correct_mobile = "0921234567"
 
-      val testObject = persist.insert(correct_id, correct_name, correct_surname, correct_email)
+
+      val testObject = persist.insert(correct_id, correct_name, correct_surname, correct_email, correct_mobile)
 
       assert(testObject)
     }
