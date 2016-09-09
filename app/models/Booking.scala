@@ -15,3 +15,14 @@ case class Booking(id: Long
 
 case class BookingList(bookings: List[Booking])
   extends Json
+
+case class UpComingBooking(id: Long
+                           , name: String
+                           , surname: String
+                           , avatar: String
+                           , time: String
+                           , symptom: String
+                           , mobile: String
+                           , insuranceLogo: String)
+
+case class UpComingBookingList(bookings: List[UpComingBooking])
