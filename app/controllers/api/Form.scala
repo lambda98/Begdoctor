@@ -10,6 +10,7 @@ import play.api.data.format.Formats._
 case class CreateBookingForm(name: String
                              , surname: String
                              , email: String
+                             , mobile: String
                              , hospitalTimeId: Long)
 
 object CreateBookingForm {
@@ -18,6 +19,7 @@ object CreateBookingForm {
       "name" -> of[String],
       "surname" -> of[String],
       "email" -> of[String],
+      "mobile" -> of[String],
       "hospitalTimeId" -> of[Long]
     )(CreateBookingForm.apply)(CreateBookingForm.unapply)
   )
