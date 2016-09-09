@@ -31,6 +31,7 @@ class BookingController @Inject()(bookingFacade: BookingFacade)
           name = form.name
           , surname = form.surname
           , email = form.email
+          , mobile = form.mobile
           , hospitalTimeId = form.hospitalTimeId
         )
         Ok("200") as "application/json"
