@@ -63,6 +63,8 @@ CREATE TABLE users
     name            VARCHAR(256) NOT NULL,
     surname         VARCHAR(256) NOT NULL,
     email           VARCHAR(256) NOT NULL UNIQUE,
+    avatar          VARCHAR(256),
+    mobile          VARCHAR(10) NOT NULL,
     created         TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT      users_pk PRIMARY KEY (id)
 );
@@ -72,11 +74,15 @@ INSERT INTO users(id
     , name
     , surname
     , email
+    , avatar
+    , mobile
     , created)
 VALUES (0
     , 'Kim'
     , 'Eun-ji'
     , 'kimeunji@mail.com'
+    , 'http://miner8.com/en/wp-content/uploads/2016/04/20160127-J-ESTINA-SONG-HYE-KYO.gif'
+    , '0912345678'
     , '2016-07-01 10:30');
 
 CREATE TABLE staffs
@@ -127,7 +133,7 @@ INSERT INTO booking(id
     , status
     , created)
 VALUES (0
-    , 1
+    , 0
     , 1
     , 'confirmed'
     , '2016-07-01 10:30');
