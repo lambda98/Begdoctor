@@ -56,6 +56,7 @@ class BookingControllerSpec
               |   "name": "Yuri",
               |   "surname": "Kwan",
               |   "email": "yurikwan@mail.com",
+              |   "mobile": "0871239192",
               |   "hospitalTimeId": "1"
               |}
             """.stripMargin
