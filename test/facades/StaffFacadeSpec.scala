@@ -2,15 +2,13 @@ package facades
 
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import play.api.inject.guice.GuiceApplicationBuilder
-import javax.inject.Inject
 import services.UuidService
 import com.github.t3hnar.bcrypt._
-import models.StaffList
 
 /**
   * Created by anawin on 8/6/2016 AD.
   */
-class StaffFacadeSpec  @Inject()(uuidService: UuidService)
+class StaffFacadeSpec
   extends PlaySpec
     with OneAppPerSuite {
 
@@ -21,7 +19,6 @@ class StaffFacadeSpec  @Inject()(uuidService: UuidService)
       val correct_username = "choiwoogeun"
       val correct_password = "password"
       val facade = app.injector.instanceOf[StaffFacade]
-
       val testObject = facade.authenticate(correct_username, correct_password)
 
       assert(testObject)
@@ -30,6 +27,8 @@ class StaffFacadeSpec  @Inject()(uuidService: UuidService)
 
   "Call create staff" should {
     "insert staff data successfully" in {
+      val uuidService = app.injector.instanceOf[UuidService]
+      val facade = app.injector.instanceOf[StaffFacade]
       val randomString = uuidService.getId
       val correct_name = "Song"
       val correct_surname = "Sang-hyun"
@@ -37,7 +36,7 @@ class StaffFacadeSpec  @Inject()(uuidService: UuidService)
       val correct_username = "songsanghyn"
       val correct_password = "songsang".bcrypt
       val correct_hospitalId = 1L
-      val facade = app.injector.instanceOf[StaffFacade]
+
 
       val testObject = facade.create(
         correct_name

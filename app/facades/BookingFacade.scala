@@ -2,7 +2,8 @@ package facades
 
 import javax.inject.{Inject, Singleton}
 
-import models.{Booking, BookingList}
+import entities.{BookingEntity, UserEntity}
+import models.{BookingList, UpComingBooking, UpComingBookingList}
 import persists.{BookingPersist, UserPersist}
 import services.UuidService
 
@@ -32,9 +33,37 @@ class BookingFacade @Inject()(uuidService: UuidService
     ))
   }
 
+  def listUpComping(): UpComingBookingList = {
+    UpComingBookingList(
+      bookingPersist.selectAll.map(
+        bookingEntity => toUpComingBooking(bookingEntity)
+      )
+    )
+  }
+
+  def toUpComingBooking(bookingEntity: BookingEntity): UpComingBooking = {
+    val user = findUser(bookingEntity.userId)
+
+    UpComingBooking(
+      id = bookingEntity.id
+      , name = user.name
+      , surname = user.surname
+      , avatar = user.avatar
+      , time = "09:00 - 09:30"
+      , symptom = "ไข้หวัด"
+      , mobile = "092-251-4661"
+      , insuranceLogo = "http://logok.org/wp-content/uploads/2014/09/AIA_Logo.png"
+    )
+  }
+
+  private def findUser(userId: Long): UserEntity = {
+    userPersist.selectById(userId).get
+  }
+
   def create(name: String
              , surname: String
              , email: String
+             , mobile: String
              , hospitalTimeId: Long): Boolean = {
 
     val booker = userPersist.selectByEmail(email)
@@ -46,6 +75,7 @@ class BookingFacade @Inject()(uuidService: UuidService
           , name = name
           , surname = surname
           , email = email
+          , mobile = mobile
         )
         createdBookerId
       }

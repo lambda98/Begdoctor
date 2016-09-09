@@ -1,15 +1,16 @@
 package facades
 
-import models.{Booking, BookingList}
+import models.{Booking, BookingList, UpComingBookingList}
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import play.api.inject.guice.GuiceApplicationBuilder
 import javax.inject.Inject
+
 import services.UuidService
 
 /**
   * Created by anawin on 7/14/2016 AD.
   */
-class BookingFacadeSpec @Inject()(uuidService: UuidService)
+class BookingFacadeSpec
   extends PlaySpec
     with OneAppPerSuite {
 
@@ -22,6 +23,7 @@ class BookingFacadeSpec @Inject()(uuidService: UuidService)
       val testObject = facade.listAll
 
       assert(testObject.isInstanceOf[BookingList])
+      println("champ2: " + testObject.bookings.size)
     }
   }
 
@@ -47,19 +49,33 @@ class BookingFacadeSpec @Inject()(uuidService: UuidService)
     }
   }
 
+  "Call listUpComing" should {
+    "return UpComingBooking" in {
+      val facade = app.injector.instanceOf[BookingFacade]
+
+      val testObject = facade.listUpComping()
+
+      assert(testObject.isInstanceOf[UpComingBookingList])
+    }
+  }
+
   "Call create" should {
     "insert Booking data successfully" in {
+      val uuidService = app.injector.instanceOf[UuidService]
+      val facade = app.injector.instanceOf[BookingFacade]
       val randomString = uuidService.getId
       val correct_name = "Pyo"
       val correct_surname = "Ji-soo"
       val correct_email = "PyoJisoo" + randomString + "@mail.com"
       val correct_hospitalTimeId = 1L
-      val facade = app.injector.instanceOf[BookingFacade]
+      val correct_mobile = "0891234567"
+
 
       val testObject = facade.create(
         correct_name
         , correct_surname
         , correct_email
+        , correct_mobile
         , correct_hospitalTimeId)
 
       assert(testObject)

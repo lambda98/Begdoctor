@@ -34,27 +34,4 @@ class UserControllerSpec
     }
   }
 
-  "POST /api/v1/users" should {
-    "return 200: with Save Successful" in {
-      val testObject = route(
-        app
-        , FakeRequest(POST, "/api/v1/users")
-          .withJsonBody(Json.parse(
-            """
-              |{
-              |   "name": "Yuri",
-              |   "surname": "kwan",
-              |   "email": "yurikwan@mail.com"
-              |}
-            """.stripMargin
-          ))
-      ).get
-
-      status(testObject) mustBe OK
-      contentType(testObject) mustBe Some("application/json")
-      val contentString = contentAsString(testObject)
-      contentString must include("200")
-    }
-  }
-
 }
