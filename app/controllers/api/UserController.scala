@@ -23,33 +23,4 @@ class UserController @Inject()(userFacade: UserFacade)
   def getByEmail(email: String) = Action {
     Ok(userFacade.findByEmail(email).toText)
   }
-
-  def create() = Action { implicit request =>
-    CreateUserForm.form.bindFromRequest.fold(
-      formWithErrors => Ok("400")
-      , form => try {
-        userFacade.create(
-          name = form.name
-          , surname = form.surname
-          , email = form.email
-        )
-        Ok("200") as "application/json"
-      } catch {
-        case t: Throwable => Ok("500")
-      }
-    )
-  }
-}
-
-case class CreateUserForm(name: String
-                          , surname: String
-                          , email: String)
-object CreateUserForm {
-  val form = Form(
-    mapping(
-      "name" -> of[String],
-      "surname" -> of[String],
-      "email" -> of[String]
-    )(CreateUserForm.apply)(CreateUserForm.unapply)
-  )
 }
