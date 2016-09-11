@@ -25,10 +25,21 @@ class BookingControllerSpec
 
   "GET /api/v1/bookings/:id" should {
     "return Booking JSON" in {
-      contentAsString(route(app, FakeRequest(POST, "/api/v1/bookings/1")).get) must include
+      contentAsString(route(app, FakeRequest(GET, "/api/v1/bookings/1")).get) must include
       """
-        |"id":"1"
-        |"user_id":"1"
+        |"id":"1",
+        |"user_id":"1",
+        |"hospital_time_id":"1"
+      """.stripMargin
+    }
+  }
+
+  "GET /api/v1/bookings/upcoming" should {
+    "return UpComing Booking JSON" in {
+      contentAsString(route(app, FakeRequest(GET, "/api/v1/bookings/upcoming")).get) must include
+      """
+        |"id":"1",
+        |"user_id":"1",
         |"hospital_time_id":"1"
       """.stripMargin
     }
@@ -39,8 +50,8 @@ class BookingControllerSpec
       contentAsString(route(app, FakeRequest(POST, "/api/v1/bookings/userid/1")).get) must include
       """
         |"id":"1"
-        |"user_id":"1"
-        |"hospital_time_id":"1"
+        |"name":"Kim",
+        |"surname":"Eun-ji"
       """.stripMargin
     }
   }
@@ -57,7 +68,8 @@ class BookingControllerSpec
               |   "surname": "Kwan",
               |   "email": "yurikwan@mail.com",
               |   "mobile": "0871239192",
-              |   "hospitalTimeId": "1"
+              |   "hospitalTimeId": "1",
+              |   "symptomId": "1"
               |}
             """.stripMargin
           ))
