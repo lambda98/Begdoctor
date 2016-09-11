@@ -2,10 +2,11 @@ package facades
 
 import javax.inject.{Inject, Singleton}
 
-import entities.{BookingEntity, UserEntity}
+import entities.{BookingEntity, HospitalTimeEntity, SymptomEntity, UserEntity}
 import models.{BookingList, UpComingBooking, UpComingBookingList}
-import persists.{BookingPersist, UserPersist}
+import persists.{BookingPersist, HospitalTimePersist, SymptomPersist, UserPersist}
 import services.UuidService
+import utilities.DateConverter
 
 /**
   * Created by anawin on 7/14/2016 AD.
@@ -13,6 +14,8 @@ import services.UuidService
 @Singleton
 class BookingFacade @Inject()(uuidService: UuidService
                               , bookingPersist: BookingPersist
+                              , hospitalTimePersist: HospitalTimePersist
+                              , symptomPersist: SymptomPersist
                               , userPersist: UserPersist) {
 
   def listAll: BookingList = {
@@ -43,28 +46,27 @@ class BookingFacade @Inject()(uuidService: UuidService
 
   def toUpComingBooking(bookingEntity: BookingEntity): UpComingBooking = {
     val user = findUser(bookingEntity.userId)
+    val hospitalTime = findHospitalTime(bookingEntity.hospitalTimeId)
+    val symptom = findSymptom(bookingEntity.symptomId)
 
-    UpComingBooking(
-      id = bookingEntity.id
-      , name = user.name
-      , surname = user.surname
-      , avatar = user.avatar
-      , time = "09:00 - 09:30"
-      , symptom = "ไข้หวัด"
-      , mobile = "092-251-4661"
-      , insuranceLogo = "http://logok.org/wp-content/uploads/2014/09/AIA_Logo.png"
-    )
-  }
-
-  private def findUser(userId: Long): UserEntity = {
-    userPersist.selectById(userId).get
+      UpComingBooking(
+        id = bookingEntity.id
+        , name = user.name
+        , surname = user.surname
+        , avatar = user.avatar
+        , time = parseTime(hospitalTime)
+        , symptom = symptom.name
+        , mobile = user.mobile
+        , insuranceLogo = "http://logok.org/wp-content/uploads/2014/09/AIA_Logo.png"
+      )
   }
 
   def create(name: String
              , surname: String
              , email: String
              , mobile: String
-             , hospitalTimeId: Long): Boolean = {
+             , hospitalTimeId: Long
+             , symptomId: Long): Boolean = {
 
     val booker = userPersist.selectByEmail(email)
     val userId = booker match {
@@ -86,7 +88,27 @@ class BookingFacade @Inject()(uuidService: UuidService
       id = uuidService.getId
       , userId = userId
       , hospitalTimeId = hospitalTimeId
+      , symptomId = symptomId
       , status = "confirmed"
     )
+  }
+
+  private def parseTime(hospitalTime: HospitalTimeEntity): String = {
+    val start = DateConverter.timeToString(hospitalTime.startDateTime)
+    val finish = DateConverter.timeToString(hospitalTime.finishDateTime)
+
+    start + " - " + finish
+  }
+
+  private def findSymptom(symptomId: Long): SymptomEntity = {
+    symptomPersist.selectById(symptomId).get
+  }
+
+  private def findUser(userId: Long): UserEntity = {
+    userPersist.selectById(userId).get
+  }
+
+  private def findHospitalTime(hospitalTimeId: Long): HospitalTimeEntity = {
+    hospitalTimePersist.selectById(hospitalTimeId).get
   }
 }
