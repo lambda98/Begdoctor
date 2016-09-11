@@ -9,6 +9,7 @@ import utilities.Json
 case class Booking(id: Long
                    , userId: Long
                    , hospitalTimeId: Long
+                   , symptomId: Long
                    , status: String
                    , created: DateTime)
   extends Json
@@ -26,3 +27,4 @@ case class UpComingBooking(id: Long
                            , insuranceLogo: String)
 
 case class UpComingBookingList(bookings: List[UpComingBooking])
+  extends Json
