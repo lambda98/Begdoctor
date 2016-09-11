@@ -7,7 +7,7 @@ import services.UuidService
 /**
   * Created by anawin on 6/23/2016 AD.
   */
-class UserPersistSpec @Inject()(uuidService: UuidService)
+class UserPersistSpec
   extends PlaySpec
     with OneAppPerSuite {
 
@@ -36,6 +36,7 @@ class UserPersistSpec @Inject()(uuidService: UuidService)
   "Call insert" should {
     "insert user data successfully" in {
       val persist = app.injector.instanceOf[UserPersist]
+      val uuidService = app.injector.instanceOf[UuidService]
       val randomString = uuidService.getId
       val randomId = uuidService.getId
       val correct_id = randomId
