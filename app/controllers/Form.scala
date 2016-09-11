@@ -1,4 +1,4 @@
-package controllers.api
+package controllers
 
 import play.api.data.Form
 import play.api.data.Forms._
@@ -11,7 +11,8 @@ case class CreateBookingForm(name: String
                              , surname: String
                              , email: String
                              , mobile: String
-                             , hospitalTimeId: Long)
+                             , hospitalTimeId: Long
+                             , symptomId: Long)
 
 object CreateBookingForm {
   val form = Form(
@@ -20,7 +21,8 @@ object CreateBookingForm {
       "surname" -> of[String],
       "email" -> of[String],
       "mobile" -> of[String],
-      "hospitalTimeId" -> of[Long]
+      "hospitalTimeId" -> of[Long],
+      "symptomId" -> of[Long]
     )(CreateBookingForm.apply)(CreateBookingForm.unapply)
   )
 }
