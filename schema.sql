@@ -121,6 +121,7 @@ CREATE TABLE booking
     id                   BIGINT NOT NULL UNIQUE,
     user_id              BIGINT NOT NULL,
     hospital_time_id     BIGINT NOT NULL,
+    symptom_id           BIGINT NOT NULL,
     status               VARCHAR(256) NOT NULL,
     created              TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT           booking_pk PRIMARY KEY (id)
@@ -130,11 +131,13 @@ ALTER TABLE booking OWNER TO begdoctor;
 INSERT INTO booking(id
     , user_id
     , hospital_time_id
+    , symptom_id
     , status
     , created)
 VALUES (0
     , 0
     , 1
+    , 0
     , 'confirmed'
     , '2016-07-01 10:30');
 
