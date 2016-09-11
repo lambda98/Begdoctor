@@ -9,21 +9,14 @@ import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 /**
   * Created by champillon on 6/13/16.
   */
-class HospitalPersistSpec @Inject()(uuidService: UuidService)
+class HospitalPersistSpec
   extends PlaySpec
     with OneAppPerSuite {
 
   "Call selectById" should {
     "return Hospital of that id" in {
-      val correct_id = 0L
-      val correct_name = "Hae Song"
-      val coreect_url = "https://www.benin2009.com/wp-content/uploads/2015/11/hospital.png"
-      val correct_doctorName = "Kang Moyeon"
-      val correct_latitude = 13.7854529F
-      val correct_longitude = 100.5736408F
-      val correct_availableTime = "10:00 - 17:00"
-
       val persist = app.injector.instanceOf[HospitalPersist]
+      val correct_id = 0L
 
       val testObject = persist.selectById(correct_id)
 
@@ -56,12 +49,13 @@ class HospitalPersistSpec @Inject()(uuidService: UuidService)
 
   "Call insert" should {
     "insert Hospital data successfully" in {
-      val randomId = uuidService.getId
-      val correct_id = randomId
+      val uuidService = app.injector.instanceOf[UuidService]
+      val persist = app.injector.instanceOf[HospitalPersist]
+      val correct_id = uuidService.getId
       val correct_latitude = 37.487996f
       val correct_longitude = 127.084419f
-      val correct_name = "Samsung Medical Center"
-      val persist = app.injector.instanceOf[HospitalPersist]
+      val correct_name = "Gug Il Medical Center"
+
 
       val testObject = persist.insert(correct_id, correct_latitude, correct_longitude, correct_name)
 
@@ -82,12 +76,12 @@ class HospitalPersistSpec @Inject()(uuidService: UuidService)
 
   "Call update" should {
     "update Hospital data successfully" in {
-      val randomId = uuidService.getId
-      val correct_id = randomId
+      val uuidService = app.injector.instanceOf[UuidService]
+      val persist = app.injector.instanceOf[HospitalPersist]
+      val correct_id = uuidService.getId
       val correct_latitude = 36.99331f
       val correct_longitude = 127.089189f
-      val correct_name = "Bagae Hospital"
-      val persist = app.injector.instanceOf[HospitalPersist]
+      val correct_name = "Hae Yong Medical Service"
 
       val testObject = persist.insert(correct_id, correct_latitude, correct_longitude, correct_name)
 
