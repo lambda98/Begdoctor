@@ -20,6 +20,7 @@ GET     /api/v1/users/:id                    controllers.api.UserController.getB
 GET     /api/v1/users/email/:email           controllers.api.UserController.getByEmail(email: String)
 
 GET     /api/v1/bookings                     controllers.api.BookingController.getList
+GET     /api/v1/bookings/upcoming            controllers.api.BookingController.getUpComing
 GET     /api/v1/bookings/:id                 controllers.api.BookingController.getById(id: Long)
 POST    /api/v1/bookings                     controllers.api.BookingController.create
 POST    /api/v1/bookings/userid/:userId      controllers.api.BookingController.getByUserId(userId: Long)

@@ -13,8 +13,8 @@ class HospitalTimePersistSpec
 
   "Call findByHospital_Id" should {
     "return Hospital of that id" in {
-      val correct_id = 1L
       val persist = app.injector.instanceOf[HospitalTimePersist]
+      val correct_id = 1L
 
       val testObject = persist.selectById(correct_id)
 

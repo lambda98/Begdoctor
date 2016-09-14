@@ -7,11 +7,15 @@ import entities.BookingEntity
   */
 trait BookingPersist {
 
-  def selectAll()  : List[BookingEntity]
-  def selectById(id: Long) : List[BookingEntity]
-  def selectByUserId(userId: Long) : List[BookingEntity]
+  def selectAll(): List[BookingEntity]
+
+  def selectById(id: Long): List[BookingEntity]
+
+  def selectByUserId(userId: Long): List[BookingEntity]
+
   def insert(id: Long
              , userId: Long
              , hospitalTimeId: Long
+             , symptomId: Long
              , status: String): Boolean
 }

@@ -63,12 +63,12 @@ class BookingFacadeSpec
     "insert Booking data successfully" in {
       val uuidService = app.injector.instanceOf[UuidService]
       val facade = app.injector.instanceOf[BookingFacade]
-      val randomString = uuidService.getId
       val correct_name = "Pyo"
       val correct_surname = "Ji-soo"
-      val correct_email = "PyoJisoo" + randomString + "@mail.com"
+      val correct_email = "PyoJisoo" + uuidService.getId + "@mail.com"
       val correct_hospitalTimeId = 1L
       val correct_mobile = "0891234567"
+      val correct_symptomId = 1L
 
 
       val testObject = facade.create(
@@ -76,7 +76,8 @@ class BookingFacadeSpec
         , correct_surname
         , correct_email
         , correct_mobile
-        , correct_hospitalTimeId)
+        , correct_hospitalTimeId
+        , correct_symptomId)
 
       assert(testObject)
     }

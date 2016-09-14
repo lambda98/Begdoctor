@@ -1,6 +1,8 @@
 package controllers.api
 
 import javax.inject.{Inject, Singleton}
+
+import controllers.CreateBookingForm
 import facades.BookingFacade
 import play.api.mvc._
 
@@ -23,6 +25,10 @@ class BookingController @Inject()(bookingFacade: BookingFacade)
     Ok(bookingFacade.listByUserId(userId).toText)
   }
 
+  def getUpComing() = Action {
+    Ok(bookingFacade.listUpComping().toText)
+  }
+
   def create() = Action { implicit request =>
     CreateBookingForm.form.bindFromRequest.fold(
       formWithErrors => Ok("400")
@@ -33,6 +39,7 @@ class BookingController @Inject()(bookingFacade: BookingFacade)
           , email = form.email
           , mobile = form.mobile
           , hospitalTimeId = form.hospitalTimeId
+          , symptomId = form.symptomId
         )
         Ok("200") as "application/json"
       } catch {

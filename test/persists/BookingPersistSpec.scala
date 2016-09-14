@@ -10,7 +10,7 @@ import services.UuidService
 /**
   * Created by anawin on 7/14/2016 AD.
   */
-class BookingPersistSpec @Inject()(uuidService: UuidService)
+class BookingPersistSpec
   extends PlaySpec
     with OneAppPerSuite {
 
@@ -26,8 +26,8 @@ class BookingPersistSpec @Inject()(uuidService: UuidService)
 
   "When selectById" should {
     "return Booking of that id" in {
-      val correct_id = 0L
       val persist = app.injector.instanceOf[BookingPostgres]
+      val correct_id = 0L
 
       val testObject = persist.selectById(correct_id)
 
@@ -37,8 +37,8 @@ class BookingPersistSpec @Inject()(uuidService: UuidService)
 
   "When selectByUserId" should {
     "return Booking of that user" in {
-      val correct_UserId = 0L
       val persist = app.injector.instanceOf[BookingPostgres]
+      val correct_UserId = 0L
 
       val testObject = persist.selectByUserId(correct_UserId)
 
@@ -48,14 +48,15 @@ class BookingPersistSpec @Inject()(uuidService: UuidService)
 
   "Call insert" should {
     "insert Booking data successfully" in {
-      val randomId = uuidService.getId
-      val correct_id = randomId
-      val correct_userId = 1L
-      val correct_hospitalTimeId = 0L
-      val correct_status = "confirmed"
       val persist = app.injector.instanceOf[BookingPersist]
+      val uuidService = app.injector.instanceOf[UuidService]
+      val correct_id = uuidService.getId
+      val correct_userId = 0L
+      val correct_hospitalTimeId = 1L
+      val correct_symptomId = 1L
+      val correct_status = "confirmed"
 
-      val testObject = persist.insert(correct_id, correct_userId, correct_hospitalTimeId, correct_status)
+      val testObject = persist.insert(correct_id, correct_userId, correct_hospitalTimeId, correct_symptomId, correct_status)
 
       assert(testObject)
     }
