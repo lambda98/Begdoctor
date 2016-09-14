@@ -37,11 +37,13 @@ class BookingFacade @Inject()(uuidService: UuidService
   }
 
   def listUpComping(): UpComingBookingList = {
-    UpComingBookingList(
+    val upComingList = UpComingBookingList(
       bookingPersist.selectAll.map(
         bookingEntity => toUpComingBooking(bookingEntity)
       )
     )
+
+    UpComingBookingList(upComingList.bookings.slice(0, 4))
   }
 
   def toUpComingBooking(bookingEntity: BookingEntity): UpComingBooking = {
@@ -49,16 +51,16 @@ class BookingFacade @Inject()(uuidService: UuidService
     val hospitalTime = findHospitalTime(bookingEntity.hospitalTimeId)
     val symptom = findSymptom(bookingEntity.symptomId)
 
-      UpComingBooking(
-        id = bookingEntity.id
-        , name = user.name
-        , surname = user.surname
-        , avatar = user.avatar
-        , time = parseTime(hospitalTime)
-        , symptom = symptom.name
-        , mobile = user.mobile
-        , insuranceLogo = "http://logok.org/wp-content/uploads/2014/09/AIA_Logo.png"
-      )
+    UpComingBooking(
+      id = bookingEntity.id
+      , name = user.name
+      , surname = user.surname
+      , avatar = user.avatar
+      , time = parseTime(hospitalTime)
+      , symptom = symptom.name
+      , mobile = user.mobile
+      , insuranceLogo = "http://logok.org/wp-content/uploads/2014/09/AIA_Logo.png"
+    )
   }
 
   def create(name: String
