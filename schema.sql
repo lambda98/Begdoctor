@@ -78,11 +78,32 @@ INSERT INTO users(id
     , mobile
     , created)
 VALUES (0
-    , 'Kim'
+    , 'Jung'
     , 'Eun-ji'
-    , 'kimeunji@mail.com'
-    , 'http://miner8.com/en/wp-content/uploads/2016/04/20160127-J-ESTINA-SONG-HYE-KYO.gif'
+    , 'juneunji@mail.com'
+    , 'https://humblebumbledumble.files.wordpress.com/2014/09/jung-eun-ji.jpg'
     , '0912345678'
+    , '2016-07-01 10:30')
+    , (1
+    , 'Kim'
+    , 'Ji-won'
+    , 'kimjiwon@mail.com'
+    , 'http://4.bp.blogspot.com/-tCUxygN6W04/UnOZBPt3mLI/AAAAAAAADhs/hg-pqGNuY1E/s1600/Kim_Ji_Won_003.jpg'
+    , '0922345678'
+    , '2016-07-01 10:30')
+    , (2
+    , 'Yuri'
+    , 'Kwan'
+    , 'yurikwan@mail.com'
+    , ''
+    , '0812345678'
+    , '2016-07-01 10:30')
+    , (3
+    , 'Song'
+    , 'Hye Kyo'
+    , 'songhyekyo@mail.com'
+    , 'http://miner8.com/en/wp-content/uploads/2016/04/20160127-J-ESTINA-SONG-HYE-KYO.gif'
+    , '0712345678'
     , '2016-07-01 10:30');
 
 CREATE TABLE staffs
@@ -136,6 +157,24 @@ INSERT INTO booking(id
     , created)
 VALUES (0
     , 0
+    , 1
+    , 0
+    , 'confirmed'
+    , '2016-07-01 10:30')
+    ,(1
+    , 1
+    , 1
+    , 0
+    , 'confirmed'
+    , '2016-07-01 10:30')
+    ,(2
+    , 2
+    , 1
+    , 0
+    , 'confirmed'
+    , '2016-07-01 10:30')
+    ,(3
+    , 3
     , 1
     , 0
     , 'confirmed'
