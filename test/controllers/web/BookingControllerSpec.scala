@@ -22,4 +22,15 @@ class BookingControllerSpec
     }
   }
 
+  "GET /web/v1/bookings" should {
+    "return Show Web Booking JSON" in {
+      contentAsString(route(app, FakeRequest(GET, "/web/v1/bookings")).get) must include
+      """
+        |"id":"1",
+        |"user_id":"1",
+        |"hospital_time_id":"1"
+      """.stripMargin
+    }
+  }
+
 }

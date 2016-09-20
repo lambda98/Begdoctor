@@ -15,4 +15,8 @@ class BookingController @Inject()(bookingFacade: BookingFacade)
   def getUpComing() = Action {
     Ok(bookingFacade.listUpComping().toText)
   }
+
+  def getBooking() = Action {
+    Ok(bookingFacade.listWebBooking().toText)
+  }
 }
