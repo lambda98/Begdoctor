@@ -8,19 +8,19 @@ GET     /assets/*file                        controllers.Assets.versioned(path="
 # WEB Route
 GET     /                                    controllers.web.HomeController.index
 
-# API Route
+#API Route
 GET     /api/v1/hospitals                    controllers.api.HospitalController.getList
 GET     /api/v1/hospitals/location/:location controllers.api.HospitalController.getByLocation(location: String)
 GET     /api/v1/hospitals/:id                controllers.api.HospitalController.getById(id: Long)
 GET     /api/v1/hospitals/:id/time           controllers.api.HospitalTimeController.getById(id: Long)
 
-GET     /api/v1/symptom                      controllers.api.SymptomController.getList
+GET     /api/v1/symptoms                     controllers.api.SymptomController.getList
 
 GET     /api/v1/users/:id                    controllers.api.UserController.getById(id: Long)
 GET     /api/v1/users/email/:email           controllers.api.UserController.getByEmail(email: String)
 
 GET     /api/v1/bookings                     controllers.api.BookingController.getList
-GET     /api/v1/bookings/upcoming            controllers.api.BookingController.getUpComing
+
 GET     /api/v1/bookings/:id                 controllers.api.BookingController.getById(id: Long)
 POST    /api/v1/bookings                     controllers.api.BookingController.create
 POST    /api/v1/bookings/userid/:userId      controllers.api.BookingController.getByUserId(userId: Long)
@@ -28,3 +28,6 @@ POST    /api/v1/bookings/userid/:userId      controllers.api.BookingController.g
 POST    /api/v1/staffs                       controllers.api.StaffController.create
 POST    /api/v1/staffs/authenticate          controllers.api.StaffController.authenticate
 
+#Web Route
+GET     /web/v1/bookings/upcoming            controllers.web.BookingController.getUpComing
+GET     /web/v1/bookings                     controllers.web.BookingController.getBooking
