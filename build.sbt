@@ -30,6 +30,8 @@ libraryDependencies ++= Seq(
   , "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.0-RC1" % Test
 )
 
+libraryDependencies += filters
+
 resolvers += Resolver.sonatypeRepo("releases")
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
