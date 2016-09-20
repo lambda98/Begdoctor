@@ -49,7 +49,7 @@ class HospitalFacadeSpec
 
   "Call findByName" should {
     "return Hospital of that name" in {
-      val correct_name = "Asan Medical Center"
+      val correct_name = "โรงพยาบาลบำรุงราษฎร์"
       val facade = app.injector.instanceOf[HospitalFacade]
 
       val testObject = facade.findByName(correct_name)
