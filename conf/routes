@@ -30,3 +30,4 @@ POST    /api/v1/staffs/authenticate          controllers.api.StaffController.aut
 
 #Web Route
 GET     /web/v1/bookings/upcoming            controllers.web.BookingController.getUpComing
+GET     /web/v1/bookings                     controllers.web.BookingController.getBooking
