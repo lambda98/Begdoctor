@@ -78,9 +78,9 @@ INSERT INTO users(id
     , mobile
     , created)
 VALUES (0
-    , 'Jung'
+    , 'Kim'
     , 'Eun-ji'
-    , 'juneunji@mail.com'
+    , 'kimeunji@mail.com'
     , 'https://humblebumbledumble.files.wordpress.com/2014/09/jung-eun-ji.jpg'
     , '0912345678'
     , '2016-07-01 10:30')
