@@ -1,6 +1,6 @@
 package facades
 
-import models.{Booking, BookingList, UpComingBookingList}
+import models.{Booking, BookingList, ShowWebBookingList, UpComingBookingList}
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import play.api.inject.guice.GuiceApplicationBuilder
 import javax.inject.Inject
@@ -56,6 +56,16 @@ class BookingFacadeSpec
       val testObject = facade.listUpComping()
 
       assert(testObject.isInstanceOf[UpComingBookingList])
+    }
+  }
+
+  "Call listWebBooking" should {
+    "return ShowWebBookingList" in {
+      val facade = app.injector.instanceOf[BookingFacade]
+
+      val testObject = facade.listWebBooking()
+
+      assert(testObject.isInstanceOf[ShowWebBookingList])
     }
   }
 

@@ -3,7 +3,7 @@ package facades
 import javax.inject.{Inject, Singleton}
 
 import entities.{BookingEntity, HospitalTimeEntity, SymptomEntity, UserEntity}
-import models.{BookingList, UpComingBooking, UpComingBookingList}
+import models._
 import persists.{BookingPersist, HospitalTimePersist, SymptomPersist, UserPersist}
 import services.UuidService
 import utilities.DateConverter
@@ -46,20 +46,11 @@ class BookingFacade @Inject()(uuidService: UuidService
     UpComingBookingList(upComingList.bookings.slice(0, 4))
   }
 
-  def toUpComingBooking(bookingEntity: BookingEntity): UpComingBooking = {
-    val user = findUser(bookingEntity.userId)
-    val hospitalTime = findHospitalTime(bookingEntity.hospitalTimeId)
-    val symptom = findSymptom(bookingEntity.symptomId)
-
-    UpComingBooking(
-      id = bookingEntity.id
-      , name = user.name
-      , surname = user.surname
-      , avatar = user.avatar
-      , time = parseTime(hospitalTime)
-      , symptom = symptom.name
-      , mobile = user.mobile
-      , insuranceLogo = "http://logok.org/wp-content/uploads/2014/09/AIA_Logo.png"
+  def listWebBooking(): ShowWebBookingList = {
+    ShowWebBookingList(
+      bookingPersist.selectAll.map(
+        bookingEntity => toShowWebBooking(bookingEntity)
+      )
     )
   }
 
@@ -92,6 +83,39 @@ class BookingFacade @Inject()(uuidService: UuidService
       , hospitalTimeId = hospitalTimeId
       , symptomId = symptomId
       , status = "confirmed"
+    )
+  }
+
+  private def toShowWebBooking(bookingEntity: BookingEntity): ShowWebBooking = {
+    val user = findUser(bookingEntity.userId)
+    val hospitalTime = findHospitalTime(bookingEntity.hospitalTimeId)
+    val symptom = findSymptom(bookingEntity.symptomId)
+
+    ShowWebBooking(
+      id = bookingEntity.id
+      , name = user.name
+      , surname = user.surname
+      , time = parseTime(hospitalTime)
+      , symptom = symptom.name
+      , mobile = user.mobile
+      , status = bookingEntity.status
+    )
+  }
+
+  private def toUpComingBooking(bookingEntity: BookingEntity): UpComingBooking = {
+    val user = findUser(bookingEntity.userId)
+    val hospitalTime = findHospitalTime(bookingEntity.hospitalTimeId)
+    val symptom = findSymptom(bookingEntity.symptomId)
+
+    UpComingBooking(
+      id = bookingEntity.id
+      , name = user.name
+      , surname = user.surname
+      , avatar = user.avatar
+      , time = parseTime(hospitalTime)
+      , symptom = symptom.name
+      , mobile = user.mobile
+      , insuranceLogo = "http://logok.org/wp-content/uploads/2014/09/AIA_Logo.png"
     )
   }
 
