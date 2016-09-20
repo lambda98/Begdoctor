@@ -13,7 +13,7 @@ class SymptomControllerSpec
 
   "GET /api/v1/symptoms/1" should {
     "return Hospital JSON" in {
-      contentAsString(route(app, FakeRequest(GET, "/api/v1/symptom/1")).get) must include
+      contentAsString(route(app, FakeRequest(GET, "/api/v1/symptoms/1")).get) must include
       """
         |"name":"Leukemia"
       """.stripMargin

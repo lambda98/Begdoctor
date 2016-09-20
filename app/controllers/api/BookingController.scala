@@ -25,10 +25,6 @@ class BookingController @Inject()(bookingFacade: BookingFacade)
     Ok(bookingFacade.listByUserId(userId).toText)
   }
 
-  def getUpComing() = Action {
-    Ok(bookingFacade.listUpComping().toText)
-  }
-
   def create() = Action { implicit request =>
     CreateBookingForm.form.bindFromRequest.fold(
       formWithErrors => Ok("400")
