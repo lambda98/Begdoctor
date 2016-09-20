@@ -65,7 +65,7 @@ class HospitalPersistSpec
 
   "Call selectByName" should {
     "return Hospitals of that name" in {
-      val correct_name = "Asan Medical Center"
+      val correct_name = "โรงพยาบาลบำรุงราษฎร์"
       val persist = app.injector.instanceOf[HospitalPersist]
 
       val testObject = persist.selectByName(correct_name)
