@@ -77,8 +77,24 @@ class BookingPostgres @Inject()(db: Database)
     , created = new DateTime(resultSet.getTimestamp("created").getTime)
   )
 
-  private val SELECT_ALL = "SELECT * FROM booking"
-  private val SELECT_BY_ID = "SELECT * FROM booking where id = ?"
-  private val SELECT_BY_USER_ID = "SELECT * FROM booking where user_id = ?"
-  private val INSERT = "INSERT INTO booking (id, user_id, hospital_time_id, symptom_id, status, created) VALUES (?, ?, ?, ?, ?, ?)"
+  private val SELECT_ALL =
+    """
+      | SELECT * FROM booking ORDER BY created
+    """.stripMargin
+
+  private val SELECT_BY_ID =
+    """
+      | SELECT * FROM booking where id = ?
+    """.stripMargin
+
+  private val SELECT_BY_USER_ID =
+    """
+      | SELECT * FROM booking where user_id = ? ORDER BY created
+    """.stripMargin
+
+  private val INSERT =
+    """
+      | INSERT INTO booking (id, user_id, hospital_time_id, symptom_id, status, created)
+      | VALUES (?, ?, ?, ?, ?, ?)
+    """.stripMargin
 }
