@@ -13,6 +13,7 @@ GET     /api/v1/hospitals                    controllers.api.HospitalController.
 GET     /api/v1/hospitals/location/:location controllers.api.HospitalController.getByLocation(location: String)
 GET     /api/v1/hospitals/:id                controllers.api.HospitalController.getById(id: Long)
 GET     /api/v1/hospitals/:id/time           controllers.api.HospitalTimeController.getById(id: Long)
+GET     /api/v1/hospitals/:id/date/:date     controllers.api.HospitalTimeController.getByDate(id: Long, date: String)
 
 GET     /api/v1/symptoms                     controllers.api.SymptomController.getList
 

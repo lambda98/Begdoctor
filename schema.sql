@@ -244,11 +244,11 @@ VALUES (0
 CREATE TABLE hospitals_time
 (
      id                     SERIAL NOT NULL UNIQUE,
-     hospital_id            BIGINT NOT NULL UNIQUE,
+     hospital_id            BIGINT NOT NULL,
      start_datetime         TIMESTAMP WITH TIME ZONE NOT NULL,
      finish_datetime        TIMESTAMP WITH TIME ZONE NOT NULL,
      available              BOOLEAN NOT NULL,
-     CONSTRAINT             hospitals_time_pk PRIMARY KEY (hospital_id)
+     CONSTRAINT             hospitals_time_pk PRIMARY KEY (id)
 );
 ALTER TABLE hospitals_time OWNER TO begdoctor;
 
@@ -258,49 +258,49 @@ INSERT INTO hospitals_time(id
      , finish_datetime
      , available)
 VALUES (1
-     , 0
+     , 1
      , '2016-07-01 10:30'
-     , '2016-07-01 11:30'
+     , '2016-07-01 11:00'
      , true)
      , (2
      , 1
+     , '2016-07-01 11:00'
      , '2016-07-01 11:30'
-     , '2016-07-01 12:30'
      , true)
      , (3
      , 2
-     , '2016-07-01 13:30'
-     , '2016-07-01 14:30'
+     , '2016-07-01 11:30'
+     , '2016-07-01 12:00'
      , true)
      , (4
      , 3
-     , '2016-07-02 10:30'
-     , '2016-07-02 11:30'
-     , true)
-     , (5
-     , 4
-     , '2016-07-02 11:30'
+     , '2016-07-02 12:00'
      , '2016-07-02 12:30'
      , true)
+     , (5
+     , 1
+     , '2016-07-02 12:30'
+     , '2016-07-02 13:00'
+     , true)
      , (6
-     , 5
+     , 1
+     , '2016-07-02 13:00'
      , '2016-07-02 13:30'
-     , '2016-07-02 14:30'
      , true)
      , (7
-     , 6
-     , '2016-07-03 11:30'
-     , '2016-07-03 12:30'
+     , 1
+     , '2016-07-03 13:30'
+     , '2016-07-03 14:00'
      , true)
      , (8
-     , 7
-     , '2016-07-03 11:30'
-     , '2016-07-03 12:30'
+     , 1
+     , '2016-07-03 14:00'
+     , '2016-07-03 14:30'
      , true)
      , (9
-     , 8
-     , '2016-07-03 13:30'
+     , 1
      , '2016-07-03 14:30'
+     , '2016-07-03 15:00'
      , true);
 
 

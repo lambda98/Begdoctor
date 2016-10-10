@@ -11,14 +11,31 @@ class HospitalTimePersistSpec
   extends PlaySpec
     with OneAppPerSuite {
 
-  "Call findByHospital_Id" should {
+  "Call selectById" should {
     "return Hospital of that id" in {
       val persist = app.injector.instanceOf[HospitalTimePersist]
-      val correct_id = 1L
+      val id = 1L
 
-      val testObject = persist.selectById(correct_id)
+      val testObject = persist.selectById(id)
 
       assert(testObject.isInstanceOf[Option[HospitalTimeEntity]])
+    }
+  }
+
+  "Call selectByDate" should {
+    "return Hospital of that hospital within that date" in {
+      val persist = app.injector.instanceOf[HospitalTimePersist]
+      val hospitalId = 1L
+      val fromDate = "2016-07-01"
+      val tilDate = "2016-07-02"
+
+      val testObject = persist.selectByDate(
+        hospitalId = hospitalId
+        , fromDate = fromDate
+        , tilDate = tilDate
+      )
+
+      assert(testObject.isInstanceOf[List[HospitalTimeEntity]])
     }
   }
 }
