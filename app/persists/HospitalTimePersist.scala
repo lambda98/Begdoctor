@@ -10,4 +10,7 @@ trait HospitalTimePersist {
 
   def selectById(id: Long): Option[HospitalTimeEntity]
 
+  def selectByDate(hospitalId: Long
+                   , fromDate: String
+                   , tilDate: String): List[HospitalTimeEntity]
 }
