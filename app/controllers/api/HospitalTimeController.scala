@@ -11,8 +11,12 @@ import play.api.mvc.{Action, Controller}
 class HospitalTimeController @Inject()(hospitalTimeFacade: HospitalTimeFacade)
   extends Controller {
 
-  def getById(Id: Long) = Action {
-    Ok(hospitalTimeFacade.findById(Id).toText)
+  def getById(id: Long) = Action {
+    Ok(hospitalTimeFacade.findById(id).toText)
+  }
+
+  def getByDate(hospitalId: Long, date: String) = Action {
+    Ok(hospitalTimeFacade.findByDate(hospitalId, date).toText)
   }
 
 }

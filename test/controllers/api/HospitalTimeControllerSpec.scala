@@ -9,9 +9,9 @@ import play.api.test.Helpers._
   */
 class HospitalTimeControllerSpec
   extends PlaySpec
-    with OneAppPerTest{
+    with OneAppPerTest {
 
-  "GET /api/v1/hospitals/1/time" should {
+  "GET /api/v1/hospitals/:id/time" should {
     "return HospitalTime JSON" in {
       contentAsString(route(app, FakeRequest(GET, "/api/v1/hospitals/1/time")).get) must include
       """
@@ -20,6 +20,15 @@ class HospitalTimeControllerSpec
         |"startDatetime":"2016-07-01 10:30"
         |"finishDatetime":"2016-07-01 11:30"
         |"available":"true"
+      """.stripMargin
+    }
+  }
+
+  "GET /api/v1/hospitals/:id/date/:date" should {
+    "return HospitalTime JSON" in {
+      contentAsString(route(app, FakeRequest(GET, "/api/v1/hospitals/1/date/2016-07-01")).get) must include
+      """
+        | "hospital_id": 1
       """.stripMargin
     }
   }
