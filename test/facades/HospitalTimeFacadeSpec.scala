@@ -1,6 +1,6 @@
 package facades
 
-import models.{HospitalTime, HospitalTimeList, HospitalTimeSlotList}
+import models.{HospitalTime, HospitalTimeSlotList}
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import play.api.inject.guice.GuiceApplicationBuilder
 
