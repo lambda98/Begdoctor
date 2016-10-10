@@ -15,3 +15,10 @@ case class HospitalTime(id: Long
 
 case class HospitalTimeList(hospitalTimes: List[HospitalTime])
   extends Json
+
+case class HospitalTimeSlot(id: Long, time_slot: String)
+
+case class HospitalTimeSlotList(hospital_id: Long
+                                , date: String
+                                , time_slots: List[HospitalTimeSlot])
+  extends Json
