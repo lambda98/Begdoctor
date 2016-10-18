@@ -2,6 +2,7 @@ package facades
 
 import javax.inject.{Inject, Singleton}
 
+import definitions.BookingStatus
 import entities.{BookingEntity, HospitalTimeEntity, SymptomEntity, UserEntity}
 import models._
 import persists.{BookingPersist, HospitalTimePersist, SymptomPersist, UserPersist}
@@ -82,7 +83,7 @@ class BookingFacade @Inject()(uuidService: UuidService
       , userId = userId
       , hospitalTimeId = hospitalTimeId
       , symptomId = symptomId
-      , status = "confirmed"
+      , status = BookingStatus.confirmed
     )
   }
 
