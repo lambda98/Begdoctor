@@ -5,6 +5,8 @@ import models.Booking
 import org.scalatestplus.play.{OneAppPerSuite, PlaySpec}
 import persists.postgres.BookingPostgres
 import javax.inject.Inject
+
+import definitions.BookingStatus
 import services.UuidService
 
 /**
@@ -54,7 +56,7 @@ class BookingPersistSpec
       val correct_userId = 0L
       val correct_hospitalTimeId = 1L
       val correct_symptomId = 1L
-      val correct_status = "confirmed"
+      val correct_status = BookingStatus.confirmed
 
       val testObject = persist.insert(correct_id, correct_userId, correct_hospitalTimeId, correct_symptomId, correct_status)
 

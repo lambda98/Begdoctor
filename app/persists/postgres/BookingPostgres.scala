@@ -1,8 +1,9 @@
 package persists.postgres
 
 import java.sql.{ResultSet, Timestamp}
-
 import javax.inject.{Inject, Singleton}
+
+import definitions.BookingStatus.BookingStatus
 import entities.BookingEntity
 import org.joda.time.DateTime
 import persists.BookingPersist
@@ -53,14 +54,14 @@ class BookingPostgres @Inject()(db: Database)
                       , userId: Long
                       , hospitalTimeId: Long
                       , symptomId: Long
-                      , status: String): Boolean = db.withConnection { implicit conn =>
+                      , status: BookingStatus): Boolean = db.withConnection { implicit conn =>
 
     val preparedStatement = conn.prepareStatement(INSERT)
     preparedStatement.setLong(1, id)
     preparedStatement.setLong(2, userId)
     preparedStatement.setLong(3, hospitalTimeId)
     preparedStatement.setLong(4, symptomId)
-    preparedStatement.setString(5, status)
+    preparedStatement.setInt(5, status.id)
     preparedStatement.setTimestamp(6, new Timestamp(new DateTime().getMillis))
     preparedStatement.executeUpdate() match {
       case 1 => true
