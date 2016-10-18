@@ -1,5 +1,6 @@
 package entities
 
+import definitions.BookingStatus.BookingStatus
 import models.Booking
 import org.joda.time.DateTime
 
@@ -10,7 +11,7 @@ case class BookingEntity(id: Long
                          , userId: Long
                          , hospitalTimeId: Long
                          , symptomId: Long
-                         , status: String
+                         , status: BookingStatus
                          , created: DateTime) {
 
   def toModel(): Booking = Booking(
@@ -18,7 +19,7 @@ case class BookingEntity(id: Long
     , userId = userId
     , hospitalTimeId = hospitalTimeId
     , symptomId = symptomId
-    , status = status
+    , status = status.toString
     , created = created
   )
 }
