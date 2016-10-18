@@ -99,7 +99,7 @@ class BookingFacade @Inject()(uuidService: UuidService
       , time = parseTime(hospitalTime)
       , symptom = symptom.name
       , mobile = user.mobile
-      , status = bookingEntity.status
+      , status = bookingEntity.status.toString
     )
   }
 
