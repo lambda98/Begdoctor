@@ -2,8 +2,11 @@ package facades
 
 import javax.inject.{Inject, Singleton}
 
+import definitions.BookingStatus
+import definitions.BookingStatus.BookingStatus
 import entities.{BookingEntity, HospitalTimeEntity, SymptomEntity, UserEntity}
 import models._
+import org.joda.time.DateTime
 import persists.{BookingPersist, HospitalTimePersist, SymptomPersist, UserPersist}
 import services.UuidService
 import utilities.DateConverter
@@ -82,7 +85,7 @@ class BookingFacade @Inject()(uuidService: UuidService
       , userId = userId
       , hospitalTimeId = hospitalTimeId
       , symptomId = symptomId
-      , status = "confirmed"
+      , status = BookingStatus.confirmed
     )
   }
 
@@ -98,8 +101,18 @@ class BookingFacade @Inject()(uuidService: UuidService
       , time = parseTime(hospitalTime)
       , symptom = symptom.name
       , mobile = user.mobile
-      , status = bookingEntity.status
+      , status = getStatus(hospitalTime).toString
     )
+  }
+
+  private def getStatus(hospitalTimeEntity: HospitalTimeEntity): BookingStatus = {
+    val now = new DateTime
+
+    now.getMillis > hospitalTimeEntity.finishDateTime.getMillis match {
+      case true => BookingStatus.delay
+      case _ => BookingStatus.upcoming
+    }
+
   }
 
   private def toUpComingBooking(bookingEntity: BookingEntity): UpComingBooking = {

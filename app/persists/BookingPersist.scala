@@ -1,5 +1,6 @@
 package persists
 
+import definitions.BookingStatus._
 import entities.BookingEntity
 
 /**
@@ -17,5 +18,5 @@ trait BookingPersist {
              , userId: Long
              , hospitalTimeId: Long
              , symptomId: Long
-             , status: String): Boolean
+             , status: BookingStatus): Boolean
 }

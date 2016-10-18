@@ -143,7 +143,7 @@ CREATE TABLE booking
     user_id              BIGINT NOT NULL,
     hospital_time_id     BIGINT NOT NULL,
     symptom_id           BIGINT NOT NULL,
-    status               VARCHAR(256) NOT NULL,
+    status               BIGINT NOT NULL,
     created              TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT           booking_pk PRIMARY KEY (id)
 );
@@ -159,25 +159,25 @@ VALUES (0
     , 0
     , 1
     , 0
-    , 'confirmed'
+    , 0
     , '2016-07-01 10:30')
     ,(1
     , 1
     , 1
     , 1
-    , 'confirmed'
+    , 0
     , '2016-07-01 10:30')
     ,(2
     , 2
     , 1
     , 2
-    , 'confirmed'
+    , 0
     , '2016-07-01 10:30')
     ,(3
     , 3
     , 1
     , 3
-    , 'confirmed'
+    , 0
     , '2016-07-01 10:30');
 
 CREATE TABLE symptoms
