@@ -3,6 +3,7 @@ package persists.postgres
 import java.sql.{ResultSet, Timestamp}
 import javax.inject.{Inject, Singleton}
 
+import definitions.BookingStatus
 import definitions.BookingStatus.BookingStatus
 import entities.BookingEntity
 import org.joda.time.DateTime
@@ -74,7 +75,7 @@ class BookingPostgres @Inject()(db: Database)
     , userId = resultSet.getLong("user_id")
     , hospitalTimeId = resultSet.getLong("hospital_time_id")
     , symptomId = resultSet.getLong("symptom_id")
-    , status = resultSet.getString("status")
+    , status = BookingStatus(resultSet.getInt("status"))
     , created = new DateTime(resultSet.getTimestamp("created").getTime)
   )
 
